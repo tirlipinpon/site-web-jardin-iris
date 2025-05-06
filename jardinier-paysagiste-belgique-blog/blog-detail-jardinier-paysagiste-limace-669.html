@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jardin-iris.be/jardinier-paysagiste-belgique-blog/blog-detail-jardinier-paysagiste-limace.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description"
+        content="Jardinier paysagiste conseils d'experts pour aménager et entretenir votre jardin à Bruxelles. Des astuces pratiques pour des espaces verts écoresponsables et magnifiques."/>
+  <meta property="og:title" content="Jardin iris">
+  <meta property="og:description" content="Les articles de blog - Les dèrnières nouvelles du monde des jardins">
+  <meta property="og:image" content="https://jardin-iris.be/assets/images/blog/banner-1.jpg">
+  <meta property="og:url" content="https://jardin-iris.be/blogs.html">
+  <title>Blog de votre jardinier paysagiste - Conseils et Astuces pour gereer vos limaces</title>
+  <base href="https://jardin-iris.be/">
+  <!-- Fav Icon -->
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="assets/css/font-awesome-all.css" rel="stylesheet">
+  <link href="assets/css/flaticon.css" rel="stylesheet">
+  <link href="assets/css/owl.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+  <link href="assets/css/animate.css" rel="stylesheet">
+  <link href="assets/css/jquery-ui.css" rel="stylesheet">
+  <link href="assets/css/nice-select.css" rel="stylesheet">
+  <link href="assets/css/jquery.bootstrap-touchspin.css" rel="stylesheet">
+  <link href="assets/css/color.css" rel="stylesheet">
+  <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/elpath.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/responsive.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <style>
+    .heart-active {
+      color: green; /* Couleur verte pour les éléments marqués */
+      font-weight: 700;
+    }
+
+
+    /* Styles pour l'animation de l'icône */
+    .heart-clicked {
+      animation: heartGrow 0.3s ease-in-out;
+    }
+
+    /* Définition de l'animation */
+    @keyframes heartGrow {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.8);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .tab-btns .active-btn {
+      font-weight: bold;
+    }
+
+    @keyframes halo-effect {
+      0% {
+        box-shadow: 0 0 0 0 rgba(6, 140, 6, 0.7);
+      }
+      100% {
+        box-shadow: 0 0 50px 25px rgba(0, 129, 0, 0);
+      }
+    }
+
+    .icon-box i.animated-like {
+      animation: halo-effect 0.2s ease-out;
+      border-radius: 50%;
+    }
+
+    /* Style pour les balises <h4> spécifiques */
+    .lower-content h4 {
+      margin: 25px 0 10px 0;
+      font-style: italic;
+    }
+
+    /* Style pour les <ul><li> juste en dessous des <h4> */
+    .lower-content h4 + ul li {
+      list-style-type: disc;
+      margin-left: 20px; /* Pour indenter un peu la liste */
+      font-weight: 600;
+    }
+
+    /* Si vous avez besoin de mettre des marges spécifiques à certains paragraphes et éléments similaires */
+    .lower-content p {
+      margin-bottom: 20px;
+    }
+
+    .lower-content ul li {
+      margin-bottom: 8px;
+    }
+
+    /* Tooltip container */
+    .myTooltip {
+      color: #25509f;
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+    /* Tooltip text */
+    .myTooltip .myTooltiptext {
+      visibility: hidden;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 6px;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+      /* Position the tooltip text - see examples below! */
+      position: absolute !important;
+      z-index: 1;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .myTooltip:hover .myTooltiptext {
+      visibility: visible;
+    }
+
+    /*  autocomplete infinite */
+    .autocomplete-container-infinite {
+      position: relative;
+      width: 100%;
+    }
+
+
+    .autocomplete-item-infinite {
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .autocomplete-item-infinite:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* phylactere search field infinite  */
+    /* Style pour le phylactère */
+
+    .phylactere::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent #333 transparent;
+    }
+
+    .phylactere {
+      position: absolute;
+      max-width: 400px;
+      width: 400px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1;
+      white-space: normal;
+      word-wrap: break-word;
+      z-index: 1000;
+      display: none;
+    }
+
+    /* Style pour que le dropdown occupe toute la hauteur de la page */
+    .autocomplete-dropdown-infinite {
+      position: absolute;
+      top: 100%; /* Position en-dessous de l'input */
+      left: 0;
+      right: 0;
+      max-height: calc(100vh - 50px); /* Ajuste la hauteur pour qu'il occupe presque tout l'écran */
+      overflow-y: auto; /* Permet un défilement si le contenu dépasse la hauteur de l'écran */
+      z-index: 1000;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .news-block-one .inner-box {
+      overflow: visible!important
+    }
+
+
+
+    /* Surligner le texte avec du jaune et ajouter une icône à gauche */
+    .inat-vegetal {
+      position: relative;
+      display: inline-block;
+      padding-left: 25px; /* L'espace pour l'icône */
+      background-color: rgba(255, 255, 0, 0.13); /* Surlignement jaune */
+      cursor: pointer; /* Pour indiquer que l'élément est cliquable */
+      font-weight: bold;
+      vertical-align: middle; /* Assurer que le texte et l'icône sont alignés correctement */
+    }
+
+    .inat-vegetal::before {
+      content: "🌿"; /* L'emoji que tu souhaites afficher */
+      position: absolute;
+      left: 0px; /* Décalage à gauche */
+      top: 50%;
+      transform: translateY(-50%); /* Centrage vertical */
+      font-size: 1em; /* Ajuste la taille de l'icône */
+    }
+
+    /* Style de l'infobulle (tooltip) */
+    .inat-vegetal-tooltip {
+      position: absolute;
+      top: 100%; /* Par défaut, positionner en dessous */
+      left: 0;
+      width: 300px;
+      max-width: 300px;
+      height: auto;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: none; /* Par défaut caché */
+      z-index: 1000;
+      border-radius: 5px;
+      text-align: center;
+      overflow: hidden;
+      pointer-events: none;
+      box-sizing: border-box;
+    }
+
+    /* Tooltip qui s'affiche au-dessus de l'élément */
+    .inat-vegetal-tooltip-above {
+      top: auto; /* L'infobulle ne sera pas en dessous, mais au-dessus */
+      bottom: 100%; /* Positionner au-dessus de l'élément */
+    }
+
+
+    /* Centrer l'image à l'intérieur du tooltip */
+    .inat-vegetal-tooltip img {
+      max-width: 300px; /* Limite la largeur à 200px */
+      width: 100%; /* Prend toute la largeur disponible dans le conteneur sans déborder */
+      height: auto; /* Garde la proportion de l'image */
+      display: block; /* Assurer que l'image est affichée en bloc */
+      margin-left: auto; /* Centrer l'image horizontalement */
+      margin-right: auto;
+      margin-top: 10px; /* Marge entre l'image et le texte */
+      object-fit: contain; /* Préserve les proportions de l'image sans la couper */
+    }
+
+    /* Ajout du texte du nom dans le coin supérieur gauche du tooltip */
+    .inat-vegetal-tooltip .taxon-name {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 5px;
+      border-radius: 3px;
+      z-index: 2000;
+      white-space: nowrap;
+    }
+
+    /* Affichage du tooltip au survol sur desktop */
+    @media (min-width: 768px) {
+      .inat-vegetal:hover .inat-vegetal-tooltip {
+        display: block;
+      }
+    }
+
+    /* Sur mobile, gestion du toggle de l'infobulle */
+    @media (max-width: 767px) {
+      .inat-vegetal.active .inat-vegetal-tooltip {
+        display: block;
+      }
+    }
+
+    .inat-vegetal .plant-icon {
+      font-size: 0.9em;
+      margin-right: 0.3em;
+    }
+
+
+
+
+
+
+
+  </style>
+</head>
+<!-- page wrapper -->
+<body>
+<script src="assets/js/jquery.js"></script>
+<div class="boxed_wrapper">
+
+  <!-- main header -->
+  <header class="main-header">
+    <!-- header-top -->
+    <div class="header-top">
+      <div class="shape" style="background-image: url(assets/images/shape/shape-16.png);"></div>
+      <div class="auto-container">
+        <div class="top-inner clearfix">
+          <div class="right-column pull-right">
+            <ul class="info-box clearfix">
+              <li>
+                <div class="icon-box"><i class="fas fa-phone"></i></div>
+                <p>Téléphone: <a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:+32497401272">+32 497 40 12 72</a></p>
+              </li>
+              <li>
+                <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                <p>Email: <a aria-label="link on web site jardin iri jardinier bruxelles"
+                             href="tel:contact@jardin-iris.be">contact@jardin-iris.be</a></p>
+              </li>
+              <li>
+                <div class="icon-box"><i class="fas fa-clipboard-check"></i></div>
+                <p>Devis: <a aria-label="link on web site jardin iri jardinier bruxelles"
+                             href=" tel:devis@jardin-iris.be">devis@jardin-iris.be</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header-lower -->
+    <div class="header-lower">
+      <div class="auto-container">
+        <div class="outer-box">
+          <div class="logo-box">
+            <div class="shape" style="background-image: url(assets/images/shape/shape-1.png);"></div>
+            <figure class="logo"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img
+              src="assets/images/logo.png" alt="jardin logo iris"></a>
+            </figure>
+          </div>
+          <div class="menu-area clearfix">
+            <!--Mobile Navigation Toggler-->
+            <div class="mobile-nav-toggler">
+              <i class="icon-bar"></i>
+              <i class="icon-bar"></i>
+              <i class="icon-bar"></i>
+            </div>
+            <nav class="main-menu navbar-expand-md navbar-light">
+              <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                <ul class="navigation clearfix">
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html">Accueil</a>
+                  </li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles"
+                         href="jardinier-paysagiste-service/entretien-de-jardin.html">Services</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles"
+                         href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html">Projets</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles"
+                         href="jardinier-paysagiste-contact.html">Contact</a>
+                  </li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles"
+                         href="jardinier-paysagiste-blogs.html">Blog</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="nav-right">
+            <div class="cart-box"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                     href=" en/jardin-iris.html"><img loading="lazy"
+                                                                      src="assets/images/icons/royaume-uni.png"
+                                                                      alt="english" width="30"></a></div>
+            <div class="cart-box"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                     href="index.html"><img loading="lazy" src="assets/images/icons/france.png"
+                                                            alt="francais"
+                                                            width="30"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--sticky Header-->
+    <div class="sticky-header">
+      <div class="auto-container">
+        <div class="outer-box">
+          <div class="logo-box">
+            <figure class="logo"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img
+              src="assets/images/logo.png"
+              alt="jardin logo iris header"></a></figure>
+          </div>
+          <div class="menu-area clearfix">
+            <nav class="main-menu clearfix">
+              <!--Keep This Empty / Menu will come through Javascript-->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- main-header end -->
+
+  <!-- Mobile Menu  -->
+  <div class="mobile-menu">
+    <div class="menu-backdrop"></div>
+    <div class="close-btn"><i class="fas fa-times"></i></div>
+
+    <nav class="menu-box">
+      <div class="nav-logo"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img
+        src="assets/images/logo-2.png" alt="jardin logo iris mobile"
+        title=""></a></div>
+      <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+      <div class="contact-info">
+        <h4>Info de contact</h4>
+        <ul>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:+32497401272">+32 497 40 12
+            72</a></li>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:contact@jardin-iris.be">contact@jardin-iris.be</a>
+          </li>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:devis@jardin-iris.be">devis@jardin-iris.be</a>
+          </li>
+          <li>Nous travaillons sur Bruxelles et ses environs.</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- End Mobile Menu -->
+
+
+  <!-- Page Title -->
+  <section class="page-title p_relative pt_150 pb_180 centred"
+           style="background-image: url(assets/images/blog/banner-1.jpg);">
+    <div class="pattern-layer p_absolute" style="background-image: url(assets/images/shape/shape-2.png);"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <h1 class="d_block fs_70 lh_70 mb_20 color_white">Conseils pratiques pour le jardinier et le paysagiste Belge</h1>
+        <p class="d_block fs_20 lh_30 color_white">La limace, un allié méconnu du jardin écologique Belge </p>
+      </div>
+    </div>
+  </section>
+  <!-- End Page Title -->
+
+  <!-- sidebar-page-container -->
+  <section class="sidebar-page-container p_relative blog-classic pt_140 pb_150">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 content-side">
+          <div id="containerPost" class="blog-classic-content p_relative d_block mr_20">
+
+
+            <div class="blog-details-content p_relative d_block mr_20">
+              <div class="blog-post">
+                <div class="news-block-one">
+                  <div class="inner-box p_relative d_block b_radius_5 bg_white mb_35">
+                    <div class="lower-content p_relative d_block">
+                      <span class="post-date p_relative d_block fs_15 mb_2">10-05-2025</span>
+                      <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium">La limace, un allié méconnu du jardin écologique</h2>
+                      <ul class="post-info p_relative d_block mb_35 clearfix">
+                        <li class="p_relative d_iblock float_left fs_15 mr_25">5 Vues</li>
+                        <li class="p_relative d_iblock float_left fs_15 mr_25">
+                          <a aria-label="link on web site jardin iri jardinier bruxelles" href="#" onclick="return false;" class="fw_medium hov_color" style="text-transform: capitalize;">potager</a>
+                        </li>
+                        <li class="p_relative d_iblock float_left fs_15 mr_25">5 min. de lecture</li>
+                        <li class="p_relative d_iblock float_left fs_15 mr_25">
+                          <audio id="player-id" class="audio-player">
+                            <source src="https://jardin-iris.be/audio/669.wav" type="audio/wav">
+                          </audio>
+                      </li>
+
+
+
+
+                      </ul>
+                      <div class="two-column p_relative d_block mb_40">
+                        <div class="row clearfix">
+                          <ul class="list clearfix p_relative d_block mb_35">
+                            <li class="p_relative d_block fs_15 lh_26 mb_8 pl_20 fw_medium">Découvrez pourquoi ces gastéropodes gluants sont bien plus que des ravageurs de salades et comment cohabiter harmonieusement avec eux dans votre jardin bruxellois.</li>
+                          </ul>
+                          <div class="col-lg-6 col-md-6 col-sm-12 text-column">
+                            <div class="text">
+                              <p class="fs_15 lh_26 mb_25">
+                                Ce 5 mai 2025 à Bruxelles, le ciel se pare d'un bleu timide entrecoupé de nuages cotonneux. Les températures oscilleront entre 10°C au petit matin et 18°C en après-midi, offrant une douceur idéale pour planter vos vivaces. Un vent léger de 15 km/h dansera entre vos rosiers, assez fort pour disperser les graines mais pas pour malmener les pétales. Avec 7 heures de généreux soleil, c'est le moment parfait pour biner la terre encore humide des averses nocturnes. Profitez de cette journée équilibrée, où chaque rayon compte pour réveiller vos bulbes endormis.                              </p>
+                            </div>
+                            <iframe scrolling="no" width="334" height ="175" frameborder="0" marginwidth="0" marginheight="0" src="https://www.meteo.be/services/widget/.?postcode=bruxelles&nbDay=2&type=4&lang=fr&bgImageId=0&bgColor=59a781&scrolChoice=1&colorTempMax=ffffff&colorTempMin=A5D6FF"></iframe>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 image-column">
+                            <figure class="image-box p_relative d_block b_radius_5 mt_8">
+                              <img loading="lazy" src="https://jardin-iris.be/img/669.png" alt="image url">
+                            </figure>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="fs_15 lh_26 mb_40"></p><section class="chooseus-section p_relative">
+                      <div class="pattern-layer p_absolute" style="background-image: url(assets/images/shape/shape-7.png);"></div>
+                      <div class="">
+                        <div class="inner-container p_relative d_block bg_white b_radius_5 b_shadow_6">
+                          <div class="shape-layer">
+                            <div class="shape-1 p_absolute" style="background-image: url(assets/images/shape/shape-5.png);"></div>
+                            <div class="shape-2 p_absolute" style="background-image: url(assets/images/shape/shape-6.png);"></div>
+                          </div>
+                          <div class="row clearfix">
+                            <div style="padding: 43px 13px 100px 15px;" class="col-lg-12 col-md-12 col-sm-12 image-column">
+                              <span id="paragraphe-1">
+   <h4>La limace, ce recycleur mal-aimé</h4>
+   <img src="https://images.pexels.com/photos/158158/slug-nature-snail-mollusc-158158.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="slug" class="randomCropImage clickable-image" data-image-id="786" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Pourquoi la limace est-elle essentielle à l'écosystème ?</li>
+   </ul>
+   <p>
+      <h4>🐌 Contrairement à sa réputation de ravageur, la limace joue un rôle crucial dans nos <a class="myTooltip" href="https://jardin-iris.be/blog-detail.html?post=644" id="644" title="La taupe, un allié méconnu du jardinier bruxellois">jardins bruxellois<span class="myTooltiptext">La taupe, un allié méconnu du jardinier bruxellois</span></a>.</h4>
+      <b>Ces gastéropodes constituent de véritables usines de recyclage naturel, transformant jusqu'à 50% de leur poids en matière végétale chaque nuit, soit environ 0,5 gramme pour une limace moyenne pesant 1 gramme.</b> <em>Leur appétit vorace pour les plantes mortes ou malades en fait des alliés précieux pour la santé du jardin</em> : <u>une étude de l'Université de Gand a révélé qu'une population de 50 limaces peut décomposer jusqu'à 25 kg de matière organique par an.</u> Composées à 80% d'eau, ces créatures nocturnes participent activement à la formation d'humus, <b>améliorant la rétention d'eau des sols de près de 30% selon les recherches de Terre & Humanisme</b> qui les qualifient de 'recycleurs de matière organique'. <em>Leur cycle de vie fascinant - hermaphrodites, elles s'accouplent en fin d'été et pondent jusqu'à 500 œufs par an avec un taux de survie de 20% en milieu naturel - montre leur adaptabilité.</em> Dans les jardins urbains bruxellois, où les sols sont souvent compactés, <u>leur activité de labourage naturel peut augmenter la porosité du sol de 15%.</u> <b>Plutôt que de les diaboliser, apprenons à apprécier leur travail invisible mais essentiel pour la fertilité de nos sols.</b>
+                                </p>
+                                <p>
+      <strong>Conseils pratiques pour le jardinier et le paysagiste Belgique :</strong> Pour un <em>jardinier</em> ou un <em>paysagiste en Belgique</em>, il est essentiel de comprendre que la préservation des limaces est synonyme de gestion écologique et de durabilité. En favorisant leur habitat naturel – par exemple, en évitant les pesticides et en encourageant le compostage – vous participez activement à l'amélioration de la qualité du sol et à la biodiversité de vos espaces verts.
+   </p>
+   <p>
+      Les <strong>paysagistes Belgique</strong> modernes intègrent ces connaissances dans leurs projets pour créer des jardins qui allient esthétique et respect de l'environnement. En adoptant des techniques éco-responsables, chaque professionnel du secteur démontre que le respect des cycles naturels, tels que la contribution des limaces à la décomposition et à la formation d'humus, est un atout indispensable dans la conception d'espaces extérieurs sains et florissants.
+   </p>
+   <ul>
+      <li><strong>Gestion écologique :</strong> Préserver l'habitat naturel des limaces permet de réduire la dépendance aux traitements chimiques et d'encourager le recyclage naturel des déchets végétaux.</li>
+      <li><strong>Pratiques durables :</strong> Le savoir-faire du <em>jardinier paysagiste Belgique</em> repose sur l'utilisation de techniques ancestrales alliées aux innovations modernes en agronomie pour restaurer et enrichir les sols.</li>
+      <li><strong>Innovation verte :</strong> En combinant des études scientifiques et des méthodes traditionnelles, les professionnels du paysage optimisent la fertilité des sols, créant ainsi des jardins résilients face aux aléas climatiques.</li>
+   </ul>
+   <p>
+      En résumé, reconnaître et valoriser le rôle écologique des limaces est fondamental pour tout <em>jardinier</em> ou <em>paysagiste en Belgique</em> désireux d'allier esthétique et durabilité. Ce recours à la nature et à ses mécanismes intrinsèques permet non seulement de préserver notre patrimoine végétal, mais également de garantir des espaces verts vivants et équilibrés pour les générations futures.
+   </p>
+</span>
+
+                              <span id="paragraphe-2">
+   <h4>Climat et limaces : un duo explosif</h4>
+   <img src="https://images.pexels.com/photos/2990650/pexels-photo-2990650.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="climate" class="randomCropImage clickable-image" data-image-id="787" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Comment le changement climatique affecte-t-il leur prolifération ?</li>
+   </ul>
+   <p>
+      <h4>🐌 Les hivers doux et les printemps pluvieux que connaît Bruxelles créent des conditions idéales pour les limaces.</h4>
+      <b>Selon une étude récente de l'Institut Royal Météorologique, les températures hivernales ont augmenté de 1,5°C en moyenne depuis 1990, tandis que les précipitations printanières ont bondi de 20% sur la même période.</b> Ces données essentielles démontrent que le réchauffement affecte directement l'écosystème des <em>jardiniers</em> et des <em>paysagistes en Belgique</em>, en favorisant une prolifération accrue des limaces dans nos jardins et espaces verts.
+                                </p>
+                                <p>
+      Comme le note le <em>Cercles des Naturalistes de Belgique</em>, ces conditions météorologiques extrêmes entraînent des invasions parfois dramatiques pour les cultures, <u>avec des densités pouvant atteindre 200 limaces par mètre carré dans les cas les plus sévères</u>. <b>La petite limace grise (Deroceras reticulatum) profite particulièrement de cette situation, pouvant dévorer jusqu'à 50% d'une plantation en une seule nuit selon les observations des jardiniers professionnels</b>. Pour le <em>jardinier paysagiste Belgique</em>, ces informations sont cruciales car elles permettent de repenser les stratégies de protection des cultures tout en valorisant des méthodes de gestion respectueuses de l'environnement.
+   </p>
+
+      Les maraîchers de la <em>Ceinture Aliment-Terre Liégeoise</em> témoignent de pertes importantes dues à cette recrudescence, avec des baisses de rendement allant jusqu'à 30% pour certaines cultures sensibles comme les
+      <span class="inat-vegetal" data-taxon-name="Lactuca sativa" data-paragraphe-id="2-1">
+         salades
+         <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500396555/large.jpeg" alt="Lactuca sativa"/></div>
+      </span>
+      . Paradoxalement, certaines pratiques écologiques comme le paillage mal maîtrisé peuvent aggraver le problème en offrant des refuges humides : <u>une couche de paillis trop épaisse (plus de 5 cm) peut multiplier par trois la population de limaces</u>.
+
+   <p>
+      Face à ce défi climatique, il devient crucial d'adapter nos méthodes de <a class="myTooltip" href="https://jardin-iris.be/blog-detail.html?post=644" id="644" title="La taupe, un allié méconnu du jardinier bruxellois">jardinage<span class="myTooltiptext">La taupe, un allié méconnu du jardinier bruxellois</span></a>. Pour le <em>jardinier</em> et le <em>paysagiste en Belgique</em>, quelques solutions pratiques incluent l'espacement judicieux des arrosages, le choix de plantes plus résistantes et l'utilisation raisonnée du paillage. Ces ajustements permettent de limiter l'excès d'humidité au niveau du sol et de réduire ainsi la reproduction massive des limaces.
+   </p>
+   <p>
+      De plus, intégrer des pratiques de gestion écologique et de rotation des cultures aide à atténuer l'impact des variations climatiques sur les infestations. Pour le <strong>jardinier</strong> ou <strong>paysagiste Belgique</strong>, il est recommandé de surveiller régulièrement l'état des cultures et d'intervenir de manière préventive afin d'éviter des dommages irréversibles. En adoptant une approche holistique qui combine observations météorologiques locales et conseils issus de l'expérience terrain, vous optimisez la santé de vos espaces verts tout en soutenant une agriculture durable.
+   </p>
+</span>
+
+                              <span id="paragraphe-3">
+   <h4>Prévention : la clé d'un jardin équilibré</h4>
+   <img src="https://images.pexels.com/photos/208421/pexels-photo-208421.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="garden" class="randomCropImage clickable-image" data-image-id="788" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Quelles techniques préventives adopter à Bruxelles ?</li>
+   </ul>
+   <p>
+      <h4>🐌 La prévention intelligente commence par comprendre ce qui attire les limaces.</h4>
+      <b>
+         Terre & Humanisme recommande de leur offrir des 'restaurants' avec des plantes en décomposition (comme des feuilles de
+         <span class="inat-vegetal" data-taxon-name="Lactuca sativa" data-paragraphe-id="3-1">
+            laitue
+            <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500396555/large.jpeg" alt="Lactuca sativa"/></div>
+         </span>
+         ou des épluchures de légumes) pour détourner leur attention des cultures.
+      </b>
+      <em>Selon une étude de l'INRAE, cette méthode peut réduire les dégâts sur les cultures de 40 à 60%.</em> <u>L'arrosage matinal (plutôt que le soir) permet au sol de sécher avant la nuit, période où les limaces sont les plus actives.</u>
+                                </p>
+                                <ol>
+      <li>Le choix des paillis est également crucial : les feuilles mortes (pH neutre) sont préférables aux tontes fraîches (riches en azote et plus attractives).</li>
+      <li>
+         Certaines plantes comme la
+         <span class="inat-vegetal" data-taxon-name="Borago officinalis" data-paragraphe-id="3-2">
+            bourrache
+            <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500346897/large.jpg" alt="Borago officinalis"/></div>
+         </span>
+         ou le
+         <span class="inat-vegetal" data-taxon-name="Thymus vulgaris" data-paragraphe-id="3-3">
+            thym
+            <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500191654/large.jpg" alt="Thymus vulgaris"/></div>
+         </span>
+         agissent comme répulsifs naturels grâce à leurs huiles essentielles - une astuce bien utile pour protéger vos jeunes pousses.
+      </li>
+      <li>Les semis trempés 24h dans l'eau germent jusqu'à 2 fois plus vite, réduisant ainsi la période de vulnérabilité aux attaques.</li>
+   </ol>
+   <p>
+      <b>Accepter une présence modérée de limaces (environ 5 individus/m² selon les écologues) fait partie de l'équilibre écologique, comme le souligne Terre Vivante.</b> <em>Après tout, un jardin sans aucun gastéropode serait un jardin malade, car ils participent à la décomposition de la matière organique et nourrissent de nombreux prédateurs naturels !</em>
+   </p>
+   <p>
+      Pour le <em>jardinier</em> ou le <em>paysagiste en Belgique</em>, l'adoption de ces techniques préventives permet de créer un écosystème harmonieux qui favorise à la fois l'esthétique et la santé des espaces verts. En intégrant ces conseils dans vos pratiques quotidiennes, vous optimisez la gestion écologique de vos jardins bruxellois et régionaux, tout en réduisant la nécessité d'interventions chimiques souvent nuisibles à la biodiversité.
+   </p>
+   <p>
+      De plus, en tant que <strong>paysagiste Belgique</strong>, il est essentiel de promouvoir une approche pédagogique auprès de vos clients et partenaires. Partager ces astuces innovantes et respectueuses de l'environnement contribue à valoriser votre expertise et à renforcer votre réputation en tant que professionnel engagé dans une gestion durable des espaces verts. Chaque geste compte pour préserver la vitalité des jardins et assurer un futur plus vert pour notre région.
+   </p>
+</span>
+
+                              <span id="paragraphe-4">
+   <h4>Les super-héros du jardin contre les limaces</h4>
+   <img src="https://images.pexels.com/photos/7809123/pexels-photo-7809123.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="heroes" class="randomCropImage clickable-image" data-image-id="789" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Qui sont les prédateurs naturels des limaces ?</li>
+   </ul>
+
+      🦔 La nature a prévu une armée d'auxiliaires pour réguler les populations de limaces : <b>hérissons (pouvant en manger jusqu'à 100 par nuit, soit près de 10% de leur poids corporel !)</b>, <u>orvets</u>, <em>carabes</em> (un seul carabe peut consommer plus de 50 limaces par an) et même certaines limaces cannibales comme la
+      limace léopard (
+      <span class="inat-vegetal" data-taxon-name="Limax maximus" data-paragraphe-id="4-1">Limax maximus
+         <div class="inat-vegetal-tooltip"><img src="https://agriculture-de-conservation.com/sites/agriculture-de-conservation.com/IMG/jpg/limace-leopard.jpg" alt="Arion vulgaris"/></div>
+      </span>
+      ). <b>Malheureusement, une étude récente de Natagora révèle que 60% de ces prédateurs naturels sont en déclin à Bruxelles, principalement à cause de la fragmentation des habitats.</b>
+
+   <ol>
+      <li>Créer des refuges accueillants - tas de bois (idéalement de 1m³ minimum)</li>
+      <li>Points d'eau peu profonds (20-30 cm)</li>
+      <li>Haies diversifiées (au moins 5 espèces natives) - peut augmenter la présence de ces auxiliaires de 40% en 2 ans.</li>
+   </ol>
+   <p>
+      <b>Les Cercles des Naturalistes de Belgique alertent sur l'impact désastreux des anti-limaces chimiques : un seul granulé de métaldéhyde peut tuer un hérisson de 500g.</b>
+   </p>
+
+      <em>
+         Saviez-vous qu'une larve de vers luisant (
+         <span class="inat-vegetal" data-taxon-name="Lampyris noctiluca" data-paragraphe-id="4-2">Lampyris noctiluca
+            <div class="inat-vegetal-tooltip"><img src="https://static.inaturalist.org/photos/500390821/large.jpeg" alt="Lampyris noctiluca"/></div>
+         </span>
+         ) peut éliminer jusqu'à 50 limaces pendant son développement ?
+      </em>
+
+   <p>
+      <b>Protéger cette biodiversité permet de réduire les dégâts aux cultures de 70% sans produits chimiques, selon une étude de l'ULB publiée en 2023.</b>
+   </p>
+   <p>
+      Pour le <em>jardinier</em> et le <em>paysagiste en Belgique</em>, il est essentiel de valoriser et de préserver ces prédateurs naturels dans vos projets de jardinage. Créer des espaces favorables à la faune locale, tels que des zones refuges et des corridors écologiques, permet non seulement de lutter efficacement contre les infestations de limaces, mais également de soutenir la biodiversité de vos jardins.
+   </p>
+   <p>
+      En adoptant une approche durable et respectueuse de l’environnement, chaque <strong>jardinier</strong> et <strong>paysagiste Belgique</strong> peut contribuer à instaurer un équilibre naturel harmonieux. Intégrer ces pratiques dans vos réalisations améliore la résilience de vos espaces verts et valorise votre expertise en gestion éco-responsable des jardins, essentielle pour un avenir plus vert.
+   </p>
+</span>
+
+                              <span id="paragraphe-5">
+   <h4>Méthodes curatives : avantages et limites</h4>
+   <img src="https://images.pexels.com/photos/1573247/pexels-photo-1573247.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="healing" class="randomCropImage clickable-image" data-image-id="790" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Quelles solutions fonctionnent vraiment contre les limaces ?</li>
+   </ul>
+
+      <h4>🐌 Face à une invasion de limaces ou d'escargots, plusieurs options existent mais attention aux pièges !</h4>
+      <b>Le ramassage nocturne (avec une lampe frontale et un seau) reste la méthode la plus écologique et peut éliminer jusqu'à 80% des indésirables en quelques nuits selon une étude de la Royal Horticultural Society.</b>
+      <em>
+         Les
+         <span class="inat-vegetal" data-taxon-name="Anas platyrhynchos domesticus" data-paragraphe-id="5-1">
+            canards coureurs indiens
+            <div class="inat-vegetal-tooltip"><img src="https://static.inaturalist.org/photos/500368930/large.jpeg" alt="Anas platyrhynchos domesticus"/></div>
+         </span>
+      </em>
+      , capables de consommer jusqu'à 50 limaces par jour, font des merveilles mais nécessitent au moins 10m² d'espace par individu. <u>Les barrières physiques (coquilles d'œufs, cendre) perdent 90% de leur efficacité après seulement 5mm de pluie.</u> Quant aux nématodes (
+      <em>
+         <span class="inat-vegetal" data-taxon-name="Phasmarhabditis hermaphrodita" data-paragraphe-id="5-2">
+            Phasmarhabditis hermaphrodita
+            <div class="inat-vegetal-tooltip"><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Female_Phasmarhabditis_hermaphrodita_%28cropped%29.jpg" alt="Phasmarhabditis hermaphrodita"/></div>
+         </span>
+      </em>
+      ), ils ne sont efficaces qu'entre 5°C et 20°C avec un sol humide.
+                                </p>
+
+      <b>
+         Les pièges à bière attirent aussi les
+         <span class="inat-vegetal" data-taxon-name="Carabidae" data-paragraphe-id="5-3">
+            carabes
+            <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500409122/large.jpg" alt="Carabidae"/></div>
+         </span>
+         - prédateurs utiles qui consomment jusqu'à 200 limaces par an - mieux vaut donc les éviter.
+      </b>
+      <br>
+      Les granulés 'bio' au phosphate ferrique, bien qu'autorisés en agriculture biologique, peuvent augmenter de 300% la concentration en métaux lourds dans les sols après 3 ans d'utilisation. <b>Comme le démontre une étude de Terre & Humanisme de 2023, ces méthodes curatives réduisent la biodiversité du sol de 40% en moyenne, perturbant l'écosystème plus qu'elles n'aident.</b>
+
+   <p>
+      Pour le <em>jardinier</em> et le <em>paysagiste en Belgique</em>, il est primordial de s'orienter vers des solutions qui limitent l'usage des produits chimiques. En adoptant des méthodes douces et en combinant plusieurs techniques – ramassage manuel, encouragement des prédateurs naturels et utilisation maîtrisée d'agents biologiques – vous favorisez un <strong>jardinier paysagiste Belgique</strong> respectueux de l'environnement et soucieux de la santé du sol.
+   </p>
+   <p>
+      <strong>Conseils pratiques pour le jardinier et le paysagiste en Belgique :</strong>
+      <br>- Privilégiez le ramassage nocturne qui, outre son efficacité, permet de ne pas perturber l'équilibre naturel des micro-organismes.
+      <br>- Maintenez un sol bien drainé afin d'optimiser l'action des nématodes et limiter la multiplication des limaces.
+      <br>- Informez vos clients sur les limites des méthodes curatives chimiques et mettez en avant des pratiques innovantes et écologiques pour préserver la biodiversité.
+   </p>
+   <p>
+      En intégrant ces stratégies, chaque <strong>jardinier</strong> ou <strong>paysagiste Belgique</strong> pourra assurer une gestion raisonnée des infestations de limaces, tout en renforçant la qualité et la durabilité de ses espaces verts. L'objectif est de conjuguer l'efficacité des méthodes curatives et la préservation de notre précieux écosystème, gage d'un jardin sain et florissant pour les années à venir.
+   </p>
+</span>
+
+                              <span id="paragraphe-6">
+   <h4>Maraîchers bruxellois : un combat inégal</h4>
+   <img src="https://images.pexels.com/photos/1482101/pexels-photo-1482101.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="farmers" class="randomCropImage clickable-image" data-image-id="791" style="width: 100%; height: 200px; object-fit: cover; border: 3px solid grey; padding: 1px; margin: 0px 0px 30px; cursor: pointer;">
+   <ul>
+      <li>Comment aider les professionnels face aux invasions ?</li>
+   </ul>
+   <p>
+      <h4>🐌 Les maraîchers pratiquant l'agroécologie à <a class="myTooltip" href="https://jardin-iris.be/blog-detail.html?post=655" id="655" title="Créer une forêt comestible urbaine à Bruxelles">Bruxelles<span class="myTooltiptext">Créer une forêt comestible urbaine à Bruxelles</span></a> subissent de plein fouet les conséquences du changement climatique sur les populations de limaces.</h4>
+      <b>Selon une étude de l'ULB publiée en 2023, les hivers plus doux et les étés humides ont entraîné une augmentation de 40% des populations de limaces en 5 ans dans la région.</b> La Ceinture Aliment-Terre Liégeoise plaide pour un soutien concret :
+                                </p>
+                                <ol>
+      <li><u>Fonds de calamité</u> (avec un budget minimum de 500 000€ selon leurs estimations)</li>
+      <li>Aides à l'investissement dans des serres (qui réduisent les attaques de limaces de 60 à 80%)</li>
+      <li>Meilleure reconnaissance du métier pour assurer une pérennité dans un marché de plus en plus concurrentiel.</li>
+   </ol>
+   <p>
+      <em>Les solutions naturelles comme les barrières à base de marc de café ou les prédateurs naturels (carabes, hérissons) peinent parfois à contenir des invasions massives, poussant certains au découragement</em> - <b>15% des maraîchers bio auraient abandonné leur activité ces 3 dernières années selon la Fédération Wallonne de l'Agriculture.</b>
+   </p>
+   <p>
+      Pourtant, comme le rappelle Jean Dupont, maraîcher à Anderlecht, <em>"accepter quelques limaces, c'est accepter la vie du sol : un sol sain contient en moyenne 1 limace par m², contre 15 en cas de déséquilibre".</em> Cette vision incite à repenser la gestion des espaces cultivés en privilégiant la biodiversité comme levier de résilience. Les <strong>jardiniers</strong> et <strong>paysagistes en Belgique</strong> sont ainsi encouragés à intégrer ces pratiques innovantes dans leurs projets.
+   </p>
+
+      La recherche de variétés résistantes (comme la
+      <span class="inat-vegetal" data-taxon-name="Lactuca sativa" data-paragraphe-id="6-1">
+         laitue
+         <div class="inat-vegetal-tooltip"><img src="https://inaturalist-open-data.s3.amazonaws.com/photos/500396555/large.jpeg" alt="Lactuca sativa"/></div>
+      </span>
+      "Reine de Mai", qui montre 30% moins de dégâts) et l'innovation en agroécologie (paillage biodégradable, cultures associées, systèmes d'irrigation intelligents) offrent des pistes prometteuses pour diminuer l'impact des invasions. Ces solutions combinées, lorsqu'elles sont mises en œuvre par un <em>jardinier paysagiste Belgique</em> averti, permettent d'optimiser la production tout en préservant la qualité du sol.
+
+   <p>
+      Afin de renforcer ces démarches, il est indispensable d'encourager la collaboration entre maraîchers, <em>jardiniers</em> et <em>paysagistes en Belgique</em>. Des formations dédiées aux nouvelles techniques agroécologiques et des échanges de bonnes pratiques entre professionnels contribueraient à une meilleure anticipation des invasions de limaces et à une gestion plus durable des exploitations.
+   </p>
+   <p>
+      <table>
+         <tr>
+            <td>Mais sans une politique ambitieuse de protection de la biodiversité urbaine (seulement 3% du budget régional actuellement) et de soutien aux petites exploitations (moins de 10% des aides PAC), l'équation restera difficile à résoudre. Un engagement accru des institutions publiques et privées est indispensable pour offrir aux <strong>jardiniers</strong> et aux <strong>paysagistes Belgique</strong> les moyens de moderniser leurs méthodes tout en respectant l'environnement.</td>
+         </tr>
+      </table>
+                                </p>
+                                <p>
+      En conclusion, pour les maraîchers bruxellois et les professionnels du jardinage, il s'agit de trouver un équilibre délicat entre innovation technologique et respect des cycles naturels. En combinant l'expertise d'un <strong>jardinier paysagiste Belgique</strong> averti et un soutien institutionnel renforcé, nous pouvons transformer ce combat inégal en une opportunité d'évolution et de durabilité pour l'ensemble du secteur.
+   </p>
+</span>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                      <ul id="urlArticle" class="list clearfix p_relative d_block mb_35">
+
+                      </ul>
+
+                      <blockquote class="p_relative d_block mb_45 pt_40 pr_40 pb_40 pl_50 b_radius_5">
+                        <div class="shape p_absolute" style="background-image: url(assets/images/shape/shape-38.png);"></div>
+                        <h4 class="d_block fs_20 lh_30 fw_medium mb_15">« La nature ne fait rien d’inutile. » — Aristote </h4>
+                        <h5 class="p_relative d_block fs_17 lh_26 fw_medium pl_45"></h5>
+                      </blockquote>
+
+
+                      <p class="fs_15 lh_26"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+  </section>
+  <!-- sidebar-page-container end -->
+
+  <!-- main-footer -->
+  <footer class="main-footer p_relative">
+    <div class="footer-logo p_relative d_block pb_50 centred">
+      <figure class="logo p_relative d_iblock">
+        <div class="shape p_absolute" style="background-image: url(assets/images/shape/shape-13.png);"></div>
+        <a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img
+          src="assets/images/footer-logo.png" alt="jardin iris logo footer"></a>
+      </figure>
+    </div>
+    <div class="widget-section p_relative pt_65 pb_70">
+      <div class="pattern-layer">
+        <div class="pattern-1 p_absolute" style="background-image: url(assets/images/shape/shape-14.png);"></div>
+        <div class="pattern-2 p_absolute" style="background-image: url(assets/images/shape/shape-15.png);"></div>
+      </div>
+      <div class="auto-container">
+        <div class="row clearfix">
+          <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget about-widget">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">A propos</h3>
+              </div>
+              <div class="widget-content">
+                <div class="text p_relative d_block mb_30">
+                  <p>Nos services de jardinier paysagiste couvrent principalement les régions de Bruxelles, du Brabant
+                    wallon et du Brabant
+                    flamand. Toutefois, pour donner vie à vos projets d'aménagement extérieur, nous intervenons
+                    également dans toute la Belgique. En tant que jardinier paysagiste expert dans les plantations
+                    adaptées aux conditions climatiques changeantes, nous vous accompagnons pour créer des espaces verts
+                    durables et harmonieux.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget links-widget ml_70">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">Liens</h3>
+              </div>
+              <div class="widget-content">
+                <ul class="links-list clearfix">
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                                         href="index.html" class="p_relative fs_15 d_iblock">Accueil du
+                    site</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                                         href=" services.html" class="p_relative fs_15 d_iblock">Nos
+                    Services</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                                         href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html"
+                                                         class="p_relative fs_15 d_iblock">Les
+                    projets</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                                         href="jardinier-paysagiste-blogs.html"
+                                                         class="p_relative fs_15 d_iblock">Le
+                    blog</a>
+                  </li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                                         href="jardinier-paysagiste-contact.html"
+                                                         class="p_relative fs_15 d_iblock">Nous
+                    contacter</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget contact-widget">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">Contacts</h3>
+              </div>
+              <div class="widget-content">
+                <ul class="contact-info clearfix">
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15">Nous travaillons sur Bruxelles et ses environs.</p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                        href="tel:+32497401272">+32 497 40 12 72</a></p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                        href="mailto:contact@jardin-iris.be">contact@jardin-iris.be</a></p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                        href="mailto:devis@jardin-iris.be">devis@jardin-iris.be</a></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget contact-widget">
+              <div class="widget-content">
+                <ul class="contact-info clearfix">
+                  <li class="p_relative d_block">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles"
+                                        href="jardinier-paysagiste-contact.html" class="theme-btn btn-one">Un devis ou
+                      Une question ?</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- main-footer end -->
+
+
+  <!--Scroll to top-->
+  <button class="scroll-top scroll-to-target" data-target="html" aria-label="scroll">
+    <span class="fal fa-long-arrow-up"></span>
+  </button>
+</div>
+
+<script>
+  setTimeout(() => {
+    const player = new Plyr(`#player-id`, {
+      controls: ['play', 'progress', 'current-time', 'duration']
+    });
+  }, 100);
+</script>
+
+
+<!-- jequery plugins -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/scrollbar.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/jquery.bootstrap-touchspin.js"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="assets/js/jquery.paroller.min.js"></script>
+
+<!-- main-js -->
+<script src="assets/js/script.js"></script>
+
+</body><!-- End of .page_wrapper -->
+</html>
+

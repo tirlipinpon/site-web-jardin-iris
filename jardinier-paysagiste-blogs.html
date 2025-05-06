@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WKF29TZK');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.jardin-iris.be/jardinier-paysagiste-blogs.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Jardinier paysagiste conseils d'experts en jardinage et paysagisme à Bruxelles sur notre blog. Depuis plus de 20 ans, nous vous aidons à créer et entretenir des jardins autonomes et écologiques."/>
+  <title>Blog Jardinier paysagiste - Astuces et conseils de votre jardinier paysagiste à Bruxelles</title>
+  <base href="https://jardin-iris.be/">
+
+
+  <!-- Fav Icon -->
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="assets/css/font-awesome-all.css" rel="stylesheet">
+  <link href="assets/css/flaticon.css" rel="stylesheet">
+  <link href="assets/css/owl.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+  <link href="assets/css/animate.css" rel="stylesheet">
+  <link href="assets/css/jquery-ui.css" rel="stylesheet">
+  <link href="assets/css/nice-select.css" rel="stylesheet">
+  <link href="assets/css/jquery.bootstrap-touchspin.css" rel="stylesheet">
+  <link href="assets/css/color.css" rel="stylesheet">
+  <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/elpath.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="assets/css/responsive.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+  <!--  supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-741K1XCCSV">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-741K1XCCSV');
+  </script>
+  <style>
+    .grid-view,
+    .list-view {
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+      font-size: 28px;
+      padding: 10px;
+      margin: 20px 0 20px 15px;
+    }
+
+    .grid-view:hover,
+    .list-view:hover {
+      background-color: #ddd; /* Couleur de fond au survol */
+      color: #312f2f; /* Couleur du texte au survol */
+    }
+
+    .grid-view.active,
+    .list-view.active {
+      background-color: rgba(47, 121, 85, 0.9); /* Couleur de fond pour le bouton sélectionné */
+      color: #fff; /* Couleur du texte pour le bouton sélectionné */
+    }
+  /*  autocomplete infinite */
+    .autocomplete-container-infinite {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Style pour que le dropdown occupe toute la hauteur de la page */
+    .autocomplete-dropdown-infinite {
+      position: absolute;
+      top: 100%; /* Position en-dessous de l'input */
+      left: 0;
+      right: 0;
+      max-height: calc(100vh - 50px); /* Ajuste la hauteur pour qu'il occupe presque tout l'écran */
+      overflow-y: auto; /* Permet un défilement si le contenu dépasse la hauteur de l'écran */
+      z-index: 1000;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    /* Style pour les éléments individuels dans le dropdown */
+    .autocomplete-item-infinite {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* Mise en forme sur le survol */
+    .autocomplete-item-infinite:hover {
+      background-color: #f0f0f0;
+    }
+
+  /*  drop down search-field */
+    .dropdown-content div {
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .dropdown-content div:hover {
+      background-color: #f1f1f1;
+    }
+
+  /* phylactere search field infinite  */
+    /* Style pour le phylactère */
+    .phylactere {
+      position: absolute;
+      max-width: 600px;
+      width: 600px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1; /* Supprime les espaces entre les lignes */
+      white-space: normal;
+      word-wrap: break-word;
+      z-index: 1000;
+      display: none;
+    }
+
+    .phylactere::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent #333 transparent;
+    }
+
+
+      .resizeHeight {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border: 3px solid grey;
+        padding: 1px;
+      }
+
+  </style>
+  <script> window.chtlConfig = { chatbotId: "6424574229" } </script>
+  <script async data-id="6424574229" id="chatling-embed-script" src="https://chatling.ai/js/embed.js"></script>
+</head>
+
+
+<!-- page wrapper -->
+<body>
+<!-- Contenu de votre site -->
+
+<!-- Bannière de cookies -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>Ce site utilise des cookies pour vous offrir la meilleure expérience. Veuillez accepter ou refuser leur utilisation.</p>
+  <div class="cookie-buttons">
+    <button id="accept-cookies" class="cookie-btn">Accepter</button>
+    <button id="reject-cookies" class="cookie-btn">Refuser</button>
+  </div>
+  <a href="/politique-de-confidentialite" target="_blank">En savoir plus</a>
+</div>
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKF29TZK"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script src="assets/js/jquery.js"></script>
+
+<div class="boxed_wrapper">
+
+  <!-- preloader -->
+  <div class="loader-wrap">
+    <div class="preloader">
+      <div class="preloader-close">x</div>
+      <div id="handle-preloader" class="handle-preloader">
+        <div class="animation-preloader">
+          <div class="spinner"></div>
+          <div class="txt-loading">
+                            <span data-text-preloader="J" class="letters-loading">
+                                J
+                            </span>
+            <span data-text-preloader="a" class="letters-loading">
+                                a
+                            </span>
+            <span data-text-preloader="r" class="letters-loading">
+                                r
+                            </span>
+            <span data-text-preloader="d" class="letters-loading">
+                                d
+                            </span>
+            <span data-text-preloader="i" class="letters-loading">
+                                i
+                            </span>
+            <span data-text-preloader="n" class="letters-loading">
+                                n
+                            </span>
+            <span data-text-preloader="-" class="letters-loading">
+                                -
+                            </span>
+            <span data-text-preloader="I" class="letters-loading">
+                                I
+                            </span>
+            <span data-text-preloader="r" class="letters-loading">
+                                r
+                            </span>
+            <span data-text-preloader="i" class="letters-loading">
+                                i
+                            </span>
+            <span data-text-preloader="s" class="letters-loading">
+                                s
+                            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- preloader end -->
+
+  <!-- main header -->
+  <header class="main-header">
+    <!-- header-top -->
+    <div class="header-top">
+      <div class="shape" style="background-image: url(assets/images/shape/shape-16.png);"></div>
+      <div class="auto-container">
+        <div class="top-inner clearfix">
+          <div class="right-column pull-right">
+            <ul class="info-box clearfix">
+              <li>
+                <div class="icon-box"><i class="fas fa-phone"></i></div>
+                <p>Téléphone: <a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:+32497401272">+32 497 40 12 72</a></p>
+              </li>
+              <li>
+                <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                <p>Email: <a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:contact@jardin-iris.be">contact@jardin-iris.be</a></p>
+              </li>
+              <li>
+                <div class="icon-box"><i class="fas fa-clipboard-check"></i></div>
+                <p>Devis: <a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:devis@jardin-iris.be">devis@jardin-iris.be</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header-lower -->
+    <div class="header-lower">
+      <div class="auto-container">
+        <div class="outer-box">
+          <div class="logo-box">
+            <div class="shape" style="background-image: url(assets/images/shape/shape-1.png);"></div>
+            <figure class="logo"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img loading="lazy" src="assets/images/logo.png" alt="jardin logo iris"></a>
+            </figure>
+          </div>
+          <div class="menu-area clearfix">
+            <!--Mobile Navigation Toggler-->
+            <div class="mobile-nav-toggler">
+              <i class="icon-bar"></i>
+              <i class="icon-bar"></i>
+              <i class="icon-bar"></i>
+            </div>
+            <nav class="main-menu navbar-expand-md navbar-light">
+              <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                <ul class="navigation clearfix">
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html">Accueil</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-service/entretien-de-jardin.html">Services</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html">Projets</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-contact.html">Contact</a></li>
+                  <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-blogs.html">Blog</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="nav-right">
+            <div class="cart-box"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" en/jardin-iris.html"><img loading="lazy" src="assets/images/icons/royaume-uni.png" alt="english" width="30"></a></div>
+            <div class="cart-box"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img loading="lazy" src="assets/images/icons/france.png" alt="francais" width="30"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--sticky Header-->
+    <div class="sticky-header">
+      <div class="auto-container">
+        <div class="outer-box">
+          <div class="logo-box">
+            <figure class="logo"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img loading="lazy" src="assets/images/logo.png"
+                                                           alt="jardin logo iris header"></a></figure>
+          </div>
+          <div class="menu-area clearfix">
+            <nav class="main-menu clearfix">
+              <!--Keep This Empty / Menu will come through Javascript-->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- main-header end -->
+
+  <!-- Mobile Menu  -->
+  <div class="mobile-menu">
+    <div class="menu-backdrop"></div>
+    <div class="close-btn"><i class="fas fa-times"></i></div>
+
+    <nav class="menu-box">
+      <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+      <div class="contact-info">
+        <h4>Info de contact</h4>
+        <ul>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:+32497401272">+32 497 40 12 72</a></li>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:contact@jardin-iris.be">contact@jardin-iris.be</a></li>
+          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:devis@jardin-iris.be">devis@jardin-iris.be</a></li>
+          <li>Nous travaillons sur Bruxelles et ses environs.</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- End Mobile Menu -->
+
+  <!-- Page Title -->
+  <section class="page-title p_relative pt_150 pb_180 centred"
+           style="background-image: url(assets/images/blog/banner-1.jpg);">
+    <div class="pattern-layer p_absolute" style="background-image: url(assets/images/shape/shape-2.png);"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <h1 class="d_block fs_70 lh_70 mb_20 color_white">Les articles de blog</h1>
+        <p class="d_block fs_20 lh_30 color_white">Les dèrnières nouvelles du monde des jardins</p>
+      </div>
+    </div>
+  </section>
+  <!-- End Page Title -->
+
+
+  <!-- design-select-container -->
+  <section id="design-select-container" class="sidebar-page-container p_relative blog-classic">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <div class="btn-box float_left p_relative clearfix">
+          <button id="listViewButton" class="list-view p_relative d_iblock fs_20 b_radius_5 centred active"><i
+            class="icon-27"></i></button>
+          <button id="gridViewButton" class="grid-view p_relative d_iblock fs_20 b_radius_5 mr_2 centred"><i
+            class="icon-26"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  cookie handler -->
+  <script>
+    function dateHelperFormat(dateNotFormated) {
+      // La date au format ISO
+      var isoDate = dateNotFormated;
+      // Convertir en objet Date
+      var date = new Date(isoDate);
+      // Extraire le jour, le mois et l'année
+      var day = ("0" + date.getDate()).slice(-2);    // Pour ajouter le '0' si nécessaire
+      var month = ("0" + (date.getMonth() + 1)).slice(-2); // Les mois commencent à 0
+      var year = date.getFullYear();
+      // Formatter la date au format DD-MM-YYYY
+      var formattedDate = day + "-" + month + "-" + year;
+      return formattedDate;
+    }
+    // Fonction pour obtenir les cookies sous forme d'objet
+    function getCookies() {
+      const cookies = {};
+      document.cookie.split(';').forEach(cookie => {
+        const [name, value] = cookie.split('=');
+        cookies[name.trim()] = value ? decodeURIComponent(value.trim()) : '';
+      });
+      console.log('Contenu de cookies:', cookies); // Affiche le contenu de la constante cookies
+      return cookies;
+    }
+
+    // Fonction pour enregistrer des cookies
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+    }
+
+    // Fonction pour ajouter ou retirer un ID de la liste dans le cookie
+    function toggleIdInCookie(id) {
+      const cookies = getCookies();
+      let ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+
+      if (ids.includes(id)) {
+        // Retirer l'ID du cookie
+        ids = ids.filter(item => item !== id);
+        setCookie('clicked_ids', JSON.stringify(ids), 7);
+        console.log(`cookie desactive = ` + id + ' A la liste = ' + JSON.stringify(ids));
+        return false; // Indique que l'élément a été désactivé
+      } else {
+        // Ajouter l'ID au cookie
+        ids.push(id);
+        setCookie('clicked_ids', JSON.stringify(ids), 7);
+        console.log(`cookie Ajouter l'ID au cookie = ` + id + ' A la liste = ' + JSON.stringify(ids));
+        return true; // Indique que l'élément a été activé
+      }
+    }
+
+    // Fonction pour marquer ou démarrer les éléments en fonction des cookies
+    function markItems() {
+      const cookies = getCookies();
+      const ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+      ids.forEach(id => {
+        const item = document.getElementById(id);
+        if (item) {
+          item.querySelector('i').classList.add('heart-active');
+          console.log(`cookie markItems= ` + id);
+        }
+      });
+    }
+
+    // Gestion des clics sur les éléments avec la classe 'track-click'
+    // Marquer les éléments au chargement de la page
+    // Objet pour stocker les références des gestionnaires d'événements
+    const eventListenersMap = new Map();
+
+    // Fonction pour ajouter des gestionnaires d'événements
+    function markItemsClickToggle() {
+      document.querySelectorAll('li.track-click').forEach(li => {
+        // Définir une fonction de gestion d'événement pour le 'click'
+        const clickHandler = () => {
+          const id = li.id;
+          const isActive = toggleIdInCookie(id);
+          const icon = li.querySelector('i');
+          if (isActive) {
+            icon.classList.add('heart-active');
+            icon.classList.add('heart-clicked');
+            console.log(`click cookie toggle active 1`);
+            // Retirer la classe 'heart-clicked' après l'animation
+            setTimeout(() => {
+              icon.classList.remove('heart-clicked');
+            }, 300); // Correspond à la durée de l'animation
+          } else {
+            icon.classList.remove('heart-active');
+            console.log(`click cookie toggle active 2`);
+          }
+          updateFavorisCountListView();
+          updateListWithFavorisGridView()
+          console.log(`ID ${id} ${isActive ? 'ajouté' : 'retiré'} du cookie.`);
+        };
+        // Ajouter l'événement 'click' à l'élément 'li'
+        li.addEventListener('click', clickHandler);
+        // Stocker la référence du gestionnaire d'événement pour cet élément 'li'
+        eventListenersMap.set(li, clickHandler);
+      });
+      console.log('Contenu de eventListenersMap après l\'ajout:', Array.from(eventListenersMap.entries())); // Affiche le contenu de la map
+    }
+
+    // Fonction pour supprimer tous les gestionnaires d'événements des éléments 'li.track-click'
+    function removeAllClickListeners() {
+      eventListenersMap.forEach((clickHandler, li) => {
+        if (clickHandler) {
+          li.removeEventListener('click', clickHandler); // Supprimer le gestionnaire d'événement
+          eventListenersMap.delete(li); // Supprimer la référence de la Map
+        }
+      });
+      console.log('Delete Contenu de eventListenersMap:', Array.from(eventListenersMap.entries())); // Affiche le contenu de la map
+    }
+
+
+    function cookieMarkItemAndClickToggle() {
+      setTimeout(() => {
+        removeAllClickListeners();
+        markItemsClickToggle()
+        markItems();
+      }, 1500); // Correspond à la durée de l'animation
+
+    }
+  </script>
+  <!--  view handler -->
+  <script>
+    // Fonction pour créer un cookie
+    function setCookieGridViewButton(name, value, days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Fonction pour obtenir un cookie
+    function getCookieGridViewButton(name) {
+      let cookieArr = document.cookie.split(";");
+      for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name == cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      return null;
+    }
+
+    // Fonction pour supprimer un cookie
+    function deleteCookieGridViewButton(name) {
+      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sélection des éléments
+      const gridViewButton = document.getElementById('gridViewButton');
+      const listViewButton = document.getElementById('listViewButton');
+      const sidebarPageContainer = document.getElementById('sidebar-page-container');
+      const infiniteNewsContainer = document.getElementById('infinite-news-container');
+      // Ajout des gestionnaires d'événements
+      listViewButton.addEventListener('click', function () {
+        deleteCookieGridViewButton('view');  // Supprime le cookie
+        fetchDataPagination();
+        fetchData(1);
+        // Affichage de la section de la vue liste
+        sidebarPageContainer.style.display = 'block';
+        infiniteNewsContainer.style.display = 'none';
+        // Mettre à jour les classes actives pour le style
+        listViewButton.classList.add('active');
+        gridViewButton.classList.remove('active');
+        const resultsContainer = document.getElementById('search-field-infinite');
+        resultsContainer.innerHTML = ''; // Vide les résultats précédents
+      });
+      // Ajout des gestionnaires d'événements
+      gridViewButton.addEventListener('click', function () {
+        setCookieGridViewButton('view', 'grid', 30);  // Stocke le cookie pendant 7 jours
+        globalCurrentCategorie = "";
+        proxy.value = "tous"
+        // Affichage de la section de la vue grille
+        sidebarPageContainer.style.display = 'none';
+        infiniteNewsContainer.style.display = 'block';
+        // Mettre à jour les classes actives pour le style
+        gridViewButton.classList.add('active');
+        listViewButton.classList.remove('active');
+        updateListWithFavorisGridView()
+        fetchDataInfinite('created_at');
+        document.querySelector('.nice-select .option[data-value="created_at"]').click();
+      });
+      // Vérifie l'état du cookie lors du chargement de la page
+      let view = getCookieGridViewButton('view');
+      if (view === 'grid') {
+        gridViewButton.click();  // Simule un clic sur le bouton "Vue Grille" après avoir défini l'écouteur d'événement
+      } else {
+        listViewButton.click();      }
+    });
+  </script>
+  <!-- design-select-container -->
+
+  <!-- sidebar-page-container -->
+  <section id="sidebar-page-container" class="sidebar-page-container p_relative blog-classic pb_150">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+          <!-- container-Blogs -->
+          <div id="containerBlogs" class="blog-classic-content p_relative d_block mr_20">
+            <script>
+              let globalCurrentPage = 1;  // Numéro de la page actuelle
+              let globalPageSize = 10;  // Nombre d'éléments par page
+              let globalCurrentCategorie = '';
+
+              const handler = {
+                set: function (target, property, value) {
+                  if (property === 'value') {
+                    $("#" + value)
+                    changeCategoryCss(value);
+                    target[property] = value;
+                    return true;
+                  }
+                  return false;
+                }
+              };
+              const target = {value: globalCurrentCategorie};
+              const proxy = new Proxy(target, handler);
+
+              // Fonction pour changer la catégorie en gras
+              function changeCategoryCss(selectedCategory) {
+                const allItems = document.getElementById("containerCategorie").querySelectorAll('.category-link');
+                allItems.forEach(item => {
+                  if (item.id === selectedCategory) {
+                    item.classList.add('fw_bold');
+                  } else {
+                    item.classList.remove('fw_bold');
+                  }
+                });
+              }
+
+              let globalPostIdsSearch = 0;
+              const SUPABASE_URL = 'https://zmgfaiprgbawcernymqa.supabase.co';
+              const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2ZhaXByZ2Jhd2Nlcm55bXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ2NTc0MjEsImV4cCI6MjA0MDIzMzQyMX0.sBq7sR7JhRZCg36xvt13yt_f398oWbHUfdUwa9yoox0';
+              const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+              async function fetchData(paginationPage, ids = []) {
+                // Variables pour la pagination
+                const page = paginationPage;  // Numéro de la page actuelle
+
+                // Requête pour obtenir les posts
+                let baseQuery = supabaseClient
+                  .from('post')
+                  .select('*')
+                  .order('created_at', {ascending: false})
+                  .neq('deleted', true)
+                  .neq('valid', false);
+
+                if (globalCurrentCategorie && globalCurrentCategorie !== "favoris") {
+                  baseQuery = baseQuery.eq('categorie', globalCurrentCategorie);
+                  baseQuery = baseQuery.range((page - 1) * 15, page * 15 - 1);
+                } else if (globalCurrentCategorie === "") {
+                  baseQuery = baseQuery.range((page - 1) * 15, page * 15 - 1);
+                }
+
+                if (ids.length > 0) {
+                  baseQuery = baseQuery.in('id', ids);
+                }
+
+                try {
+                  const {data: posts, error: postsError} = await baseQuery;
+
+                  if (postsError) {
+                    throw postsError;
+                  }
+
+                  // Obtenir les IDs des posts récupérés
+                  const postIds = posts.map(post => post.id);
+
+                  // Étape 2 : Obtenir le nombre de commentaires pour chaque post
+                  const {data: commentsCount, error: commentsError} = await supabaseClient
+                    .rpc('count_comments', {post_ids: postIds});
+
+                  if (commentsError) {
+                    throw commentsError;
+                  }
+
+                  // Créer un dictionnaire pour les comptages de commentaires
+                  const commentCountMap = {};
+                  commentsCount.forEach(({post_id, comment_count}) => {
+                    commentCountMap[post_id] = comment_count;
+                  });
+
+                  // Ajouter le nombre de commentaires aux posts
+                  const postsWithCommentCount = posts.map(post => ({
+                    ...post,
+                    comment_count: commentCountMap[post.id] || 0
+                  }));
+
+                  $("#containerBlogs").empty();
+                  dataJson = postsWithCommentCount;
+                  cpt = 1;
+                  for (const dataJsonKey in dataJson) {
+                    // Déterminer le texte en fonction de comment_count
+                    var commentText = dataJson[dataJsonKey].comment_count > 0
+                      ? dataJson[dataJsonKey].comment_count + ' commentaire(s)'
+                      : '';
+                    var ldiv = document.createElement("div");
+                    ldiv.innerHTML = `<div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+              <div class="inner-box p_relative d_block b_radius_5 bg_white mb_70">
+                <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=${dataJson[dataJsonKey].id}">
+                 <img class="resizeHeight" loading="lazy" src="${dataJson[dataJsonKey].image_url}" alt="${dataJson[dataJsonKey].titre}${dataJson[dataJsonKey].id}"></a></figure>
+                <div class="lower-content p_relative d_block pt_35">
+                  <span class="post-date p_relative d_block fs_15 mb_2">${dateHelperFormat(dataJson[dataJsonKey].created_at)}</span>
+                  <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=${dataJson[dataJsonKey].id}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
+                  <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:bisque;padding:0 0 0 10px;">
+                   <li id="myListItem${cpt}" class="p_relative d_iblock float_left fs_15 mr_25"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" #" onclick="return false;" class="fw_medium hov_color" style="text-transform: capitalize;">${dataJson[dataJsonKey].categorie}</a></li>
+                   <li class="p_relative d_iblock float_left fs_15 mr_25">${Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2)) + Math.ceil(2))} min. de lecture</li>
+                   <li class="p_relative d_iblock float_left fs_15 mr_25">${dataJson[dataJsonKey].visite} vues</li>
+                   <li class="p_relative d_iblock float_left fs_15 mr_25">${commentText}</li>
+                   <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].id}"><i class="far fa-heart"></i></li>
+                   ${dataJson[dataJsonKey].video ? `<li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].video}"><i class="fab fa-youtube-square"></i></li>` : ''}
+                   ${dataJson[dataJsonKey].audio ? `<li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].audio}"><i class="far fa-podcast"></i></li>` : ''}
+                  </ul>
+                </div>
+              </div>
+            </div>`;
+                    if (dataJson[dataJsonKey].audio) {
+                      setTimeout(() => {
+                        const player = new Plyr(`#player-${dataJson[dataJsonKey].id}`, {
+                          controls: ['play', 'progress', 'current-time', 'duration']
+                        });
+                      }, 100);
+                    }
+                    document.getElementById("containerBlogs").appendChild(ldiv);
+                    // Ajoutez un événement 'click' à cet élément
+                    var listItem = document.getElementById('myListItem' + cpt);
+                    listItem.addEventListener('click', function () {
+                      categorieSelected(dataJson[dataJsonKey].categorie);
+                    });
+                    cpt++;
+                  }
+                } catch (error) {
+                  console.error('Erreur lors du fetch:', error);
+                }
+                cookieMarkItemAndClickToggle()
+              }
+            </script>
+          </div>
+          <!-- container-Blogs -->
+
+          <!-- pagination-wrapper -->
+          <div class="pagination-wrapper">
+            <ul id="containerPagination" class="pagination clearfix">
+              <script>
+                async function fetchDataPagination() {
+                  // 1. Compter le nombre total d'éléments
+                  let countQuery = supabaseClient
+                    .from('post')
+                    .select('id', {count: 'exact'})
+                    .neq('deleted', true)  // Exclut les entrées où deleted = true
+                    .neq('valid', false);
+
+                  if (globalCurrentCategorie) {
+                    countQuery = countQuery.eq('categorie', globalCurrentCategorie);
+                  }
+                  const {count, error: countError} = await countQuery;
+
+                  if (countError) {
+                    console.error("Erreur lors du comptage:", countError);
+                  } else {
+                    $("#containerPagination").empty();
+                    dataJson = Math.ceil(count / globalPageSize)
+                    for (let i = 1; i <= dataJson; i++) {
+                      var ldiv = document.createElement("li");
+                      ldiv.innerHTML = ('<a aria-label="link on web site jardin iri jardinier bruxelles" href=" #" onclick="return false;" class="click-pagination' + i + '">' + i + '</a href="">');
+                      document.getElementById("containerPagination").appendChild(ldiv);
+                      $(".click-pagination1").addClass("current");
+                      $('.click-pagination' + i).click(() => {
+                        $(".click-pagination" + globalCurrentPage + "").removeClass("current");
+                        globalCurrentPage = i;
+                        fetchData(globalCurrentPage);
+                        if (i === globalCurrentPage) {
+                          $(".click-pagination" + i + "").addClass("current");
+                        }
+                        $("html, body").animate({scrollTop: 0}, "slow");
+                      });
+                    }
+                  }
+                }
+              </script>
+            </ul>
+          </div>
+          <!-- pagination-wrapper -->
+        </div>
+        <!-- menu droite -->
+        <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+          <div class="blog-sidebar default-sidebar ml_20">
+
+            <div class="search-widget sidebar-widget p_relative d_block mb_50 pt_30 pr_40 pb_40 pl_40 b_radius_5">
+              <div class="search-inner">
+                <form id="search-form" class="default-form">
+                  <div class="form-group p_relative mr-0">
+                    <input type="search" id="search-field" name="search-field" minlength="3" placeholder="Recherche par mots clefs" required="">
+                    <div id="dropdownContainer" class="dropdown" style="position: relative;">
+                      <div id="dropdownResults" class="dropdown-content" style="position: absolute; background-color: white; border: 1px solid #ccc; display: none; width: 100%; overflow-y: auto; z-index: 1;"></div>
+                    </div>
+                    <button id="loadMoreButton" style="display: none;">Charger plus de résultats</button>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+            <script>
+              let currentPage = 0;
+              const pageSize = 10;
+              let currentQuery = '';
+
+              async function searchArticlesDropDown(query, page = 0) {
+                const { data, error } = await supabaseClient
+                  .from('post')
+                  .select('id, titre')
+                  .or(`titre.ilike.%${query}%, article.ilike.%${query}%`)
+                  .range(page * pageSize, (page + 1) * pageSize - 1);
+
+                if (error) {
+                  console.error("Erreur lors de la recherche :", error.message);
+                  return [];
+                }
+
+                return data;
+              }
+
+              let debounceTimeout;
+              function debounceDropDown(func, delay) {
+                return (...args) => {
+                  clearTimeout(debounceTimeout);
+                  debounceTimeout = setTimeout(() => func(...args), delay);
+                };
+              }
+
+              document.getElementById('search-field').addEventListener(
+                'input',
+                debounceDropDown(async (event) => {
+                  currentQuery = event.target.value.trim();
+                  currentPage = 0;
+
+                  if (currentQuery === '') {
+                    document.getElementById('dropdownResults').style.display = 'none';
+                    return;
+                  }
+
+                  const results = await searchArticlesDropDown(currentQuery, currentPage);
+                  displayDropdownResults(results, true);
+                }, 300)
+              );
+
+              function displayDropdownResults(results, clear = false) {
+                const dropdownResults = document.getElementById('dropdownResults');
+
+                if (clear) dropdownResults.innerHTML = '';
+
+                if (results.length === 0 && currentPage === 0) {
+                  dropdownResults.innerHTML = '<div>Aucun résultat trouvé</div>';
+                  dropdownResults.style.display = 'block';
+                  return;
+                }
+
+                results.forEach(article => {
+                  const articleElement = document.createElement('div');
+                  articleElement.innerHTML = `<a href="/blog-detail.html?post=${article.id}">${article.titre}</a>`;
+                  articleElement.onclick = () => {
+                    document.getElementById('search-field').value = article.title;
+                    dropdownResults.style.display = 'none'; // Cache le dropdown après sélection
+                  };
+                  dropdownResults.appendChild(articleElement);
+                });
+
+                // Affiche le dropdown uniquement si des résultats sont trouvés
+                dropdownResults.style.display = results.length > 0 ? 'block' : 'none';
+              }
+
+              // Gérer le clic en dehors du dropdown pour le fermer
+              document.addEventListener('click', (event) => {
+                const searchField = document.getElementById('search-field');
+                const dropdownResults = document.getElementById('dropdownResults');
+                if (!searchField.contains(event.target) && !dropdownResults.contains(event.target)) {
+                  dropdownResults.style.display = 'none';
+                }
+              });
+
+              document.getElementById('loadMoreButton').addEventListener('click', async () => {
+                currentPage += 1;
+                const results = await searchArticlesDropDown(currentQuery, currentPage);
+                displayDropdownResults(results, false);
+              });
+
+
+
+
+              document.getElementById('search-field').addEventListener('input', debounce(async function (event) {
+                const searchTerm = event.target.value.trim();
+
+                // Vérifie que le champ de recherche a au moins 3 lettres
+                if (searchTerm.length === 0) {
+                  globalPageSize = 3
+                  fetchData(1);
+                  fetchDataPagination()
+                  return;
+                } else if(searchTerm.length !== 0 && searchTerm.length < 4) {
+                  return;
+                }
+
+                try {
+                  // Appel de la fonction searchArticles avec le terme de recherche
+                  const articles = await searchArticles(searchTerm);
+
+                  // Sélectionne l'élément pour afficher les résultats
+                  const resultsContainer = document.getElementById('search-field');
+                  resultsContainer.innerHTML = ''; // Vide les résultats précédents
+
+                  // Vérifie si des articles ont été trouvés
+                  if (articles.length === 0) {
+                    resultsContainer.innerHTML = '<p>Aucun résultat trouvé.</p>';
+                    $("#containerBlogs").empty();
+                    $("#containerPagination").empty();
+                    return;
+                  } else {
+                    // Affiche les résultats de la recherche
+                    $("#containerBlogs").empty();
+                    $("#containerPagination").empty();
+                    globalPageSize = articles.length
+                    fetchData(1, articles);
+
+                  }
+                } catch (error) {
+                  console.error('Erreur lors de la recherche:', error);
+                  alert('Une erreur est survenue lors de la recherche.');
+                }
+              }, 1000)); // 300 millisecondes de délai pour le debounce
+
+              function debounce(func, delay) {
+                let timer;
+                return function (...args) {
+                  clearTimeout(timer);
+                  timer = setTimeout(() => func.apply(this, args), delay);
+                };
+              }
+
+              async function searchArticles(term) {
+                // Effectue une requête pour obtenir seulement les ID des posts
+                const {data, error} = await supabaseClient
+                  .from('post')
+                  .select('id') // Sélectionne uniquement les IDs
+                  .neq('deleted', true)  // Exclut les entrées où deleted = true
+                  .neq('valid', false)
+                  .textSearch('article', term, {
+                    config: 'french', // Utilise la configuration linguistique pour le français
+                    type: 'plain'     // Utilise plainto_tsquery pour une recherche simple
+                  });
+
+                if (error) {
+                  console.error('Erreur lors de la recherche:', error);
+                  return [];
+                }
+                return data.map(post => post.id); // Retourne seulement les IDs
+              }
+
+            </script>
+
+            <div class="category-widget sidebar-widget p_relative d_block pt_30 pr_40 pb_12 pl_40 b_radius_5 mb_50">
+              <div class="widget-title p_relative d_block">
+                <h3>Catégories</h3>
+              </div>
+              <div class="widget-content">
+                <ul id="containerCategorie" class="category-list clearfix">
+                  <li id="favorisLi" class="p_relative d_block pt_20 pb_20 fs_16 lh_26 fw_medium">
+                    <a id="favoris" href="#" onclick="return false;" class="p_relative d_iblock category-link">
+                      <i class="far fa-heart heart-active"></i> Vos favoris
+                    </a>
+                    ( <span id="favoriCount"> </span> )
+                  </li>
+                  <li class="p_relative d_block pt_20 pb_20 fs_16 lh_26 fw_medium">
+                    <a id="tous" href="#" onclick="return false;" class="p_relative d_iblock category-link">Tous les
+                      articles</a></li>
+                  <script>
+                    // Fonction pour mettre à jour le compteur de favoris
+                    function updateFavorisCountListView() {
+                      const cookies = getCookies();
+                      const favorisCookie = cookies['clicked_ids']; // Remplacez 'clicked_ids' par le nom réel de votre cookie
+
+                      if (favorisCookie) {
+                        try {
+                          const favorisArray = JSON.parse(favorisCookie); // Convertit le cookie en tableau JSON
+                          if (Array.isArray(favorisArray) && favorisArray.length > 0) {
+                            const count = favorisArray.length;
+                            document.getElementById('favoriCount').textContent = count; // Met à jour le nombre de favoris
+                            document.getElementById('favorisLi').style.display = 'block'; // Masque le <li> si le tableau est vide
+                          } else {
+                            document.getElementById('favorisLi').style.display = 'none'; // Masque le <li> si le tableau est vide
+                            fetchData(1);
+                          }
+                        } catch (e) {
+                          console.error('Erreur lors de la conversion du cookie en JSON:', e);
+                          document.getElementById('favorisLi').style.display = 'none'; // Masque le <li> en cas d'erreur
+                        }
+                      } else {
+                        document.getElementById('favorisLi').style.display = 'none'; // Masque le <li> si aucun cookie de favoris n'existe
+                      }
+                    }
+
+                    updateFavorisCountListView()
+                    document.getElementById('favorisLi').addEventListener('click', function () {
+                      const cookies = getCookies();
+                      const favorisCookie = cookies['clicked_ids'];
+                      globalCurrentCategorie = "favoris";
+                      proxy.value = "favoris"
+                      $("#containerPagination").empty();
+                      fetchData(1, JSON.parse(favorisCookie));
+                    });
+
+                    function categorieSelected(categorieName) {
+                      proxy.value = categorieName
+                      globalCurrentCategorie = categorieName
+                      fetchDataPagination();
+                      fetchData(1);
+                    }
+
+                    async function fetchCategorie() {
+                      try {
+                        // Appel de la fonction SQL pour obtenir les catégories et leur quantité
+                        const {data, error} = await supabaseClient
+                          .rpc('get_category_counts'); // Nom de la fonction SQL
+
+                        if (error) {
+                          console.error("Erreur lors de la récupération des catégories et de leur quantité:", error);
+                        } else {
+                          $('#tous').click(() => {
+                            categorieSelected("");
+                          });
+                          dataJsonCat = data;
+                          cpt = 0;
+                          for (const dataJsonKeyCat in dataJsonCat) {
+                            cpt += dataJsonCat[dataJsonKeyCat].count;
+                            var ldiv = document.createElement("div");
+                            ldiv.innerHTML = (' <li class="p_relative d_block pt_20 pb_20 fs_16 lh_26 fw_medium">' +
+                              '<a id="' + dataJsonCat[dataJsonKeyCat].category_name + '" href="#" onclick="return false;" class="p_relative d_iblock category-link">' + dataJsonCat[dataJsonKeyCat].category_name + ' ( ' + dataJsonCat[dataJsonKeyCat].count + ' ) </a></li>');
+                            document.getElementById("containerCategorie").appendChild(ldiv);
+
+                            $('#' + dataJsonCat[dataJsonKeyCat].category_name + '').click(() => {
+                              categorieSelected(dataJsonCat[dataJsonKeyCat].category_name);
+                            });
+                          }
+                          document.getElementById("tous").innerText = 'Tous les articles ( ' + cpt + ' )';
+
+                        }
+                      } catch (err) {
+                        console.error("Erreur lors de l'exécution de la fonction RPC:", err);
+                      }
+                    }
+
+                    fetchCategorie();
+                  </script>
+                </ul>
+              </div>
+            </div>
+
+
+            <div class="post-widget sidebar-widget p_relative d_block pt_30 pr_40 pl_40 b_radius_5 mb_50">
+              <div id="containerPostRecent" class="widget-title p_relative d_block mb_15">
+                <h3 class="fs_30 lh_40">Les dèrniers articles</h3>
+              </div>
+              <script>
+                async function fetchDataPostMini() {
+                  const {data, error} = await supabaseClient
+                    .from('post')
+                    .select('id, created_at, titre, image_url')
+                    .order('created_at', {ascending: false})
+                    .limit(10)
+                    .neq('deleted', true)  // Exclut les entrées où deleted = true
+                    .neq('valid', false);
+
+                  if (error) {
+                    console.error('Erreur lors du fetch:', error);
+                  } else {
+                    dataJson = data;
+                    for (const dataJsonKey in dataJson) {
+                      var ldiv = document.createElement("div");
+                      ldiv.innerHTML = ('<div class="post p_relative d_block pl_100 pb_20 mb_15" style="border-bottom: 1px solid lightgray">\n' +
+                        '                  <figure class="post-thumb p_absolute b_radius_5"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJson[dataJsonKey].id + '"><img loading="lazy" src="' + dataJson[dataJsonKey].image_url + '" alt="' + dataJson[dataJsonKey].titre + '"></a></figure>\n' +
+                        '                  <h5 class="fs_18 lh_26 fw_medium mb_6"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJson[dataJsonKey].id + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
+                        '                  <span class="post-date p_relative d_block fs_16 lh_28">' + dateHelperFormat(dataJson[dataJsonKey].created_at) + '</span>\n' +
+                        '                </div>');
+                      document.getElementById("containerPostRecent").appendChild(ldiv);
+                    }
+                  }
+                }
+
+                fetchDataPostMini();
+              </script>
+            </div>
+          </div>
+        </div>
+        <!-- menu droite -->
+      </div>
+    </div>
+  </section>
+  <!-- sidebar-page-container end -->
+
+
+  <!-- infinite-news-container  -->
+  <section id="infinite-news-container" class="news-section p_relative blog-grid pb_150" style="display: none;">
+    <div class="auto-container">
+      <div class="item-shorting p_relative d_block mb_50 clearfix">
+        <div class="right-column pull-right clearfix">
+          <div class="short-box clearfix">
+            <p class="p_relative d_iblock fs_15 lh_45 mr_10 float_left">Trier par:</p>
+            <div class="select-box float_left mr_30">
+
+              <div class="nice-select wide open" tabindex="0">
+                <span id="current-selection" class="current">Date (le plus récent)</span>
+                <ul id="dropdown-list" class="list">
+                  <li data-value="created_at" class="option selected focus">Date (le plus récent)</li>
+                  <li data-value="visite" class="option">Vues (le plus populaire)</li>
+                  <li data-value="comment_count" class="option">Commentaires</li>
+                  <li data-value="categorie" class="option has-submenu">Catégorie
+                    <!-- Sous-menu généré dynamiquement -->
+                    <ul id="category-submenu" class="submenu"></ul>
+                  </li>
+                </ul>
+              </div>
+
+
+              <script>
+                async function loadCategories() {
+                  try {
+                    const { data, error } = await supabaseClient
+                      .from('post')
+                      .select('categorie')
+                      .neq('deleted', true)
+                      .neq('valid', false);
+
+                    if (error) throw error;
+
+                    // Utiliser un Set pour obtenir les catégories uniques
+                    const uniqueCategories = [...new Set(data.map(item => item.categorie))];
+
+                    const submenu = document.getElementById('category-submenu');
+                    submenu.innerHTML = ''; // Nettoyer le sous-menu avant ajout
+
+                    uniqueCategories.forEach(category => {
+                      const li = document.createElement('li');
+                      li.classList.add('option', 'sub-option');
+                      li.setAttribute('data-value', category);
+                      li.textContent = category;
+                      submenu.appendChild(li);
+
+                      // Écouteur pour chaque sous-catégorie
+                      li.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        document.getElementById('current-selection').textContent = `Catégorie - ${category}`;
+                        fetchDataInfinite(category, []);
+                        updateSelectionClasses(this, submenu.querySelectorAll('.sub-option'));
+                      });
+                    });
+                  } catch (error) {
+                    console.error('Erreur lors du chargement des catégories :', error);
+                  }
+                }
+
+                function selectMenuInfinite() {
+                  const options = document.querySelectorAll('.nice-select .option:not(.sub-option)');
+                  const currentSelection = document.getElementById('current-selection');
+
+                  options.forEach(function (option) {
+                    option.addEventListener('click', function () {
+                      if (!this.classList.contains('has-submenu')) {
+                        currentSelection.textContent = this.textContent;
+                        fetchDataInfinite(this.getAttribute('data-value'));
+                        updateSelectionClasses(this, options);
+                      }
+                    });
+                  });
+                }
+
+                function updateSelectionClasses(selectedOption, optionList) {
+                  optionList.forEach(opt => opt.classList.remove('selected', 'focus'));
+                  selectedOption.classList.add('selected', 'focus');
+                }
+
+                loadCategories();
+                selectMenuInfinite();
+
+                function handleSelection(value) {
+                  // Vérifier si la valeur correspond à une catégorie dynamique
+                  const categories = ['created_at', 'visite', 'comment_count']; // Liste des options non-catégories
+                  if (categories.includes(value)) {
+                    // Gérer les options standards (tri par date, vues, commentaires)
+                    fetchDataInfinite(value);
+                  } else {
+                    // Gérer les catégories dynamiques
+                    fetchDataInfinite(value, []); // Filtre par catégorie avec le nom dynamique
+                  }
+                }
+
+                function updateSelectionClasses(selectedOption, optionList) {
+                  optionList.forEach(function (opt) {
+                    opt.classList.remove('selected', 'focus');
+                  });
+                  selectedOption.classList.add('selected', 'focus');
+                }
+
+                selectMenuInfinite();
+              </script>
+
+
+              <script>
+                // Fonction pour gérer le clic sur l'option "favoris"
+                function handleFavorisClick() {
+                  const cookies = getCookies(); // Récupère les cookies
+                  const ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : []
+                  fetchDataInfinite('favoris', ids)
+                }
+
+                // Fonction pour mettre à jour la liste
+                function updateListWithFavorisGridView() {
+                  const cookies = getCookies(); // Récupère les cookies
+                  const favoris = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : []
+
+                  // Sélectionne la liste dans le DOM
+                  const ulElement = document.querySelector('.nice-select .list');
+
+                  // Cherche l'élément <li> "favoris" existant
+                  let favoriteLi = ulElement.querySelector('li[data-value="favoris"]');
+
+                  if (Array.isArray(favoris) && favoris.length > 0 && !favoriteLi) {
+                    // Si le cookie "favoris" existe et l'élément <li> n'est pas présent, on l'ajoute
+                    favoriteLi = document.createElement('li');
+                    favoriteLi.setAttribute('data-value', 'favoris');
+                    favoriteLi.className = 'option';
+
+                    // Créer l'icône Font Awesome
+                    const icon = document.createElement('i');
+                    icon.className = 'far fa-heart heart-active';
+                    favoriteLi.appendChild(icon); // Ajouter l'icône à l'élément <li>
+
+                    // Ajouter le texte après l'icône
+                    favoriteLi.appendChild(document.createTextNode(' Favoris '));
+
+                    // Créer le <span> pour afficher la longueur des favoris
+                    const spanCount = document.createElement('span');
+                    spanCount.textContent = `( ${favoris.length} )`;
+                    spanCount.id = 'favorite-count'; // Ajoute un id pour faciliter la mise à jour
+                    favoriteLi.appendChild(spanCount);
+
+                    ulElement.insertBefore(favoriteLi, ulElement.firstChild);
+
+                    // Attache un événement de clic en passant un paramètre
+                    favoriteLi.addEventListener('click', function () {
+                      handleFavorisClick(favoris); // Remplacez par le paramètre souhaité
+                      console.log('! je met dans la liste le choix favoris')
+                    });
+                  } else if (favoris.length === 0 && favoriteLi) {
+                    // Si le cookie "favoris" n'existe pas mais l'élément <li> est présent, on le retire
+                    favoriteLi.removeEventListener('click', handleFavorisClick); // Supprime l'événement de clic
+                    ulElement.removeChild(favoriteLi);
+                    document.querySelector('.nice-select .option[data-value="created_at"]').click();
+                    console.log('! j enléve de la liste le choix favoris')
+                  } else {
+                    const spanCount = document.getElementById('favorite-count');
+                    if (spanCount) {
+                      spanCount.textContent = `(${favoris.length})`;
+                    }
+                    console.log('! il se passe un truc pour la liste avec le favoris')
+                  }
+                }
+
+                // Appel de la fonction pour initialiser la liste avec l'état des cookies
+                updateListWithFavorisGridView();
+
+              </script>
+
+            </div>
+          </div>
+        </div>
+        <div class="right-column pull-right clearfix">
+          <div class="short-box clearfix">
+
+
+
+            <div class="float_left mr_30">
+              <form id="search-form-infinite" class="default-form">
+                <div class="form-group p_relative mr-0">
+                  <div class="autocomplete-container-infinite">
+                    <input type="search" id="search-field-infinite" name="search-field-infinite" minlength="3" placeholder="Recherche sur titre" required="">
+                    <div id="autocompleteDropdown-infinite" class="autocomplete-dropdown-infinite" style="display: none;"></div>
+                  </div>
+                </div>
+              </form>
+              <script>
+                let debounceTimeoutInfinite;
+                const phylactere = document.createElement('div');
+                phylactere.classList.add('phylactere');
+                document.body.appendChild(phylactere);
+
+                // Fonction de debounce pour limiter les requêtes
+                function debounce(func, delay) {
+                  return (...args) => {
+                    clearTimeout(debounceTimeoutInfinite);
+                    debounceTimeoutInfinite = setTimeout(() => func(...args), delay);
+                  };
+                }
+
+                // Fonction pour récupérer les titres et le contenu limité à 300 mots
+                async function fetchMatchingTitles(query) {
+                  const { data, error } = await supabaseClient
+                    .from('post')
+                    .select('id, titre, article'); // Sélectionne également le contenu
+
+                  if (error) {
+                    console.error("Erreur lors de la recherche :", error.message);
+                    return [];
+                  }
+
+                  const matchingTitles = new Map();
+                  const queryWords = query.toLowerCase().split(/\s+/);
+
+                  data.forEach(article => {
+                    const titleWords = article.titre.toLowerCase().split(/\s+/);
+                    let matchIndex = 0;
+
+                    for (let i = 0; i < titleWords.length; i++) {
+                      if (titleWords[i].startsWith(queryWords[matchIndex])) {
+                        matchIndex += 1;
+                        if (matchIndex === queryWords.length) {
+                          const nextWord = titleWords[i + 1] || '';
+                          const displayTitle = nextWord ? `${article.titre} ${nextWord}` : article.titre;
+
+                          if (!matchingTitles.has(article.titre)) {
+                            const contentPreview = article.article.split(' ').slice(0, 300).join(' '); // Limite à 300 mots
+                            matchingTitles.set(article.titre, { id: article.id, displayTitle, contentPreview });
+                          }
+                          break;
+                        }
+                      }
+                    }
+                  });
+
+                  return Array.from(matchingTitles.entries());
+                }
+
+                // Fonction pour afficher les résultats dans le dropdown
+                function displayAutocompleteResults(matches, query) {
+                  const dropdown = document.getElementById('autocompleteDropdown-infinite');
+                  dropdown.innerHTML = '';
+
+                  if (matches.length === 0) {
+                    dropdown.style.display = 'none';
+                    return;
+                  }
+
+                  matches.forEach(([title, { id, displayTitle, contentPreview }]) => {
+                    const item = document.createElement('div');
+                    item.classList.add('autocomplete-item-infinite');
+
+                    const regex = new RegExp(`(${query})`, 'i');
+                    const highlightedText = displayTitle.replace(regex, `<strong>$1</strong>`);
+
+                    const link = document.createElement('a');
+                    link.href = `/blog-detail.html?post=${id}`;
+                    link.style.textDecoration = 'none';
+                    link.style.color = 'inherit';
+                    link.style.display = 'block';
+                    link.style.padding = '5px';
+                    link.innerHTML = highlightedText;
+
+                    item.appendChild(link);
+
+                    // Gestion de l'affichage du phylactère avec aperçu du contenu
+                    item.addEventListener('mouseover', (e) => {
+                      phylactere.innerText = stripHTML(contentPreview); // Utilisation de stripHTML pour enlever les balises
+                      phylactere.style.display = 'block';
+                      phylactere.style.left = `${e.pageX + 10}px`;
+                      phylactere.style.top = `${e.pageY + 10}px`;
+                    });
+
+                    item.addEventListener('mousemove', (e) => {
+                      phylactere.style.left = `${e.pageX + 10}px`;
+                      phylactere.style.top = `${e.pageY + 10}px`;
+                    });
+
+                    item.addEventListener('mouseout', () => {
+                      phylactere.style.display = 'none';
+                    });
+
+                    dropdown.appendChild(item);
+                  });
+
+                  dropdown.style.display = 'block';
+                }
+
+                // Détection de la saisie dans le champ de recherche
+                document.getElementById('search-field-infinite').addEventListener(
+                  'input',
+                  debounce(async (event) => {
+                    const query = event.target.value.trim();
+                    if (query.length < 3) {
+                      document.getElementById('autocompleteDropdown-infinite').style.display = 'none';
+                      return;
+                    }
+
+                    const matches = await fetchMatchingTitles(query);
+                    displayAutocompleteResults(matches, query);
+                  }, 300)
+                );
+
+                // Ferme le dropdown si on clique en dehors
+                document.addEventListener('click', (event) => {
+                  const searchField = document.getElementById('search-field-infinite');
+                  const dropdown = document.getElementById('autocompleteDropdown-infinite');
+                  if (!searchField.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                  }
+                });
+
+                // Fonction pour enlever les balises HTML
+                function stripHTML(html) {
+                  const tempDiv = document.createElement("div");
+                  tempDiv.innerHTML = html;
+                  return tempDiv.textContent || tempDiv.innerText || "";
+                }
+
+              </script>
+            </div>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <div id="containerBlogsInfinite" class="row clearfix">
+        <script>
+          async function fetchDataInfinite(selectionTri, ids = []) {
+            // Création de la requête de base pour obtenir les posts
+            let baseQuery = supabaseClient
+              .from('post')
+              .select('*')
+              .neq('deleted', true)  // Exclut les entrées où deleted = true
+              .neq('valid', false);  // Exclut les entrées où valid = false
+
+            // Vérifier si selectionTri est une catégorie ou un critère de tri
+            const { data: categoriesData, error: categoriesError } = await supabaseClient
+              .from('post')
+              .select('categorie')
+              .neq('deleted', true)
+              .neq('valid', false);
+
+            if (categoriesError) {
+              console.error('Erreur lors de la récupération des catégories :', categoriesError);
+              return [];
+            }
+
+            // Extraire les catégories uniques
+            const categories = [...new Set(categoriesData.map(item => item.categorie))];
+
+            // Si selectionTri est une catégorie dynamique, on filtre par cette catégorie
+            if (categories.includes(selectionTri)) {
+              baseQuery = baseQuery.eq('categorie', selectionTri);
+            } else if (selectionTri !== 'comment_count' && selectionTri !== 'favoris') {
+              // Si ce n'est pas une catégorie, on l'utilise comme critère de tri
+              baseQuery = baseQuery.order(selectionTri, { ascending: false });
+            }
+
+            // Filtrer par liste d'IDs si fournie (ex: favoris)
+            if (ids.length > 0) {
+              baseQuery = baseQuery.in('id', ids);
+            }
+
+            // Gestion des favoris ou des IDs spécifiques (cas où des posts spécifiques sont demandés)
+            if (selectionTri === 'favoris' && ids.length > 0) {
+              baseQuery = baseQuery.in('id', ids);
+            } else if (ids.length > 0) {
+              baseQuery = baseQuery.in('id', ids);
+            }
+
+            try {
+              const {data: posts, error: postsError} = await baseQuery;
+              if (postsError) {
+                throw postsError;
+              }
+
+              // Obtenir les IDs des posts récupérés
+              const postIds = posts.map(post => post.id);
+
+              // Étape 2 : Obtenir le nombre de commentaires pour chaque post
+              const {data: commentsCount, error: commentsError} = await supabaseClient
+                .rpc('count_comments', {post_ids: postIds});
+
+              if (commentsError) {
+                throw commentsError;
+              }
+
+              // Créer un dictionnaire pour les comptages de commentaires
+              const commentCountMap = {};
+              commentsCount.forEach(({post_id, comment_count}) => {
+                commentCountMap[post_id] = comment_count;
+              });
+
+              // Ajouter le nombre de commentaires aux posts
+              const postsWithCommentCount = posts.map(post => ({
+                ...post,
+                comment_count: commentCountMap[post.id] || 0
+              }));
+
+              // Appliquer le tri côté client si nécessaire
+              if (selectionTri === 'comment_count') {
+                postsWithCommentCount.sort((a, b) => {
+                  const countA = a.comment_count || 0; // S'assurer que 'comment_count' est un nombre
+                  const countB = b.comment_count || 0; // S'assurer que 'comment_count' est un nombre
+                  return countB - countA; // Tri décroissant par 'comment_count'
+                });
+              }
+              $("#containerBlogsInfinite").empty();
+              // Mettre à jour le conteneur avec les données triées
+              dataJsonInfinite = postsWithCommentCount;
+              // Afficher les données
+              for (const dataJsonKeyInfinite in dataJsonInfinite) {
+
+                // Déterminer le texte en fonction de comment_count
+                var commentText = dataJsonInfinite[dataJsonKeyInfinite].comment_count > 0
+                  ? dataJsonInfinite[dataJsonKeyInfinite].comment_count + ' avis'
+                  : '';
+                var ldiv = document.createElement("div");
+                ldiv.className = "col-lg-4 col-md-6 col-sm-12 news-block";
+                ldiv.innerHTML = ('<div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">\n' +
+                  '            <div class="inner-box p_relative d_block b_radius_5 b_shadow_7 bg_white mb_30">\n' +
+                  '              <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '">' +
+                  '               <img class="resizeHeight" loading="lazy" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '"></a></figure>\n' +
+                  '              <div class="lower-content p_relative d_block pl_40 pt_35 pr_30 pb_40">\n' +
+                  '                <span class="post-date p_relative d_block fs_15 mb_5">' + dateHelperFormat(dataJsonInfinite[dataJsonKeyInfinite].created_at) + '</span>\n' +
+                  '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
+                  '                <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:bisque;padding:0 0 0 10px;">\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '" class="fw_medium hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a></li>\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + Math.floor(Math.random() * (Math.floor(8) - Math.ceil(2)) + Math.ceil(3)) + ' min. </li>\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</li>\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + commentText + '</li>\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].id + '"><i class="far fa-heart"></i></li>\n' +
+                  (dataJsonInfinite[dataJsonKeyInfinite].video ?
+                    '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></li>\n'
+                    : '') +
+                  (dataJsonInfinite[dataJsonKeyInfinite].audio ?
+                    '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].audio + '"><i class="far fa-podcast"></i></li>\n'
+                    : '') +
+                  '                </ul>\n' +
+                  '              </div>\n' +
+                  '            </div>\n' +
+                  '          </div>');
+                document.getElementById("containerBlogsInfinite").appendChild(ldiv);
+              }
+              cookieMarkItemAndClickToggle();
+
+            } catch (error) {
+              console.error('Erreur lors du fetch:', error);
+            }
+          }
+        </script>
+      </div>
+      <!--      <div class="pagination-wrapper centred">-->
+      <!--        <ul class="pagination clearfix">-->
+      <!--          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-2.html"><i class="fas fa-angle-left"></i></a></li>-->
+      <!--          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-2.html" class="current">1</a></li>-->
+      <!--          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-2.html">2</a></li>-->
+      <!--          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-2.html">3</a></li>-->
+      <!--          <li><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-2.html"><i class="fas fa-angle-right"></i></a></li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+    </div>
+  </section>
+  <!-- infinite-news-container  -->
+
+
+  <!-- main-footer -->
+  <footer class="main-footer p_relative">
+    <div class="footer-logo p_relative d_block pb_50 centred">
+      <figure class="logo p_relative d_iblock">
+        <div class="shape p_absolute" style="background-image: url(assets/images/shape/shape-13.png);"></div>
+        <a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html"><img loading="lazy" src="assets/images/footer-logo.png" alt="jardin iris logo footer"></a>
+      </figure>
+    </div>
+    <div class="widget-section p_relative pt_65 pb_70">
+      <div class="pattern-layer">
+        <div class="pattern-1 p_absolute" style="background-image: url(assets/images/shape/shape-14.png);"></div>
+        <div class="pattern-2 p_absolute" style="background-image: url(assets/images/shape/shape-15.png);"></div>
+      </div>
+      <div class="auto-container">
+        <div class="row clearfix">
+          <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget about-widget">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">A propos</h3>
+              </div>
+              <div class="widget-content">
+                <div class="text p_relative d_block mb_30">
+                  <p>Nos services de jardinier paysagiste couvrent principalement les régions de Bruxelles, du Brabant wallon et du Brabant
+                    flamand. Toutefois, pour donner vie à vos projets d'aménagement extérieur, nous intervenons
+                    également dans toute la Belgique. En tant que jardinier paysagiste expert dans les plantations
+                    adaptées aux conditions climatiques changeantes, nous vous accompagnons pour créer des espaces verts
+                    durables et harmonieux.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget links-widget ml_70">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">Liens</h3>
+              </div>
+              <div class="widget-content">
+                <ul class="links-list clearfix">
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles" href="index.html" class="p_relative fs_15 d_iblock">Accueil du
+                    site</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" services.html" class="p_relative fs_15 d_iblock">Nos
+                    Services</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html" class="p_relative fs_15 d_iblock">Les
+                    projets</a></li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-blogs.html" class="p_relative fs_15 d_iblock">Le blog</a>
+                  </li>
+                  <li class="p_relative d_block mb_7"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-contact.html" class="p_relative fs_15 d_iblock">Nous
+                    contacter</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget contact-widget">
+              <div class="widget-title p_relative d_block mb_25">
+                <h3 class="fs_26 lh_35 color_white">Contacts</h3>
+              </div>
+              <div class="widget-content">
+                <ul class="contact-info clearfix">
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15">Nous travaillons sur Bruxelles et ses environs.</p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles" href="tel:+32497401272">+32 497 40 12 72</a></p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:contact@jardin-iris.be">contact@jardin-iris.be</a></p>
+                  </li>
+                  <li class="p_relative d_block mb_20">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles" href="mailto:devis@jardin-iris.be">devis@jardin-iris.be</a></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+            <div class="footer-widget contact-widget">
+              <div class="widget-content">
+                <ul class="contact-info clearfix">
+                  <li class="p_relative d_block">
+                    <p class="fs_15"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-contact.html" class="theme-btn btn-one">Un devis ou Une question ?</a></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- main-footer end -->
+
+  <!--Scroll to top-->
+  <button class="scroll-top scroll-to-target" data-target="html" aria-label="scroll">
+    <span class="fal fa-long-arrow-up"></span>
+  </button>
+</div>
+
+
+<!-- jequery plugins -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/scrollbar.js"></script>
+<script src="assets/js/isotope.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<script src="assets/js/jquery.bootstrap-touchspin.js"></script>
+
+<!-- main-js -->
+<script src="assets/js/script.js"></script>
+
+</body><!-- End of .page_wrapper -->
+</html>

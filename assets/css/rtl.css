@@ -1,0 +1,256 @@
+
+
+.rtl {
+  direction: rtl; 
+}
+
+.ltr {
+  direction: ltr; 
+}
+
+.rtl .pull-left{
+  float: right;
+}
+
+.rtl .pull-right{
+  float: left;
+}
+
+.rtl .owl-carousel{
+  direction: ltr;
+}
+
+.rtl .main-menu .navigation > li{
+  float: right;
+}
+
+.rtl .main-menu{
+  float: right;
+}
+
+.rtl .cta-section{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li:first-child{
+  margin-left: 15px !important;
+  margin-right: 0px;
+}
+
+.rtl .main-menu .navigation > li:last-child{
+  margin-right: 15px !important;
+  margin-left: 0px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > a, 
+.rtl .main-menu .navigation > li > .megamenu li > a{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation li.dropdown .megamenu li h4{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li > a{
+  text-align: right;
+}
+
+.rtl .main-menu .navigation > li > ul > li.dropdown > a:after{
+  right: inherit;
+  left: 20px;
+  content: "\f104";
+}
+
+.rtl .mobile-menu{
+  text-align: right;
+}
+
+.rtl .mobile-menu .nav-logo{
+  text-align: right;
+}
+
+.rtl .mobile-menu .navigation li > a:before{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .mobile-menu .navigation li.dropdown .dropdown-btn{
+  right: inherit;
+  left: 6px;
+}
+
+.rtl .mobile-menu .navigation li.dropdown .dropdown-btn.open{
+  transform: rotate(-90deg);
+}
+
+.rtl .header-top .social-links li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 25px;
+}
+
+.rtl .header-top .info-box li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 60px;
+}
+
+.rtl .header-top .info-box li:before{
+  right: inherit;
+  left: -30px;
+}
+
+.rtl .main-header .nav-right .cart-box{
+  margin-right: 0px;
+  margin-left: 30px;
+}
+
+.rtl .banner-carousel .content-box{
+  text-align: right;
+}
+
+.rtl .feature-section .single-item .inner-box{
+  padding-left: 0px;
+  padding-right: 160px;
+  text-align: right;
+}
+
+.rtl .feature-section .single-item .inner-box .icon-box{
+  left: inherit;
+  right: 70px;
+}
+
+.rtl .feature-section .single-item .inner-box:before{
+  right: inherit;
+  left: -30px;
+}
+
+.rtl .content_block_1 .content-box{
+  margin-left: 0px;
+  margin-right: 30px;
+  text-align: right;
+}
+
+.rtl .image_block_1 .image-box .image img{
+  float: left;
+}
+
+.rtl .image_block_1 .image-box .shape-1{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .image_block_1 .image-box .shape-2{
+  right: inherit;
+  left: 30px;
+}
+
+.rtl .image_block_1 .image-box{
+  padding-right: 0px;
+  padding-left: 90px;
+}
+
+.rtl .image_block_1 .image-box .inner{
+  right: inherit;
+  left: 30px;
+}
+
+.rtl .working-block-one .inner-box .arrow{
+  right: inherit;
+  left: -10%;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.rtl .content_block_2 .content-box{
+  text-align: right;
+}
+
+.rtl .image_block_2 .image-box{
+  padding-left: 0px;
+  padding-right: 85px;
+}
+
+.rtl .image_block_2 .image-box .shape-1{
+  right: inherit;
+  left: 0px;
+}
+
+.rtl .content_block_2 .content-box .single-item{
+  padding-left: 0px;
+  padding-right: 55px;
+}
+
+.rtl .content_block_2 .content-box .single-item .icon-box{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .testimonial-section.alternat-2 .sec-title{
+  margin-right: 0px;
+  margin-left: 100px;
+  text-align: right;
+}
+
+.rtl .testimonial-block-one .inner-box{
+  text-align: right;
+}
+
+.rtl .testimonial-block-one .inner-box .rating li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 4px;
+}
+
+.rtl .testimonial-block-one .inner-box .author-box{
+  padding-left: 0px;
+  padding-right: 65px;
+}
+
+.rtl .testimonial-block-one .inner-box .author-box .author-thumb{
+  left: inherit;
+  right: 0px;
+}
+
+.rtl .team-block-one .inner-box .lower-content{
+  text-align: right;
+}
+
+.rtl .team-block-one .inner-box .share-box{
+  right: inherit;
+  left: 30px;
+}
+
+.rtl .theme-btn i{
+  margin-left: 0px;
+  margin-right: 9px;
+}
+
+.rtl .news-block-one .inner-box{
+  text-align: right;
+}
+
+.rtl .news-block-one .inner-box .post-info li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 25px;
+}
+
+.rtl .news-block-one .inner-box .lower-content .post-info li:before{
+  right: inherit;
+  left: -14px;
+}
+
+.rtl .main-footer .widget-section{
+  text-align: right;
+}
+
+.rtl .main-footer .widget-section .links-widget.ml_70{
+  margin-left: 0px;
+  margin-right: 70px;
+}
+
+.rtl .main-footer .social-links li{
+  float: right;
+  margin-right: 0px;
+  margin-left: 10px;
+}
