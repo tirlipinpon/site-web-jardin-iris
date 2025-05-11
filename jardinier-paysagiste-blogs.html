@@ -778,6 +778,7 @@
               let currentPage = 0;
               const pageSize = 10;
               let currentQuery = '';
+              let newHrefFolder  = 'jardinier-paysagiste-belgique-blog';
 
               async function searchArticlesDropDown(query, page = 0) {
                 const { data, error } = await supabaseClient
@@ -1037,7 +1038,7 @@
                 async function fetchDataPostMini() {
                   const {data, error} = await supabaseClient
                     .from('post')
-                    .select('id, created_at, titre, image_url')
+                    .select('id, created_at, titre, image_url, new_href')
                     .order('created_at', {ascending: false})
                     .limit(10)
                     .neq('deleted', true)  // Exclut les entrées où deleted = true
@@ -1050,8 +1051,11 @@
                     for (const dataJsonKey in dataJson) {
                       var ldiv = document.createElement("div");
                       ldiv.innerHTML = ('<div class="post p_relative d_block pl_100 pb_20 mb_15" style="border-bottom: 1px solid lightgray">\n' +
-                        '                  <figure class="post-thumb p_absolute b_radius_5"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJson[dataJsonKey].id + '"><img loading="lazy" src="' + dataJson[dataJsonKey].image_url + '" alt="' + dataJson[dataJsonKey].titre + '"></a></figure>\n' +
-                        '                  <h5 class="fs_18 lh_26 fw_medium mb_6"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJson[dataJsonKey].id + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
+                        '                  <figure class="post-thumb p_absolute b_radius_5">' +
+                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + (dataJson[dataJsonKey].new_href ? newHrefFolder + '/' + dataJson[dataJsonKey].new_href  : 'blog-detail.html?post=' + dataJson[dataJsonKey].id) + '">' +
+                        '<img loading="lazy" src="' + dataJson[dataJsonKey].image_url + '" alt="' + dataJson[dataJsonKey].titre + '"></a></figure>\n' +
+                        '                  <h5 class="fs_18 lh_26 fw_medium mb_6">' +
+                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + (dataJson[dataJsonKey].new_href ? newHrefFolder + '/' + dataJson[dataJsonKey].new_href  : 'blog-detail.html?post=' + dataJson[dataJsonKey].id) + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
                         '                  <span class="post-date p_relative d_block fs_16 lh_28">' + dateHelperFormat(dataJson[dataJsonKey].created_at) + '</span>\n' +
                         '                </div>');
                       document.getElementById("containerPostRecent").appendChild(ldiv);
