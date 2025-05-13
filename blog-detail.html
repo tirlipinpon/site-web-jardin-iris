@@ -20,6 +20,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.jardin-iris.be/jardinier-paysagiste-blogs.html">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description"
         content="Jardinier paysagiste conseils d'experts pour aménager et entretenir votre jardin à Bruxelles. Des astuces pratiques pour des espaces verts écoresponsables et magnifiques."/>
@@ -625,11 +626,6 @@
                 if (postValue && postValue > 0) {
                   async function incrementVisite(postId) {
                     postIdInt = parseInt(postId);
-
-                    const canonicalTag = document.createElement("link");
-                    canonicalTag.setAttribute("rel", "canonical");
-                    canonicalTag.setAttribute("href", `https://jardin-iris.be/blog-detail.html?post=${postIdInt}`);
-                    document.head.appendChild(canonicalTag);
 
 
                     const {data, error} = await supabaseClient
@@ -2063,7 +2059,7 @@
               console.log("Recherche de titres pour la requête :", queryInfinite);
               const {data, error} = await supabaseClient
                 .from('post')
-                .select('id, titre, article');
+                .select('id, titre, article, new_href');
 
               if (error) {
                 console.error("Erreur lors de la récupération des titres :", error.message);
@@ -2074,7 +2070,7 @@
               data.forEach(article => {
                 if (article.titre.toLowerCase().includes(queryInfinite.toLowerCase())) {
                   const contentPreview = article.article.split(' ').slice(0, 300).join(' ');
-                  titlesMapInfinite.set(article.titre, {id: article.id, contentPreview});
+                  titlesMapInfinite.set(article.titre, {id: article.id, contentPreview, new_href: article.new_href});
                 }
               });
 
@@ -2112,7 +2108,7 @@
                 return;
               }
 
-              titlesInfinite.forEach(([title, {id, contentPreview}]) => {
+              titlesInfinite.forEach(([title, {id, contentPreview, new_href}]) => {
                 const itemInfinite = document.createElement('div');
                 itemInfinite.classList.add('autocomplete-item-infinite');
 
@@ -2120,7 +2116,7 @@
                 const highlightedTitleInfinite = title.replace(regexInfinite, `<strong>$1</strong>`);
 
                 const linkInfinite = document.createElement('a');
-                linkInfinite.href = `/blog-detail.html?post=${id}`;
+                linkInfinite.href = `${getOldHrefAndSetNewHref(new_href, id)}`;
                 linkInfinite.style.textDecoration = 'none';
                 linkInfinite.style.color = 'inherit';
                 linkInfinite.style.display = 'block';

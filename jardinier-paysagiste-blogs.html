@@ -671,11 +671,11 @@
                     var ldiv = document.createElement("div");
                     ldiv.innerHTML = `<div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
               <div class="inner-box p_relative d_block b_radius_5 bg_white mb_70">
-                <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=${dataJson[dataJsonKey].id}">
+                <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}">
                  <img class="resizeHeight" loading="lazy" src="${dataJson[dataJsonKey].image_url}" alt="${dataJson[dataJsonKey].titre}${dataJson[dataJsonKey].id}"></a></figure>
                 <div class="lower-content p_relative d_block pt_35">
                   <span class="post-date p_relative d_block fs_15 mb_2">${dateHelperFormat(dataJson[dataJsonKey].created_at)}</span>
-                  <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=${dataJson[dataJsonKey].id}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
+                  <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
                   <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:bisque;padding:0 0 0 10px;">
                    <li id="myListItem${cpt}" class="p_relative d_iblock float_left fs_15 mr_25"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" #" onclick="return false;" class="fw_medium hov_color" style="text-transform: capitalize;">${dataJson[dataJsonKey].categorie}</a></li>
                    <li class="p_relative d_iblock float_left fs_15 mr_25">${Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2)) + Math.ceil(2))} min. de lecture</li>
@@ -832,7 +832,7 @@
 
                 results.forEach(article => {
                   const articleElement = document.createElement('div');
-                  articleElement.innerHTML = `<a href="/blog-detail.html?post=${article.id}">${article.titre}</a>`;
+                  articleElement.innerHTML = `<a href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}">${article.titre}</a>`;
                   articleElement.onclick = () => {
                     document.getElementById('search-field').value = article.title;
                     dropdownResults.style.display = 'none'; // Cache le dropdown après sélection
@@ -858,9 +858,6 @@
                 const results = await searchArticlesDropDown(currentQuery, currentPage);
                 displayDropdownResults(results, false);
               });
-
-
-
 
               document.getElementById('search-field').addEventListener('input', debounce(async function (event) {
                 const searchTerm = event.target.value.trim();
@@ -928,6 +925,14 @@
                   return [];
                 }
                 return data.map(post => post.id); // Retourne seulement les IDs
+              }
+
+              function getOldHrefAndSetNewHref(newHref, id) {
+                if (newHref && newHref!=='NULL' && newHref.length > 10) {
+                  return 'jardinier-paysagiste-belgique-blog/'+newHref+'.html?post='+id;
+                } else {
+                  return 'blog-detail.html?post='+id;
+                }
               }
 
             </script>
@@ -1052,10 +1057,10 @@
                       var ldiv = document.createElement("div");
                       ldiv.innerHTML = ('<div class="post p_relative d_block pl_100 pb_20 mb_15" style="border-bottom: 1px solid lightgray">\n' +
                         '                  <figure class="post-thumb p_absolute b_radius_5">' +
-                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + (dataJson[dataJsonKey].new_href ? newHrefFolder + '/' + dataJson[dataJsonKey].new_href  : 'blog-detail.html?post=' + dataJson[dataJsonKey].id) + '">' +
+                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id) + '">' +
                         '<img loading="lazy" src="' + dataJson[dataJsonKey].image_url + '" alt="' + dataJson[dataJsonKey].titre + '"></a></figure>\n' +
                         '                  <h5 class="fs_18 lh_26 fw_medium mb_6">' +
-                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + (dataJson[dataJsonKey].new_href ? newHrefFolder + '/' + dataJson[dataJsonKey].new_href  : 'blog-detail.html?post=' + dataJson[dataJsonKey].id) + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
+                        '<a aria-label="link on web site jardin iri jardinier bruxelles" href="' + getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id) + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
                         '                  <span class="post-date p_relative d_block fs_16 lh_28">' + dateHelperFormat(dataJson[dataJsonKey].created_at) + '</span>\n' +
                         '                </div>');
                       document.getElementById("containerPostRecent").appendChild(ldiv);
@@ -1282,7 +1287,7 @@
                 async function fetchMatchingTitles(query) {
                   const { data, error } = await supabaseClient
                     .from('post')
-                    .select('id, titre, article'); // Sélectionne également le contenu
+                    .select('id, titre, article, new_href'); // Sélectionne également le contenu
 
                   if (error) {
                     console.error("Erreur lors de la recherche :", error.message);
@@ -1305,7 +1310,7 @@
 
                           if (!matchingTitles.has(article.titre)) {
                             const contentPreview = article.article.split(' ').slice(0, 300).join(' '); // Limite à 300 mots
-                            matchingTitles.set(article.titre, { id: article.id, displayTitle, contentPreview });
+                            matchingTitles.set(article.titre, { id: article.id, displayTitle, contentPreview, new_href: article.new_href});
                           }
                           break;
                         }
@@ -1326,7 +1331,7 @@
                     return;
                   }
 
-                  matches.forEach(([title, { id, displayTitle, contentPreview }]) => {
+                  matches.forEach(([title, { id, displayTitle, contentPreview, new_href}]) => {
                     const item = document.createElement('div');
                     item.classList.add('autocomplete-item-infinite');
 
@@ -1334,7 +1339,7 @@
                     const highlightedText = displayTitle.replace(regex, `<strong>$1</strong>`);
 
                     const link = document.createElement('a');
-                    link.href = `/blog-detail.html?post=${id}`;
+                    link.href = `${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, id)}`;
                     link.style.textDecoration = 'none';
                     link.style.color = 'inherit';
                     link.style.display = 'block';
@@ -1506,13 +1511,13 @@
                 ldiv.className = "col-lg-4 col-md-6 col-sm-12 news-block";
                 ldiv.innerHTML = ('<div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">\n' +
                   '            <div class="inner-box p_relative d_block b_radius_5 b_shadow_7 bg_white mb_30">\n' +
-                  '              <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '">' +
+                  '              <figure class="image-box p_relative d_block theme_bg"><a aria-label="link on web site jardin iri jardinier bruxelles" href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '">' +
                   '               <img class="resizeHeight" loading="lazy" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '"></a></figure>\n' +
                   '              <div class="lower-content p_relative d_block pl_40 pt_35 pr_30 pb_40">\n' +
                   '                <span class="post-date p_relative d_block fs_15 mb_5">' + dateHelperFormat(dataJsonInfinite[dataJsonKeyInfinite].created_at) + '</span>\n' +
-                  '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
+                  '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a aria-label="link on web site jardin iri jardinier bruxelles" href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
                   '                <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:bisque;padding:0 0 0 10px;">\n' +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25"><a aria-label="link on web site jardin iri jardinier bruxelles" href=" blog-detail.html?post=' + dataJsonInfinite[dataJsonKeyInfinite].id + '" class="fw_medium hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a></li>\n' +
+                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25"><a aria-label="link on web site jardin iri jardinier bruxelles" href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="fw_medium hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a></li>\n' +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + Math.floor(Math.random() * (Math.floor(8) - Math.ceil(2)) + Math.ceil(3)) + ' min. </li>\n' +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</li>\n' +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + commentText + '</li>\n' +
