@@ -168,40 +168,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.jardin-iris.be/blog-detail.html?post=636</loc>
-    <lastmod>2025-04-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.jardin-iris.be/blog-detail.html?post=638</loc>
-    <lastmod>2025-04-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.jardin-iris.be/blog-detail.html?post=513</loc>
-    <lastmod>2025-04-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.jardin-iris.be/blog-detail.html?post=639</loc>
-    <lastmod>2025-04-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.jardin-iris.be/blog-detail.html?post=641</loc>
-    <lastmod>2025-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://jardin-iris.be/jardinier-paysagiste-belgique-blog/blog-detail-jardinier-paysagiste-limace.html</loc>
-    <lastmod>2025-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-permaculture-design-interieur-ecoresponsable.html</loc>
+  <lastmod>2025-05-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-blog-payer-agriculteurs-preserver-biodiversite-initiative-audacieuse.html</loc>
+  <lastmod>2025-05-11</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-bruxelles-jardinage-sol-vivant-techniques-innovantes-europe.html</loc>
+  <lastmod>2025-05-12</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/potager-facile-bruxelles-astuces-jardiniers.html</loc>
+  <lastmod>2025-05-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-entretiens-ratons-laveurs-envahissent-citadelle-namur.html</loc>
+  <lastmod>2025-05-14</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-paysagiste-bruxelles-preparer-jardin-saison-florissante.html</loc>
+  <lastmod>2025-05-14</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
 </urlset>
