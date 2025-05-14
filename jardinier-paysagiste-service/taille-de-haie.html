@@ -55,6 +55,27 @@
   </script>
   <script> window.chtlConfig = { chatbotId: "6424574229" } </script>
   <script async data-id="6424574229" id="chatling-embed-script" src="https://chatling.ai/js/embed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    .resizeHeight {
+      width: 100%; /* Prend toute la largeur disponible */
+      height: 150px; /* Hauteur fixe */
+      object-fit: cover; /* Remplit le conteneur tout en gardant le ratio */
+      border-radius: 5px;
+    }
+    .owl-item {
+      width: 300px; /* Ajuste cette valeur selon la largeur souhaitée */
+    }
+
+    .testimonial-block-one {
+      width: 100%;
+      max-width: 300px; /* La même largeur que `.owl-item` */
+      box-sizing: border-box;
+    }
+    .owl-theme .owl-dots .owl-dot.active span {
+      background-color: #1c7430;
+    }
+  </style>
 </head>
 
 
@@ -281,6 +302,106 @@
       </div>
     </div>
   </section>
+
+  <!-- testimonial-section -->
+  <section class="testimonial-section p_relative" style="padding: 35px 0px 20px 0px !important; margin: 50px 0;">
+    <div class="bg-layer p_absolute" style="background-image: url(https://cdn.atoutloisir.com/blog/wp-content/uploads/2024/11/mur-vegetal-artificielle.webp);"></div>
+    <div class="pattern-layer p_absolute wow slideInLeft" data-wow-delay="00ms" data-wow-duration="2000ms" style="background-image: url(assets/images/shape/shape-9.png);"></div>
+    <div class="auto-container">
+      <div class="row clearfix">
+        <div class="col-lg-2 col-md-12 col-sm-12 title-column">
+          <div class="sec-title">
+            <span class="sub-title">Blog</span>
+            <h2>Les dèrniers articles</h2>
+          </div>
+        </div>
+        <div class="col-lg-10 col-md-12 col-sm-12 inner-column">
+          <div class="inner-content">
+            <div class="two-column-carousel owl-carousel owl-theme">
+              <!-- Les items seront insérés ici par le JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const SUPABASE_URL = 'https://zmgfaiprgbawcernymqa.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2ZhaXByZ2Jhd2Nlcm55bXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ2NTc0MjEsImV4cCI6MjA0MDIzMzQyMX0.sBq7sR7JhRZCg36xvt13yt_f398oWbHUfdUwa9yoox0';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    function dateHelperFormat(dateNotFormated) {
+      // La date au format ISO
+      var isoDate = dateNotFormated;
+      // Convertir en objet Date
+      var date = new Date(isoDate);
+      // Extraire le jour, le mois et l'année
+      var day = ("0" + date.getDate()).slice(-2);    // Pour ajouter le '0' si nécessaire
+      var month = ("0" + (date.getMonth() + 1)).slice(-2); // Les mois commencent à 0
+      var year = date.getFullYear();
+      // Formatter la date au format DD-MM-YYYY
+      var formattedDate = day + "-" + month + "-" + year;
+      // console.log(formattedDate); // Affiche : 03-09-2024
+      return formattedDate;
+    }
+    async function fetchDataPostBelow() {
+      let baseQuery = supabaseClient
+        .from('post')
+        .select('id, titre, created_at, image_url, new_href')
+        .eq('valid', true)
+        .eq('deleted', false)
+        .order('created_at', { ascending: false })
+        .limit(12);
+
+      const { data, error } = await baseQuery;
+
+      if (error) {
+        console.error('Erreur lors du fetch:', error);
+        return;
+      }
+
+      const carousel = document.querySelector(".two-column-carousel");
+      carousel.innerHTML = ""; // Vider le conteneur avant d'ajouter les nouveaux éléments
+
+      data.forEach(post => {
+        const newHref = post.new_href && post.new_href !== 'NULL'
+          ? `jardinier-paysagiste-belgique-blog/${post.new_href}.html?post=${post.id}`
+          : `blog-detail.html?post=${post.id}`;
+
+        const item = document.createElement("div");
+        item.classList.add("item");
+        item.innerHTML = `
+        <div class="testimonial-block-one">
+          <div class="inner-box p_relative d_block pl_20 pt_20 pr_20 pb_20 b_radius_5 b_shadow_6 bg_white">
+            <div class="shape p_absolute" style="background-image: url(assets/images/shape/shape-8.png);"></div>
+             <div class="text p_relative d_block mb_10">${dateHelperFormat(post.created_at)}</div>
+            <a href="${newHref}" title="${post.titre}"><img class="resizeHeight" loading="lazy" src="${post.image_url}" alt="${post.titre}"></a>
+            <a href="${newHref}" title="${post.titre}" style="color:grey;"><div class="text p_relative d_block mb_10">${post.titre}</div></a>
+          </div>
+        </div>
+      `;
+        carousel.appendChild(item);
+      });
+
+      // Réinitialiser Owl Carousel
+      $(carousel).owlCarousel('destroy'); // Détruire l'instance précédente
+      $(carousel).owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 20,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        responsive: {
+          0: { items: 1 },
+          768: { items: 2 },
+          1024: { items: 3 }
+        }
+      });
+    }
+
+    // Initialisation
+    fetchDataPostBelow();
+  </script>
+  <!-- testimonial-section end -->
 
   <!-- main-footer -->
   <footer class="main-footer p_relative">
