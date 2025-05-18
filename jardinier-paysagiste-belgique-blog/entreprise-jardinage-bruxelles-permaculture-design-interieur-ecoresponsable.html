@@ -689,7 +689,7 @@ Aujourd'hui, le ciel sera partiellement ensoleillé avec quelques nuages épars.
               const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
               const params = new URLSearchParams(window.location.search);
               if (params.has('post')) {
-                const postValue = params.get('post');
+                const postValue = parseInt(params.get('post'));
                 if (!postValue) {
                    // récupère l id du post dans :
                   // <!-- Page Title -->
@@ -708,11 +708,9 @@ Aujourd'hui, le ciel sera partiellement ensoleillé avec quelques nuages épars.
                       .rpc('increment_visite', {post_id: postIdInt}) // Appelle la fonction avec l'ID du post
                     if (error) {
                       console.error('Erreur lors de l\'incrémentation :', error)
-                    } else {
-                      // console.log('Incrémentation réussie pour le post avec l\'ID 1 :', postIdInt)
-                      // console.log('Incrémentation réussie pour le post avec l\'ID 2 :', data)
                     }
                   }
+                  fetchDataPostOne(postValue)
                   async function fetchDataPostOne(postValue) {
                     datatJsonPostOne = '';
                     const {data, error} = await supabaseClient

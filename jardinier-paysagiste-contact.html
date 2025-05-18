@@ -81,6 +81,35 @@
     .owl-theme .owl-dots .owl-dot.active span {
       background-color: #1c7430;
     }
+
+                            /* Styles pour les messages d'erreur */
+                          input:invalid, select:invalid, textarea:invalid {
+                            border: 1px solid #ff0000;
+                          }
+
+    .error-field {
+      border: 1px solid #ff0000 !important;
+    }
+
+    /* Message personnalisé d'erreur */
+    .error-message-validation {
+      color: #ff0000;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* Style pour le formulaire */
+    #contact-form input:focus,
+    #contact-form select:focus,
+    #contact-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+      border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+
+
   </style>
 </head>
 
@@ -262,20 +291,58 @@
           <div class="form-inner">
             <h3 class="p_relative d_block fs_30 lh_40 mb_30">
               En tant qu'entreprise de jardinage professionnelle, nos jardiniers paysagistes sont à votre service pour tous vos projets. Notre entreprise de paysagisme s'engage à créer des espaces verts qui correspondent parfaitement à vos attentes. Notre entreprise paysagiste vous accompagne de la conception à la réalisation. Complétez le formulaire ci-dessous pour échanger avec un jardinier de notre entreprise.            </h3>
-            <form method="post" action="sendemail.php" id="contact-form" class="default-form">
+
+
+
+            <form method="post" action="sendemail.php" id="contact-form" class="default-form" enctype="multipart/form-data" novalidate>
               <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 form-group mb_30">
-                  <input type="text" name="username" placeholder="Votre nom" required>
+                  <input type="text" name="username" placeholder="Votre nom (obligatoire)" required>
+                  <div class="error-message-validation username-error">Ce champ est obligatoire</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 form-group mb_30">
-                  <input type="email" name="email" placeholder="Votre email" required>
+                  <input type="email" name="email" placeholder="Votre email (obligatoire)" required>
+                  <div class="error-message-validation email-error">Ce champ est obligatoire</div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
-                  <input type="text" name="phone" required placeholder="Un numéro de téléphone">
+                  <input type="text" name="phone" required placeholder="Un numéro de téléphone (obligatoire)">
+                  <div class="error-message-validation phone-error">Ce champ est obligatoire</div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group mb_30">
+                  <input type="text" name="address" required placeholder="Votre adresse complète (obligatoire)">
+                  <div class="error-message-validation address-error">Ce champ est obligatoire</div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
-                  <input type="text" name="subject" required placeholder="Le sujet de votre message">
+                  <input type="text" name="subject" required placeholder="Le sujet de votre message (obligatoire)">
+                  <div class="error-message-validation subject-error">Ce champ est obligatoire</div>
                 </div>
+
+                <!-- Nouveau champ pour la taille du jardin -->
+                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
+                  <input style="border: 1px solid #d7d4d4;padding: 10px; border-radius: 5px;" type="number" name="garden_size" placeholder="Taille du jardin en m²">
+                </div>
+
+                <!-- Nouveau champ pour le budget -->
+                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
+                  <select name="budget" class="form-select">
+                    <option value="">Sélectionnez votre budget</option>
+                    <option value="0 € à 1 000 €">0 € à 1 000 €</option>
+                    <option value="1 000 € à 3 000 €">1 000 € à 3 000 €</option>
+                    <option value="3 000 € à 5 000 €">3 000 € à 5 000 €</option>
+                    <option value="5 000 € à 10 000 €">5 000 € à 10 000 €</option>
+                    <option value="Plus de 10 000 €">Plus de 10 000 €</option>
+                  </select>
+                </div>
+
+                <!-- Nouveau champ pour l'upload de photos -->
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group mb_30">
+                  <label for="photos">Ajoutez jusqu'à 3 photos (maximum 10 Mo au total)</label>
+                  <input type="file" name="photos[]" id="photos" accept="image/*" multiple class="form-control">
+                  <small id="photoHelp" class="form-text text-muted">Format accepté : JPG, PNG, GIF. Taille maximale totale : 10 Mo.</small>
+                  <div id="total-size-display" style="margin-top: 5px;">Taille totale : <span id="size-value">0 Mo</span></div>
+                  <div id="photo-size-error" class="error-message" style="color: red; display: none;">La taille totale des fichiers dépasse la limite de 10 Mo.</div>
+                </div>
+
                 <div class="col-lg-12 col-md-12 col-sm-12 form-group mb_30">
                   <textarea name="message" placeholder="Votre Message"></textarea>
                 </div>
@@ -286,25 +353,131 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn mr-0">
                   <button type="submit" class="theme-btn btn-one">Envoyer maintenant</button>
                   <script>
+                    // Style pour les messages d'erreur HTML5 natifs
+                    document.addEventListener('DOMContentLoaded', function() {
+                      // Ajouter un style personnalisé pour les messages de validation
+                      var style = document.createElement('style');
+                      style.type = 'text/css';
+                      style.innerHTML = `
+            input:invalid, select:invalid, textarea:invalid {
+              border-color: #ff0000;
+            }
+            ::-webkit-input-placeholder { /* Chrome, Safari */
+              color: #555;
+            }
+
+            /* Style pour les messages d'erreur natifs */
+            input::-webkit-validation-bubble-message,
+            select::-webkit-validation-bubble-message,
+            textarea::-webkit-validation-bubble-message {
+              color: #ff0000 !important;
+              background: #fff !important;
+              border: 1px solid #ff0000 !important;
+            }
+          `;
+                      document.getElementsByTagName('head')[0].appendChild(style);
+
+                      // Solution alternative pour les navigateurs qui ne supportent pas la personnalisation des messages d'erreur natifs
+                      var inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+                      for (var i = 0; i < inputs.length; i++) {
+                        inputs[i].addEventListener('invalid', function(e) {
+                          e.preventDefault(); // Empêcher le message natif du navigateur
+                          this.setCustomValidity('');
+                          if (!this.validity.valid) {
+                            this.classList.add('error-field');
+                            // Afficher le message d'erreur personnalisé
+                            var errorDiv = this.nextElementSibling;
+                            if (errorDiv && errorDiv.classList.contains('error-message-validation')) {
+                              errorDiv.style.display = 'block';
+                            }
+                          }
+                        });
+
+                        inputs[i].addEventListener('input', function(e) {
+                          this.setCustomValidity('');
+                          this.classList.remove('error-field');
+                          // Masquer le message d'erreur personnalisé
+                          var errorDiv = this.nextElementSibling;
+                          if (errorDiv && errorDiv.classList.contains('error-message-validation')) {
+                            errorDiv.style.display = 'none';
+                          }
+                        });
+                      }
+
+                      // Validation personnalisée lors de la soumission du formulaire
+                      document.getElementById('contact-form').addEventListener('submit', function(e) {
+                        var isValid = true;
+                        var inputs = this.querySelectorAll('input[required], select[required], textarea[required]');
+
+                        for (var i = 0; i < inputs.length; i++) {
+                          if (!inputs[i].validity.valid) {
+                            isValid = false;
+                            inputs[i].classList.add('error-field');
+                            // Afficher le message d'erreur personnalisé
+                            var errorDiv = inputs[i].nextElementSibling;
+                            if (errorDiv && errorDiv.classList.contains('error-message-validation')) {
+                              errorDiv.style.display = 'block';
+                            }
+                          }
+                        }
+
+                        if (!isValid) {
+                          e.preventDefault(); // Empêcher la soumission si le formulaire n'est pas valide
+                        }
+                      });
+                    });
+
+                    // Script reCAPTCHA
                     grecaptcha.ready(function() {
                       grecaptcha.execute('6Lc2Ec8qAAAAAPzym9INLfO3G6zrlcmpHkyqNm3O', {action: 'submit'}).then(function(token) {
                         document.getElementById('recaptchaResponse').value = token;
                       });
                     });
+
+                    // Vérification des messages d'erreur/succès
                     const params = new URLSearchParams(window.location.search);
                     const contactValue = params.get('message');
                     if (contactValue) {
                       window.scrollTo(0, document.body.scrollHeight);
                       document.write('<p style="font-weight: bold; border: 1px solid ' + (contactValue === 'Success' ? 'green' : 'red') + '; color: black;padding: 20px 0;margin: 20px 0;text-align: center;"> ' + (contactValue === 'Success' ? 'Merci ! Votre message a bien été envoyé.' : 'Zut ! Une erreur est survenue, veuillez réessayer.') + ' </p>');
                     }
+
+                    // Script de validation de la taille des images avec affichage
+                    document.getElementById('photos').addEventListener('change', function() {
+                      const files = this.files;
+                      const errorElement = document.getElementById('photo-size-error');
+                      const sizeDisplay = document.getElementById('size-value');
+                      const totalSizeDisplay = document.getElementById('total-size-display');
+                      let totalSize = 0;
+
+                      for (let i = 0; i < files.length; i++) {
+                        totalSize += files[i].size;
+                      }
+
+                      // Convertir les octets en Mo avec 2 décimales
+                      const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+
+                      // Afficher la taille totale
+                      sizeDisplay.textContent = totalSizeMB + ' Mo';
+
+                      // Vérifier si la taille totale dépasse 4 Mo
+                      if (totalSize > 10 * 1024 * 1024) {
+                        errorElement.style.display = 'block';
+                        sizeDisplay.style.color = 'red';
+                        sizeDisplay.style.fontWeight = 'bold';
+                        this.value = ''; // Réinitialiser le champ d'upload
+                      } else {
+                        errorElement.style.display = 'none';
+                        sizeDisplay.style.color = totalSize > 7 * 1024 * 1024 ? 'orange' : 'green';
+                        sizeDisplay.style.fontWeight = 'normal';
+                      }
+                    });
                   </script>
                 </div>
               </div>
             </form>
-          </div>
-        </div>
 
-        <!-- Script reCAPTCHA v3 -->
+            <!-- Script reCAPTCHA v3 -->
         <script src="https://www.google.com/recaptcha/api.js?render=6Lc2Ec8qAAAAAPzym9INLfO3G6zrlcmpHkyqNm3O"></script>
 
       </div>

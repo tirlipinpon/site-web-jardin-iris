@@ -688,7 +688,7 @@ Aujourd'hui, le temps sera variable avec des averses éparses et des éclaircies
               const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
               const params = new URLSearchParams(window.location.search);
               if (params.has('post')) {
-                const postValue = params.get('post');
+                const postValue = parseInt(params.get('post'), 10)
                 if (!postValue) {
                    // récupère l id du post dans :
                   // <!-- Page Title -->
@@ -712,6 +712,7 @@ Aujourd'hui, le temps sera variable avec des averses éparses et des éclaircies
                       // console.log('Incrémentation réussie pour le post avec l\'ID 2 :', data)
                     }
                   }
+                  fetchDataPostOne(postValue)
                   async function fetchDataPostOne(postValue) {
                     datatJsonPostOne = '';
                     const {data, error} = await supabaseClient
