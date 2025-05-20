@@ -3,7 +3,7 @@
 define("RECIPIENT_NAME", "jardin-iris");
 define("RECIPIENT_EMAIL", "contact@jardin-iris.be");
 define("RECAPTCHA_SECRET_KEY", "6Lc2Ec8qAAAAAKsI_cofoBHA6ELz6Wmx_ifzehJF");
-define("MAX_FILE_SIZE", 10 * 1024 * 1024); // 4 Mo en octets
+define("MAX_FILE_SIZE", 10 * 1024 * 1024); // 10 Mo en octets
 define("UPLOAD_DIR", "uploads/");
 define("ALLOWED_EXTENSIONS", ["jpg", "jpeg", "png", "gif"]);
 
@@ -35,13 +35,16 @@ if (!$responseData->success || $responseData->score < 0.5) {
 $userName = filter_var($_POST['username'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $senderEmail = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
 $userPhone = filter_var($_POST['phone'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$userAddress = filter_var($_POST['address'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $userSubject = filter_var($_POST['subject'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$gardenSize = filter_var($_POST['garden_size'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$budget = filter_var($_POST['budget'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $message = filter_var($_POST['message'] ?? '', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+// Méthodes de contact
+$contactMethods = isset($_POST['contact_method']) ? $_POST['contact_method'] : ['email'];
+$availabilityDays = isset($_POST['availability_days']) ? $_POST['availability_days'] : [];
 
+// Dates de visite
+$visitDates = isset($_POST['visitDates']) ? $_POST['visitDates'] : [];
+$visitDatesFormatted = !empty($visitDates) ? implode(', ', array_map('htmlspecialchars', $visitDates)) : "Aucune date sélectionnée";
 
 // Génération d'une boundary unique
 $boundary = md5(uniqid(time()));
@@ -58,73 +61,83 @@ $body .= "Content-Type: text/html; charset=UTF-8\r\n";
 $body .= "Content-Transfer-Encoding: quoted-printable\r\n\r\n";
 
 // Contenu HTML du message
-$body .= "<p><strong>Nom:</strong> $userName</p>";
-$body .= "<p><strong>Email:</strong> $senderEmail</p>";
-$body .= "<p><strong>Téléphone:</strong> $userPhone</p>";
-$body .= "<p><strong>Adresse:</strong> $userAddress</p>";
-$body .= "<p><strong>Sujet:</strong> $userSubject</p>";
-$body .= "<p><strong>Taille du jardin:</strong> $gardenSize m²</p>";
-$body .= "<p><strong>Budget:</strong> $budget</p>";
-$body .= "<p>$message</p>\r\n";
+$body .= "<p><strong>Nom :</strong> $userName</p>";
+$body .= "<p><strong>Email :</strong> $senderEmail</p>";
+$body .= "<p><strong>Téléphone :</strong> $userPhone</p>";
+$body .= "<p><strong>Sujet :</strong> $userSubject</p>";
 
-// Gestion des fichiers joints
-if (isset($_FILES['photos']) && !empty($_FILES['photos']['name'][0])) {
-    $fileCount = count($_FILES['photos']['name']);
-    for ($i = 0; $i < $fileCount; $i++) {
-        // Vérification taille et extension
-        if ($_FILES['photos']['error'][$i] === UPLOAD_ERR_OK &&
-            $_FILES['photos']['size'][$i] <= MAX_FILE_SIZE) {
-
-            $fileName = basename($_FILES['photos']['name'][$i]);
-            $fileTmpPath = $_FILES['photos']['tmp_name'][$i];
-            $fileType = mime_content_type($fileTmpPath);
-            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-            if (in_array($extension, ALLOWED_EXTENSIONS)) {
-                $fileContent = chunk_split(base64_encode(file_get_contents($fileTmpPath)));
-
-                $body .= "--$boundary\r\n";
-                $body .= "Content-Type: $fileType; name=\"$fileName\"\r\n";
-                $body .= "Content-Disposition: attachment; filename=\"$fileName\"\r\n";
-                $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-                $body .= $fileContent . "\r\n";
-            } else {
-                secureLog("Fichier non autorisé: $fileName");
-            }
-        } else {
-            secureLog("Erreur upload fichier: " . $_FILES['photos']['name'][$i]);
-        }
+// Méthodes de contact
+$body .= "<p><strong>Méthodes de contact préférées :</strong> ";
+if (in_array('email', $contactMethods)) {
+    $body .= "Email";
+    if (in_array('phone', $contactMethods)) {
+        $body .= " et Téléphone";
     }
+} elseif (in_array('phone', $contactMethods)) {
+    $body .= "Téléphone uniquement";
 }
+$body .= "</p>";
+
+// Disponibilité téléphonique
+if (in_array('phone', $contactMethods) && !empty($availabilityDays)) {
+    $body .= "<p><strong>Disponibilité téléphonique :</strong> ";
+    $body .= in_array('tous', $availabilityDays) ? "Tous les jours" : implode(', ', $availabilityDays);
+    $body .= "</p>";
+}
+
+// Dates de visite
+$body .= "<p><strong>Dates de visite sélectionnées :</strong> $visitDatesFormatted</p>";
+
+$body .= "<p>$message</p>\r\n";
 
 // Fin du corps multipart
 $body .= "--$boundary--\r\n";
 
-// Envoi de l'email
+// Envoi de l'email à l'administrateur
 $mailSuccess = mail(RECIPIENT_EMAIL, "[Jardin Iris] $userSubject", $body, $headers);
 
-// Détection de la langue de la page d'origine
-$referer = $_SERVER['HTTP_REFERER'] ?? '';
-$isEnglish = strpos($referer, '/en/') !== false;  // Vérifie si l'URL contient "/en/"
+// Email de confirmation au client
+$clientHeaders = "From: " . RECIPIENT_EMAIL . "\r\n";
+$clientHeaders .= "Reply-To: " . RECIPIENT_EMAIL . "\r\n";
+$clientHeaders .= "MIME-Version: 1.0\r\n";
+$clientHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-if (filter_var($senderEmail, FILTER_VALIDATE_EMAIL) && $mailSuccess) {
-    // Redirection conditionnelle en fonction de la langue
-    if ($isEnglish) {
-        header('Location: https://jardin-iris.be/en/jardinier-paysagiste-contact.html?message=Success');
-    } else {
-        header('Location: https://jardin-iris.be/jardinier-paysagiste-contact.html?message=Success');
+// Contenu du mail client
+$clientBody = "<html><body>";
+$clientBody .= "<h2>Merci pour votre message</h2>";
+$clientBody .= "<p>Bonjour $userName,</p>";
+$clientBody .= "<p>Nous avons bien reçu votre demande :</p>";
+$clientBody .= "<p><strong>Sujet :</strong> $userSubject</p>";
+$clientBody .= "<p><strong>Méthodes de contact :</strong> ";
+if (in_array('email', $contactMethods)) {
+    $clientBody .= "Email";
+    if (in_array('phone', $contactMethods)) {
+        $clientBody .= " et Téléphone";
     }
-    exit();
-} else {
-    secureLog("Adresse email invalide: $senderEmail");
-    // En cas d'échec de l'envoi du mail
-    if ($isEnglish) {
-        header('Location: https://jardin-iris.be/en/jardinier-paysagiste-contact.html?message=Failed');
-    } else {
-        header('Location: https://jardin-iris.be/jardinier-paysagiste-contact.html?message=Failed');
-    }
-    exit();
+} elseif (in_array('phone', $contactMethods)) {
+    $clientBody .= "Téléphone uniquement";
+}
+$clientBody .= "</p>";
+
+// Disponibilité téléphonique
+if (in_array('phone', $contactMethods) && !empty($availabilityDays)) {
+    $clientBody .= "<p><strong>Disponibilités téléphoniques :</strong> ";
+    $clientBody .= in_array('tous', $availabilityDays) ? "Tous les jours" : implode(', ', $availabilityDays);
+    $clientBody .= "</p>";
 }
 
+// Dates de visite
+$clientBody .= "<p><strong>Dates de visite sélectionnées :</strong> $visitDatesFormatted</p>";
+
+$clientBody .= "<p><em>L'équipe de Jardin Iris</em></p>";
+$clientBody .= "</body></html>";
+
+// Envoi de l'email de confirmation
+if (filter_var($senderEmail, FILTER_VALIDATE_EMAIL)) {
+    mail($senderEmail, "Confirmation de votre demande - Jardin Iris", $clientBody, $clientHeaders);
+}
+
+// Redirection
+header('Location: jardinier-paysagiste-contact.html?message=Success');
 exit();
 ?>
