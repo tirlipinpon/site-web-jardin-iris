@@ -143,6 +143,12 @@
       z-index: 1000 !important;
     }
 
+    @media (max-width: 768px) {
+      .hide-on-mobile {
+        display: none;
+      }
+    }
+
 
   </style>
 </head>
@@ -323,11 +329,9 @@
 
         <div class="col-lg-7 col-md-12 col-sm-12 form-column">
           <div class="form-inner">
-            <h3 class="p_relative d_block fs_30 lh_40 mb_30">
-              En tant qu'entreprise de jardinage professionnelle, nos jardiniers paysagistes sont à votre service pour tous vos projets. Notre entreprise de paysagisme s'engage à créer des espaces verts qui correspondent parfaitement à vos attentes. Notre entreprise paysagiste vous accompagne de la conception à la réalisation. Complétez le formulaire ci-dessous pour échanger avec un jardinier de notre entreprise.            </h3>
-
-
-
+            <h3 class="p_relative d_block fs_30 lh_40 mb_30 hide-on-mobile">
+              En tant qu'entreprise de jardinage professionnelle, nos jardiniers paysagistes sont à votre service pour tous vos projets. Notre entreprise de paysagisme s'engage à créer des espaces verts qui correspondent parfaitement à vos attentes. Notre entreprise paysagiste vous accompagne de la conception à la réalisation. Complétez le formulaire ci-dessous pour échanger avec un jardinier de notre entreprise.
+            </h3>
             <form method="post" action="sendemail.php" id="contact-form" class="default-form" enctype="multipart/form-data" novalidate>
               <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 form-group mb_30">
@@ -338,23 +342,26 @@
                   <input type="email" name="email" placeholder="Votre email (obligatoire)" required>
                   <div class="error-message-validation email-error">Ce champ est obligatoire</div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
-                  <input type="text" name="phone" required placeholder="Un numéro de téléphone (obligatoire)">
+                <div class="col-lg-6 col-md-6 col-sm-12 form-group mb_30">
+                  <input type="text" name="phone" required placeholder="Numéro de téléphone (obligatoire)">
                   <div class="error-message-validation phone-error">Ce champ est obligatoire</div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 form-group mb_30">
-                  <input type="text" name="address" required placeholder="Votre adresse complète (obligatoire)">
-                  <div class="error-message-validation address-error">Ce champ est obligatoire</div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
-                  <input type="text" name="subject" required placeholder="Le sujet de votre message (obligatoire)">
-                  <div class="error-message-validation subject-error">Ce champ est obligatoire</div>
                 </div>
 
                 <!-- Nouveau champ pour la taille du jardin -->
-                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
+                <div class="col-lg-6 col-md-6 col-sm-12 form-group mb_30">
                   <input style="border: 1px solid #d7d4d4;padding: 10px; border-radius: 5px;" type="number" name="garden_size" placeholder="Taille du jardin en m²">
                 </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group mb_30">
+                  <input type="text" name="address" required placeholder="Adresse complète (obligatoire)">
+                  <div class="error-message-validation address-error">Ce champ est obligatoire</div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
+                  <input type="text" name="subject" required placeholder="Votre message (obligatoire)">
+                  <div class="error-message-validation subject-error">Ce champ est obligatoire</div>
+                </div>
+
+
 
                 <!-- Nouveau champ pour le budget -->
                 <div class="col-lg-6 col-md-12 col-sm-12 form-group mb_30">
@@ -373,7 +380,7 @@
                   <label for="photos">Ajoutez jusqu'à 3 photos (maximum 10 Mo au total)</label>
                   <input type="file" name="photos[]" id="photos" accept="image/*" multiple class="form-control">
                   <small id="photoHelp" class="form-text text-muted">Format accepté : JPG, PNG, GIF. Taille maximale totale : 10 Mo.</small>
-                  <div id="total-size-display" style="margin-top: 5px;">Taille totale : <span id="size-value">0 Mo</span></div>
+                  <div id="total-size-display" style="margin-top: 5px;"><span id="size-value"></span></div>
                   <div id="photo-size-error" class="error-message" style="color: red; display: none;">La taille totale des fichiers dépasse la limite de 10 Mo.</div>
                 </div>
 
@@ -466,15 +473,11 @@
                     type="text"
                     id="visit-dates"
                     name="visitDates[]"
-                    placeholder="Sélectionnez vos dates de visite"
+                    placeholder="Sélectionnez vos préférences de visite"
                     readonly
                     style="padding-left: 35px;"
                   >
                 </div>
-
-
-
-
 
 
                 <!-- Script pour gérer l'affichage conditionnel -->
@@ -638,7 +641,7 @@
                       const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
 
                       // Afficher la taille totale
-                      sizeDisplay.textContent = totalSizeMB + ' Mo';
+                      sizeDisplay.textContent = ' Taille totale : ' + totalSizeMB + ' Mo';
 
                       // Vérifier si la taille totale dépasse 4 Mo
                       if (totalSize > 10 * 1024 * 1024) {
