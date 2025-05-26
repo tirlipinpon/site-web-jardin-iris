@@ -480,8 +480,16 @@
                   </li>
                   <li><a aria-label="link on web site jardin iri jardinier bruxelles"
                          href="jardinier-paysagiste-service/entretien-de-jardin.html">Services</a></li>
-                  <li><a aria-label="link on web site jardin iri jardinier bruxelles"
-                         href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html">Projets</a></li>
+                  <li class="dropdown">
+                    <a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html">Projets</a>
+                    <ul>
+                      <li><a href="jardinier-paysagiste-projet/creation-jardin-etterbeek.html">Création</a></li>
+                      <li><a href="jardinier-paysagiste-projet/creation-jardin-avenue-louise.html">Maison Horta</a></li>
+                      <li><a href="jardinier-paysagiste-projet/jardinier-bruxelles-potager.html">Potager</a></li>
+                      <li><a href="jardinier-paysagiste-projet/amenagement-jardin-etterbeek.html">Aménagement</a></li>
+                    </ul>
+                    <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+                  </li>
                   <li><a aria-label="link on web site jardin iri jardinier bruxelles"
                          href="jardinier-paysagiste-contact.html">Contact</a>
                   </li>
@@ -755,17 +763,16 @@
                     <div class="row clearfix">
                         <div style="padding: 43px 13px 100px 15px;" class="col-lg-12 col-md-12 col-sm-12 image-column">
                             ${dataJson[dataJsonKey].article}
-                           ${dataJson[dataJsonKey].video ? `
 
+                           ${dataJson[dataJsonKey].video ? `
                             <iframe width="560" height="315"
                               src="${dataJson[dataJsonKey].video.replace(/watch\?v=([a-zA-Z0-9_-]{11})/, "embed/$1")}?cc_load_policy=1&cc_lang_pref=fr&hl=fr"
                               title="${dataJson[dataJsonKey].titre}" frameborder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                               allowfullscreen>
-                      </iframe>
-                          ` : ''}
-                        </div>
+                            </iframe>` : ''}
 
+                        </div>
                     </div>
                 </div>
             </div>
