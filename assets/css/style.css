@@ -370,7 +370,6 @@ img {
   text-align: center;
   padding: 17px 30px;
   border-radius: 5px;
-  text-transform: capitalize;
   z-index: 1;
   transition: all 500ms ease;
 }
