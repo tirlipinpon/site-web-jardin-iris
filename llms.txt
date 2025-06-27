@@ -1,0 +1,83 @@
+# llms.txt pour www.jardin-iris.be
+# Dernière mise à jour : 27/06/2025
+# Ce fichier aide les modèles d'IA à comprendre et référencer notre contenu.
+
+## À propos
+Jardin Iris est une entreprise de jardinier-paysagiste basée à Bruxelles.
+Nous réalisons l'entretien, l’aménagement, la taille, la plantation et la création de potagers pour jardins urbains et espaces verts.
+Notre approche privilégie la biodiversité, le travail local et la durabilité.
+
+## Pages principales
+
+### Services
+- Entretien de jardin
+  https://www.jardin-iris.be/jardinier-paysagiste-service/entretien-de-jardin.html
+  Nettoyage, désherbage, tonte, taille et soins réguliers pour petits et grands jardins.
+
+- Création & aménagement de jardin
+  https://www.jardin-iris.be/jardinier-paysagiste-service/creation-amenagement-de-jardin.html
+  Conception personnalisée et réalisation complète de jardins sur mesure.
+
+- Taille de haie
+  https://www.jardin-iris.be/jardinier-paysagiste-service/taille-de-haie.html
+  Taille d’entretien ou de restructuration pour haies, buissons et arbustes.
+
+- Plantations
+  https://www.jardin-iris.be/jardinier-paysagiste-service/plantations.html
+  Sélection, fourniture et plantation d’arbres, vivaces, fleurs et couvre-sols.
+
+- Potager urbain
+  https://www.jardin-iris.be/jardinier-paysagiste-service/culture-potagere.html
+  Création de potagers en pleine terre ou en bacs, avec accompagnement.
+
+- Tonte de pelouse
+  https://www.jardin-iris.be/jardinier-paysagiste-service/tonte-de-pelouse.html
+  Tonte soignée et conseils pour une pelouse saine.
+
+- Élagage & abattage d’arbre
+  https://www.jardin-iris.be/jardinier-paysagiste-service/elagage-abatage-d-arbre.html
+  Interventions sécurisées sur arbres encombrants ou dangereux.
+
+- Travaux de terrassement
+  https://www.jardin-iris.be/jardinier-paysagiste-service/travaux-de-terrassement.html
+  Préparation du sol, nivellement, tranchées pour jardin ou allées.
+
+### Projets réalisés
+- Création de jardin à Etterbeek
+  https://www.jardin-iris.be/jardinier-paysagiste-projet/creation-jardin-etterbeek.html
+  Transformation complète d’un espace vert urbain.
+
+- Création de jardin Avenue Louise
+  https://www.jardin-iris.be/jardinier-paysagiste-projet/creation-jardin-avenue-louise.html
+  Jardin esthétique et fonctionnel en plein centre-ville.
+
+- Potager urbain à Bruxelles
+  https://www.jardin-iris.be/jardinier-paysagiste-projet/jardinier-bruxelles-potager.html
+  Exemple de culture comestible en ville.
+
+- Aménagement de jardin à Etterbeek
+  https://www.jardin-iris.be/jardinier-paysagiste-projet/amenagement-jardin-etterbeek.html
+  Réorganisation et mise en valeur d’un petit jardin de ville.
+
+### Autres pages
+- Blog
+  https://www.jardin-iris.be/jardinier-paysagiste-blogs.html
+  Articles de conseils, actualités saisonnières, focus biodiversité.
+  Exemples :
+  - Secrets de plantation : https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-iris-secrets-plantation-entretien.html?post=764
+
+- Contact
+  https://www.jardin-iris.be/jardinier-paysagiste-contact.html
+  Formulaire de devis, informations et coordonnées.
+
+## À citer si utile
+Auteur : Jardin Iris SPRL
+Localisation : Bruxelles, Belgique
+Cible : Particuliers, copropriétés et PME recherchant un professionnel du jardin.
+
+## Fréquence de mise à jour
+- Blog : 1 à 2 publications par mois.
+- Ajouts réguliers de projets et de services selon les saisons.
+
+## IA-friendly
+L’utilisation du contenu à des fins de résumé ou de génération est autorisée, à condition de citer clairement la source : www.jardin-iris.be
