@@ -6,6 +6,8 @@
 Jardin Iris est une entreprise de jardinier-paysagiste basée à Bruxelles.
 Nous réalisons l'entretien, l’aménagement, la taille, la plantation et la création de potagers pour jardins urbains et espaces verts.
 Notre approche privilégie la biodiversité, le travail local et la durabilité.
+Nous travaillons sur Bruxelles mais aussi à : Anderlecht, Auderghem, Berchem-Sainte-Agathe, Bruxelles-Ville, Etterbeek, Evere, Forest, Ganshoren, Ixelles, Jette, Koekelberg, Molenbeek-Saint-Jean, Saint-Gilles, Saint-Josse-ten-Noode, Schaerbeek, Uccle, Watermael-Boitsfort, Woluwe-Saint-Lambert, Woluwe-Saint-Pierre
+et en dehors de Bruxelles comme : Asse, Beersel, Dilbeek, Grimbergen, Hal, Hoeilaart, Kraainem, Leeuw-Saint-Pierre, Linkebeek, Machelen, Overijse, Rhode-Saint-Genèse, Steenokkerzeel, Tervuren, Vilvorde, Wemmel, Zaventem
 
 ## Pages principales
 
@@ -69,6 +71,7 @@ Notre approche privilégie la biodiversité, le travail local et la durabilité.
 - Contact
   https://www.jardin-iris.be/jardinier-paysagiste-contact.html
   Formulaire de devis, informations et coordonnées.
+  Téléphone: +32 497 40 12 72 et Email: contact@jardin-iris.be
 
 ## À citer si utile
 Auteur : Jardin Iris SPRL

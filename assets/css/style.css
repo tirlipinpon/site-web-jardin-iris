@@ -2214,7 +2214,7 @@ div#mCSB_1_container{
 
 .testimonial-section .owl-nav{
   position: absolute;
-  left: -200px;
+  left: 0;
   bottom: 40px;
 }
 
