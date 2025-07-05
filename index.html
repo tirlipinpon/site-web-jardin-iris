@@ -103,6 +103,7 @@
 
   <!-- main header -->
   <header class="main-header">
+
     <!-- header-top -->
     <div class="header-top">
       <div class="shape" style="background-image: url(assets/images/shape/shape-16.png);"></div>
@@ -149,10 +150,10 @@
                     <ul>
                       <li><a href="jardinier-paysagiste-service/entretien-de-jardin.html">Entretien de jardin</a></li>
                       <li><a href="jardinier-paysagiste-service/creation-amenagement-de-jardin.html">Création et aménagement</a></li>
-                      <li><a href="jardinier-paysagiste-service/plantations.html">Plantations</a></li>
+                      <li><a href="jardinier-paysagiste-service/plantations.html">Plantations résiliantes</a></li>
                       <li><a href="jardinier-paysagiste-service/taille-de-haie.html">Taille de haie</a></li>
                       <li><a href="jardinier-paysagiste-service/culture-potagere.html">Potager urbain</a></li>
-                      <li><a href="jardinier-paysagiste-service/tonte-de-pelouse.html">Tonte de pelouse</a></li>
+                      <li><a href="jardinier-paysagiste-service/tonte-de-pelouse.html">Entretien et tonte de pelouse</a></li>
                       <li><a href="jardinier-paysagiste-service/elagage-abatage-d-arbre.html">Élagage et abatage</a></li>
                       <li><a href="jardinier-paysagiste-service/travaux-de-terrassement.html">Travaux de terrassement</a></li>
                     </ul>
@@ -220,27 +221,24 @@
   <!-- End Mobile Menu -->
 
 
-  <!-- Preload dans <head> -->
-  <link rel="preload" as="image" href="assets/images/banner/banner-1.webp">
-  <!-- banner-section -->
-  <section class="banner-section centred p_relative">
-    <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-2.png);"></div>
-    <div class="banner-carousel owl-carousel">
-      <div class="slide-item p_relative pt_130 pb_190">
-        <div class="image-layer p_absolute" style="background-image:url(assets/images/banner/banner-1.webp)"></div>
-        <div class="auto-container">
-          <div class="content-box p_relative d_block z_5">
-            <h1 class="color_white d_block fs_90 lh_90 mb_25">Bienvenue au jardin Iris votre jardinier paysagiste.</h1>
-            <p class="color_white fs_20 lh_32 mb_45">Le jardin d'iris est spécialisé dans la création et l'aménagement de jardin écologique et résiliant.</p>
-            <div class="btn-box clearfix">
-              <a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-contact.html" class="theme-btn btn-one">Demander un devis gratuit pour votre jardin</a>
-            </div>
-          </div>
+  <!-- Page Title -->
+  <section class="page-title p_relative pt_150 pb_180 centred"
+           style="background-image: url(assets/images/banner/banner-1.webp);">
+    <div class="pattern-layer p_absolute" style="background-image: url(assets/images/shape/shape-2.png);"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <h1 class="d_block fs_70 lh_70 mb_20 color_white">Contacter un jardinier sur Bruxelles ou ses environs pour tous travaux d'entretien de jardin.</h1>
+
+        <div class="btn-box clearfix">
+          <a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-contact.html" class="theme-btn btn-one">
+            Pour toutes questions ou un devis de notre entreprise de jardinage.
+          </a>
         </div>
       </div>
     </div>
   </section>
-  <!-- banner-section end -->
+  <!-- End Page Title -->
+
 
   <!-- about-section -->
   <section class="about-section p_relative pt_130 pb_130" style="min-height: 400px;">
@@ -438,6 +436,11 @@
     </div>
   </section>
   <!--   project-section end -->
+  <script>
+    setTimeout(() => {
+      document.querySelector('li.active.filter[data-role="button"][data-filter=".all"]')?.click();
+    }, 2000);
+  </script>
 
   <!-- service-section -->
   <section class="service-section p_relative bg_color_1 sec-pad centred">
@@ -488,7 +491,7 @@
                 <figure class="image p_relative d_iblock b_radius_50 img_hover_1"><img loading="lazy" src="assets/images/service/jardinier-plante-arbuste.jpg" alt="Plantations"></figure>
                 <div class="icon-box p_absolute d_iblock b_radius_10 fs_35 mb_30 z_1 tran_5 icon_overlay"><i class="icon-21"></i></div>
               </div>
-              <h3 class="p_relative d_block fs_22 fw_medium mb_17"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-service/plantations.html" class="d_iblock">Plantations</a></h3>
+              <h3 class="p_relative d_block fs_22 fw_medium mb_17"><a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-service/plantations.html" class="d_iblock">Plantations résiliantes</a></h3>
               <p class="mb_17 lh_26">Nos jardins durables personnalisés, conçus par des paysagistes professionnels, utilisent des méthodes respectueuses de l'environnement et favorisent l’éco-paysagisme pour améliorer l’esthétique et la biodiversité de votre espace.</p>
               <div class="link-box p_relative">
                 <a aria-label="link on web site jardin iri jardinier bruxelles" href="jardinier-paysagiste-service/plantations.html" class="link-btn d_iblock"><i class="far fa-long-arrow-right fs_20"></i></a>
@@ -581,11 +584,7 @@
     </div>
   </section>
   <!-- service-section -->
-  <script>
-    setTimeout(() => {
-      document.querySelector('li.active.filter[data-role="button"][data-filter=".all"]')?.click();
-    }, 2000);
-  </script>
+
 
 
   <!-- testimonial-section -->
