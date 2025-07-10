@@ -772,152 +772,142 @@
               const SUPABASE_URL = 'https://zmgfaiprgbawcernymqa.supabase.co';
               const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2ZhaXByZ2Jhd2Nlcm55bXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ2NTc0MjEsImV4cCI6MjA0MDIzMzQyMX0.sBq7sR7JhRZCg36xvt13yt_f398oWbHUfdUwa9yoox0';
               const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-              const params = new URLSearchParams(window.location.search);
-              if (params.has('post')) {
-                const postValue = parseInt(params.get('post'), 10)
-                if (!postValue) {
-                   // récupère l id du post dans :
-                  // <!-- Page Title -->
-                  // <section id="id-post-{{todo-db-id}}"
-                  const section = document.querySelector("section[id^='id-post-']");
-                  if (section) {
-                    const idValue = section.id.match(/\d+$/);
-                    const postValue = idValue ? parseInt(idValue[0], 10) : null;
-                    console.log(postValue);
-                  }
-                } else if (postValue && Number(postValue) > 0) {}
-                async function incrementVisite(postId) {
-                  postIdInt = parseInt(postId);
-                  const {data, error} = await supabaseClient
-                    .rpc('increment_visite', {post_id: postIdInt}) // Appelle la fonction avec l'ID du post
-                  if (error) {
-                    console.error('Erreur lors de l\'incrémentation :', error)
-                  } else {
-                    // console.log('Incrémentation réussie pour le post avec l\'ID 1 :', postIdInt)
-                    // console.log('Incrémentation réussie pour le post avec l\'ID 2 :', data)
-                  }
+              // récupère l id du post dans :
+              // <!-- Page Title -->
+              // <section id="id-post-{{todo-db-id}}"
+              const section = document.querySelector("section[id^='id-post-']");
+              const idValue = section.id.match(/\d+$/);
+              let postValue = idValue ? parseInt(idValue[0], 10) : null;
+              console.log('postValue = ' + postValue);
+
+              async function incrementVisite(postId) {
+                postIdInt = parseInt(postId);
+                const {data, error} = await supabaseClient
+                  .rpc('increment_visite', {post_id: postIdInt}) // Appelle la fonction avec l'ID du post
+                if (error) {
+                  console.error('Erreur lors de l\'incrémentation :', error)
                 }
-                fetchDataPostOne(postValue)
-                async function fetchDataPostOne(postValue) {
-                  datatJsonPostOne = '';
-                  const {data, error} = await supabaseClient
-                    .from('post')
-                    .select('*')
-                    .eq('id', parseInt(postValue))
-                    .neq('deleted', true)  // Exclut les entrées où deleted = true
-                    .neq('valid', false);
-                  if (data.length === 0) {
-                    window.location.href = "../jardinier-paysagiste-blogs.html";
-                  }
-                  if (error) {
-                    console.error('Erreur lors du fetch:', error);
-                  } else { setTimeout(() => {incrementVisite(postValue);}, 3000);
-                    dataJson = data;
-                    globalCurrentCategorie = dataJson[0].categorie;
-                    postIdToExclude = dataJson[0].id;
-                    await fetchDataPostBelow();
-                    await getCommentsByIDPOst(postIdToExclude);
-                    if(!dataJson[0].new_href || dataJson[0].new_href==='NULL' || dataJson[0].new_href.length < 6) {
-                      await getFaqById(postIdToExclude);
-                    }
-                    for (const dataJsonKey in dataJson) {
-                      datatJsonPostOne = dataJson[dataJsonKey]
-                      if (dataJson[dataJsonKey].audio) {
-                        setTimeout(() => {
-                          const player = new Plyr(`#player-${dataJson[dataJsonKey].id}`, {
-                            controls: ['play', 'progress', 'current-time', 'duration']
-                          });
-                        }, 100);
-                      }
-                    }
-                    setTimeout(() => {
-                      // console.log("Delayed for 1 second.");
-                      insertImagesIntoChapters(datatJsonPostOne.id)
-                      // adaptLienUrlArticleObjetOrString(datatJsonPostOne.lien_url_article)
-                      initializeVegetalElements();
-                      // Exemple d'insertion dans la page HTML :
-                      if(datatJsonPostOne.video && datatJsonPostOne.video.length > 15 && datatJsonPostOne.video.includes('youtube') && datatJsonPostOne.video!=='{"source":{}}') {
-                        document.getElementById('video-youtube').innerHTML = generateIframe(datatJsonPostOne.video, datatJsonPostOne.titre);
-                      }
-
-
-                    }, "1000");
-                  }
+              }
+              fetchDataPostOne(postValue)
+              async function fetchDataPostOne(postValue) {
+                datatJsonPostOne = '';
+                const {data, error} = await supabaseClient
+                  .from('post')
+                  .select('*')
+                  .eq('id', parseInt(postValue))
+                  .neq('deleted', true)  // Exclut les entrées où deleted = true
+                  .neq('valid', false);
+                if (data.length === 0) {
+                  window.location.href = "../jardinier-paysagiste-blogs.html";
                 }
-                function initializeVegetalElements() {
-                  const vegeElements = document.querySelectorAll('.inat-vegetal');
+                if (error) {
+                  console.error('Erreur lors du fetch:', error);
+                } else { setTimeout(() => {incrementVisite(postValue);}, 3000);
+                  dataJson = data;
+                  globalCurrentCategorie = dataJson[0].categorie;
+                  postIdToExclude = dataJson[0].id;
+                  await fetchDataPostBelow();
+                  await getCommentsByIDPOst(postIdToExclude);
+                  if(!dataJson[0].new_href || dataJson[0].new_href==='NULL' || dataJson[0].new_href.length < 6) {
+                    await getFaqById(postIdToExclude);
+                  }
+                  for (const dataJsonKey in dataJson) {
+                    datatJsonPostOne = dataJson[dataJsonKey]
+                    if (dataJson[dataJsonKey].audio) {
+                      setTimeout(() => {
+                        const player = new Plyr(`#player-${dataJson[dataJsonKey].id}`, {
+                          controls: ['play', 'progress', 'current-time', 'duration']
+                        });
+                      }, 100);
+                    }
+                  }
+                  setTimeout(() => {
+                    // console.log("Delayed for 1 second.");
+                    insertImagesIntoChapters(datatJsonPostOne.id)
+                    // adaptLienUrlArticleObjetOrString(datatJsonPostOne.lien_url_article)
+                    initializeVegetalElements();
+                    // Exemple d'insertion dans la page HTML :
+                    if(datatJsonPostOne.video && datatJsonPostOne.video.length > 15 && datatJsonPostOne.video.includes('youtube') && datatJsonPostOne.video!=='{"source":{}}') {
+                      document.getElementById('video-youtube').innerHTML = generateIframe(datatJsonPostOne.video, datatJsonPostOne.titre);
+                    }
 
-                  if (vegeElements.length === 0) {
-                    console.log("Pas encore d'éléments .inat-vegetal, nouvelle tentative dans 500ms");
-                    setTimeout(initializeVegetalElements, 500);
-                    return;
+
+                  }, "1000");
+                }
+              }
+              function initializeVegetalElements() {
+                const vegeElements = document.querySelectorAll('.inat-vegetal');
+
+                if (vegeElements.length === 0) {
+                  console.log("Pas encore d'éléments .inat-vegetal, nouvelle tentative dans 500ms");
+                  setTimeout(initializeVegetalElements, 500);
+                  return;
+                }
+
+                console.log(`${vegeElements.length} éléments .inat-vegetal trouvés, initialisation...`);
+
+                vegeElements.forEach(element => {
+                  const tooltip = element.querySelector('.inat-vegetal-tooltip');
+                  const img = tooltip?.querySelector('img');
+
+                  if (!tooltip || !img) return;
+
+                  // Évite d’ajouter plusieurs fois le nom si déjà présent
+                  if (!tooltip.querySelector('.taxon-name')) {
+                    const taxonName = element.getAttribute('data-taxon-name') || img.alt || 'Nom inconnu';
+
+                    const nameBox = document.createElement('div');
+                    nameBox.className = 'taxon-name';
+                    nameBox.textContent = taxonName;
+
+                    tooltip.appendChild(nameBox);
                   }
 
-                  console.log(`${vegeElements.length} éléments .inat-vegetal trouvés, initialisation...`);
+                  // Fonction pour ajuster la position du tooltip en fonction de la position de l'élément dans la fenêtre
+                  function adjustTooltipPosition() {
+                    const rect = element.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
 
-                  vegeElements.forEach(element => {
-                    const tooltip = element.querySelector('.inat-vegetal-tooltip');
-                    const img = tooltip?.querySelector('img');
-
-                    if (!tooltip || !img) return;
-
-                    // Évite d’ajouter plusieurs fois le nom si déjà présent
-                    if (!tooltip.querySelector('.taxon-name')) {
-                      const taxonName = element.getAttribute('data-taxon-name') || img.alt || 'Nom inconnu';
-
-                      const nameBox = document.createElement('div');
-                      nameBox.className = 'taxon-name';
-                      nameBox.textContent = taxonName;
-
-                      tooltip.appendChild(nameBox);
+                    // Si l'élément est proche du bas de la fenêtre, afficher le tooltip au-dessus
+                    if (rect.bottom > windowHeight / 1.5) {
+                      tooltip.classList.add('inat-vegetal-tooltip-above');
+                    } else {
+                      tooltip.classList.remove('inat-vegetal-tooltip-above');
                     }
+                  }
 
-                    // Fonction pour ajuster la position du tooltip en fonction de la position de l'élément dans la fenêtre
-                    function adjustTooltipPosition() {
-                      const rect = element.getBoundingClientRect();
-                      const windowHeight = window.innerHeight;
+                  // Ajuster la position du tooltip au chargement de la page et lors du défilement
+                  adjustTooltipPosition(); // Au chargement initial
+                  window.addEventListener('scroll', adjustTooltipPosition); // Lors du défilement de la page
 
-                      // Si l'élément est proche du bas de la fenêtre, afficher le tooltip au-dessus
-                      if (rect.bottom > windowHeight / 1.5) {
-                        tooltip.classList.add('inat-vegetal-tooltip-above');
-                      } else {
-                        tooltip.classList.remove('inat-vegetal-tooltip-above');
-                      }
+                  // Gestion desktop : afficher le tooltip au survol
+                  element.addEventListener('mouseenter', () => {
+                    if (window.innerWidth >= 768) {
+                      tooltip.style.display = 'block';
                     }
-
-                    // Ajuster la position du tooltip au chargement de la page et lors du défilement
-                    adjustTooltipPosition(); // Au chargement initial
-                    window.addEventListener('scroll', adjustTooltipPosition); // Lors du défilement de la page
-
-                    // Gestion desktop : afficher le tooltip au survol
-                    element.addEventListener('mouseenter', () => {
-                      if (window.innerWidth >= 768) {
-                        tooltip.style.display = 'block';
-                      }
-                    });
-
-                    element.addEventListener('mouseleave', () => {
-                      if (window.innerWidth >= 768) {
-                        tooltip.style.display = 'none';
-                      }
-                    });
-
-                    // Gestion mobile : toggle
-                    element.addEventListener('click', (e) => {
-                      if (window.innerWidth < 768) {
-                        e.preventDefault();
-                        element.classList.toggle('active');
-                      }
-                    });
                   });
 
-                  // Fermer les tooltips si clic hors de l'élément
-                  document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.inat-vegetal')) {
-                      document.querySelectorAll('.inat-vegetal.active').forEach(el => el.classList.remove('active'));
+                  element.addEventListener('mouseleave', () => {
+                    if (window.innerWidth >= 768) {
+                      tooltip.style.display = 'none';
                     }
                   });
-                }
+
+                  // Gestion mobile : toggle
+                  element.addEventListener('click', (e) => {
+                    if (window.innerWidth < 768) {
+                      e.preventDefault();
+                      element.classList.toggle('active');
+                    }
+                  });
+                });
+
+                // Fermer les tooltips si clic hors de l'élément
+                document.addEventListener('click', (e) => {
+                  if (!e.target.closest('.inat-vegetal')) {
+                    document.querySelectorAll('.inat-vegetal.active').forEach(el => el.classList.remove('active'));
+                  }
+                });
               }
               async function insertLink_to_serviceAfterParagraphe() {
                 try {
@@ -1373,7 +1363,7 @@
               }
               function getOldHrefAndSetNewHref(newHref, id) {
                 if (newHref && newHref!=='NULL' && newHref.length > 10) {
-                  return 'jardinier-paysagiste-belgique-blog/'+newHref+'.html?post='+id;
+                  return 'jardinier-paysagiste-belgique-blog/'+newHref+'.html';
                 } else {
                   return 'blog-detail.html?post='+id;
                 }

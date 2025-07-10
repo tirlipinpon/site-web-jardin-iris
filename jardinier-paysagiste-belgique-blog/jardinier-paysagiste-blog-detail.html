@@ -583,7 +583,7 @@
         <!--  //TODO: remplir balise <h1> avec titre SEO -->
         <h1 class="d_block fs_70 lh_70 mb_20 color_white">{{todo-db-titre}}</h1>
         <!--  //TODO: remplir balise <p> avec sous titre SEO -->
-        <p class="d_block fs_20 lh_30 color_white">{{todo-db-phrase_accroche}}</p>
+        <h2 class="d_block fs_20 lh_30 color_white">{{todo-db-phrase_accroche}}</h2>
       </div>
     </div>
   </section>
@@ -755,13 +755,13 @@
               const SUPABASE_URL = 'https://zmgfaiprgbawcernymqa.supabase.co';
               const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2ZhaXByZ2Jhd2Nlcm55bXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ2NTc0MjEsImV4cCI6MjA0MDIzMzQyMX0.sBq7sR7JhRZCg36xvt13yt_f398oWbHUfdUwa9yoox0';
               const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-              const params = new URLSearchParams(window.location.search);
+
                    // récupère l id du post dans :
                   // <!-- Page Title -->
                   // <section id="id-post-{{todo-db-id}}"
                 const section = document.querySelector("section[id^='id-post-']");
                 const idValue = section.id.match(/\d+$/);
-                postValue = idValue ? parseInt(idValue[0], 10) : null;
+                let postValue = idValue ? parseInt(idValue[0], 10) : null;
                 console.log('postValue = ' + postValue);
 
                 async function incrementVisite(postId) {
@@ -1419,7 +1419,7 @@
           <section>
             <div class="content-box p_relative d_block mb_100">
               <div class="sec-title mb_15">
-                <h2>F.A.Q.</h2>
+                <p>Réponses aux questions les plus posées</p>
               </div>
               <ul id="accordion-box" class="accordion-box">
                 <!-- FAQ MAKE REPLACE -->

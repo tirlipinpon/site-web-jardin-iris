@@ -81,6 +81,74 @@
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Project",
+      "name": "Plantation d'un jardin situé avenue louise d'une maison Horta à Bruxelles",
+      "description": "Création colorée pour la préparation à une exposition dans les écuries de l'Hôtel Solvay",
+      "url": "https://www.jardin-iris.be/jardinier-paysagiste-projet/creation-jardin-avenue-louise.html",
+      "image": [
+        "https://www.jardin-iris.be/assets/images/projet/creation-jardin-avenue-louise/petit-jardin/f01.jpg",
+        "https://www.jardin-iris.be/assets/images/projet/creation-jardin-avenue-louise/petit-jardin/f02.jpg"
+      ],
+      "about": {
+        "@type": "Thing",
+        "name": "Jardin urbain, aménagement paysager, jardin écologique"
+      },
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Jardin Iris",
+        "url": "https://www.jardin-iris.be",
+        "telephone": "+32 497 40 12 72",
+        "email": "contact@jardin-iris.be",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bruxelles",
+          "addressCountry": "BE"
+        },
+        "logo": "https://www.jardin-iris.be/assets/images/logo.png"
+      },
+      "hasPart": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Quel est le rôle d'un ver de terre ? : Les Ingénieurs Cachés de Votre Jardin",
+          "datePublished": "2025-07-06",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-bruxelles-vers-terre-ingenieurs-caches-jardin.html"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Comment bien arroser les plantes en pot ? : techniques et astuces",
+          "datePublished": "2025-07-06",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-arrosage-plantes-pot-techniques-astuces.html"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Comment arroser en période de canicule ?",
+          "datePublished": "2025-07-05",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-art-subtil-arrosage-economiser-eau-potager.html"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Quel légume planter en juillet et août ?",
+          "datePublished": "2025-07-04",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-optimiser-potager-bruxellois-ete-recoltes-automne.html"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Quels sont les meilleurs parcs de Bruxelles ?",
+          "datePublished": "2025-07-03",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-tresors-verts-caches-bruxelles.html"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Jardinage à Bruxelles : Survivre à la Sécheresse avec Style",
+          "datePublished": "2025-06-29",
+          "url": "https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-survivre-secheresse-style.html"
+        }
+      ]
+    }
+  </script>
 
 </head>
 <!-- page wrapper -->
@@ -511,7 +579,7 @@
 
       data.forEach(post => {
         const newHref = post.new_href && post.new_href !== 'NULL'
-          ? `jardinier-paysagiste-belgique-blog/${post.new_href}.html?post=${post.id}`
+          ? `jardinier-paysagiste-belgique-blog/${post.new_href}.html`
           : `blog-detail.html?post=${post.id}`;
 
         const item = document.createElement("div");

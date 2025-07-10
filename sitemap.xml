@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.jardin-iris.be/</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-projet/creation-jardin-etterbeek.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-projet/creation-jardin-avenue-louise.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-projet/jardinier-bruxelles-potager.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/creation-amenagement-de-jardin.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/culture-potagere.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/elagage-abatage-d-arbre.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/entretien-de-jardin.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/plantations.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/taille-de-haie.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/tonte-de-pelouse.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/travaux-de-terrassement.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-contact.html</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -636,4 +636,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-arrosage-plantes-pot-techniques-astuces.html</loc>
+  <lastmod>2025-07-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/jardinier-bruxelles-vers-terre-ingenieurs-caches-jardin.html</loc>
+  <lastmod>2025-07-06</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
 </urlset>
