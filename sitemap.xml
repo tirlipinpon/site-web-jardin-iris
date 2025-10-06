@@ -79,6 +79,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.jardin-iris.be/jardinier-paysagiste-service/robot-tondeuse-installation-reparation.html</loc>
+    <lastmod>2025-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.jardin-iris.be/jardinier-paysagiste-contact.html</loc>
     <lastmod>2025-07-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -693,6 +699,42 @@
 <url>
   <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-jardin-propre-sans-effort.html</loc>
   <lastmod>2025-07-15</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-loi-bruxelloise-plantation-elagage-arbres.html</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-plantes-invasives-interdites-etterbeek.html</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-robot-tondeuse-revolutionner-jardin.html</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-jardiner-sans-pesticides-apres-2025.html</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-bruxelles-creer-haie-libre-ecologique.html</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://www.jardin-iris.be/jardinier-paysagiste-belgique-blog/entreprise-jardinage-vegetaliser-bruxelles-projets-citoyens.html</loc>
+  <lastmod>2025-08-26</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.6</priority>
 </url>
