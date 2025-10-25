@@ -2397,6 +2397,268 @@
 <!-- main-js -->
 <script src="../assets/js/script.js" defer></script>
 
+<script>
+// Script pour déplacer les widgets en haut sur mobile
+document.addEventListener('DOMContentLoaded', function() {
+    function moveWidgetsOnMobile() {
+        const searchWidget = document.querySelector('.search-widget');
+        const archivesWidget = document.querySelector('.category-widget.archives-widget');
+        const contentSide = document.querySelector('.content-side');
+        const sidebarSide = document.querySelector('.sidebar-side');
+        const row = document.querySelector('.row.clearfix');
+        
+        if (!searchWidget || !archivesWidget || !contentSide || !sidebarSide || !row) return;
+        
+        // Vérifier si on est sur mobile (largeur < 992px)
+        if (window.innerWidth < 992) {
+            // Gérer le search-widget
+            if (searchWidget.parentNode === sidebarSide.querySelector('.blog-sidebar')) {
+                let mobileSearchContainer = document.getElementById('mobile-search-container');
+                if (!mobileSearchContainer) {
+                    mobileSearchContainer = document.createElement('div');
+                    mobileSearchContainer.id = 'mobile-search-container';
+                    mobileSearchContainer.className = 'col-12 mb-3';
+                    mobileSearchContainer.style.cssText = `
+                        background: white;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        border-radius: 5px;
+                        padding: 20px;
+                    `;
+                }
+                row.insertBefore(mobileSearchContainer, contentSide);
+                mobileSearchContainer.innerHTML = '';
+                
+                // Retirer les classes de padding et margin du search-widget sur mobile
+                searchWidget.classList.remove('mb_50', 'pt_30', 'pr_40', 'pb_40', 'pl_40');
+                
+                mobileSearchContainer.appendChild(searchWidget);
+                contentSide.style.marginTop = '';
+            }
+            
+            // Gérer le widget archives
+            if (archivesWidget.parentNode === sidebarSide.querySelector('.blog-sidebar')) {
+                // Masquer le widget original sur mobile
+                archivesWidget.style.display = 'none';
+                let mobileArchivesContainer = document.getElementById('mobile-archives-container');
+                if (!mobileArchivesContainer) {
+                    mobileArchivesContainer = document.createElement('div');
+                    mobileArchivesContainer.id = 'mobile-archives-container';
+                    mobileArchivesContainer.className = 'col-12 mb-3';
+                    mobileArchivesContainer.style.cssText = `
+                        background: white;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        border-radius: 5px;
+                        padding: 20px;
+                    `;
+                }
+                
+                // Insérer après le search-widget
+                const searchContainer = document.getElementById('mobile-search-container');
+                if (searchContainer) {
+                    searchContainer.insertAdjacentElement('afterend', mobileArchivesContainer);
+                } else {
+                    row.insertBefore(mobileArchivesContainer, contentSide);
+                }
+                
+                // Créer l'interface avec dropdown simple
+                mobileArchivesContainer.innerHTML = `
+                    <div class="mobile-archives-widget">
+                        <button class="archives-toggle-btn" style="
+                            width: 100%;
+                            padding: 15px;
+                            border: none;
+                            background: #f8f9fa;
+                            border-radius: 8px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            transition: all 0.3s ease;
+                        ">
+                            <span>📁 Archives</span>
+                            <span class="toggle-icon" style="transition: transform 0.3s ease;">▼</span>
+                        </button>
+                        <div class="archives-content" style="
+                            display: none;
+                            margin-top: 15px;
+                            padding-top: 15px;
+                            border-top: 1px solid #e9ecef;
+                        ">
+                            <div class="archives-list" style="
+                                max-height: 200px;
+                                overflow-y: auto;
+                                padding-right: 10px;
+                            "></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Copier le contenu original COMPLET avec tous les événements
+                const originalArchivesList = archivesWidget.querySelector('.category-list');
+                if (originalArchivesList) {
+                    // Cloner le contenu avec tous les événements
+                    const clonedList = originalArchivesList.cloneNode(true);
+                    mobileArchivesContainer.querySelector('.archives-list').appendChild(clonedList);
+                }
+                
+                // Gérer le toggle
+                const toggleBtn = mobileArchivesContainer.querySelector('.archives-toggle-btn');
+                const archivesContent = mobileArchivesContainer.querySelector('.archives-content');
+                const toggleIcon = mobileArchivesContainer.querySelector('.toggle-icon');
+                
+                toggleBtn.addEventListener('click', function() {
+                    const isOpen = archivesContent.style.display !== 'none';
+                    archivesContent.style.display = isOpen ? 'none' : 'block';
+                    toggleIcon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+                    
+                    // Si on ouvre, s'assurer que les favoris sont à jour
+                    if (!isOpen) {
+                        updateFavoritesInMobile();
+                    }
+                });
+                
+                // Fonction pour mettre à jour les favoris dans le mobile
+                function updateFavoritesInMobile() {
+                    const originalFavorites = archivesWidget.querySelector('#count-ids-li');
+                    if (originalFavorites) {
+                        const mobileFavorites = mobileArchivesContainer.querySelector('#count-ids-li');
+                        if (mobileFavorites) {
+                            // Mettre à jour le contenu existant
+                            mobileFavorites.innerHTML = originalFavorites.innerHTML;
+                            
+                            // Recréer l'événement onclick après la mise à jour
+                            const favoriteLink = mobileFavorites.querySelector('#count-ids');
+                            if (favoriteLink) {
+                                // Supprimer le href pour éviter la redirection
+                                favoriteLink.removeAttribute('href');
+                                favoriteLink.onclick = function(event) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    const cookies = getCookies();
+                                    let idsCurrent = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+                                    fetchDataPostMini('', idsCurrent);
+                                    $('html, body').animate({
+                                        scrollTop: $('#postWidget').offset().top - 100
+                                    }, 500);
+                                    setTimeout(() => {
+                                        document.getElementById('currentMonthYear').textContent = "Favoris ";
+                                    }, "800");
+                                    return false;
+                                };
+                            }
+                        } else {
+                            // Créer les favoris s'ils n'existent pas
+                            const clonedFavorites = originalFavorites.cloneNode(true);
+                            
+                            // Recréer l'événement onclick pour les favoris
+                            const favoriteLink = clonedFavorites.querySelector('#count-ids');
+                            if (favoriteLink) {
+                                // Supprimer le href pour éviter la redirection
+                                favoriteLink.removeAttribute('href');
+                                favoriteLink.onclick = function(event) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    const cookies = getCookies();
+                                    let idsCurrent = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+                                    fetchDataPostMini('', idsCurrent);
+                                    $('html, body').animate({
+                                        scrollTop: $('#postWidget').offset().top - 100
+                                    }, 500);
+                                    setTimeout(() => {
+                                        document.getElementById('currentMonthYear').textContent = "Favoris ";
+                                    }, "800");
+                                    return false;
+                                };
+                            }
+                            
+                            const firstChild = mobileArchivesContainer.querySelector('.archives-list').firstChild;
+                            if (firstChild) {
+                                mobileArchivesContainer.querySelector('.archives-list').insertBefore(clonedFavorites, firstChild);
+                            } else {
+                                mobileArchivesContainer.querySelector('.archives-list').appendChild(clonedFavorites);
+                            }
+                        }
+                    } else {
+                        // Si les favoris n'existent plus dans l'original, les supprimer du mobile
+                        const mobileFavorites = mobileArchivesContainer.querySelector('#count-ids-li');
+                        if (mobileFavorites) {
+                            mobileFavorites.remove();
+                        }
+                    }
+                }
+                
+                // Observer les changements dans la sidebar originale pour synchroniser
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                            updateFavoritesInMobile();
+                        }
+                    });
+                });
+                
+                // Observer la sidebar originale
+                const originalContainer = sidebarSide.querySelector('.blog-sidebar');
+                if (originalContainer) {
+                    observer.observe(originalContainer, {
+                        childList: true,
+                        subtree: true,
+                        characterData: true
+                    });
+                }
+            }
+        } else {
+            // Sur desktop, remettre les widgets dans la sidebar
+            const originalContainer = sidebarSide.querySelector('.blog-sidebar');
+            
+            if (originalContainer && searchWidget.parentNode !== originalContainer) {
+                // Remettre les classes originales du search-widget sur desktop
+                searchWidget.classList.add('mb_50', 'pt_30', 'pr_40', 'pb_40', 'pl_40');
+                
+                const firstChild = originalContainer.firstChild;
+                if (firstChild) {
+                    originalContainer.insertBefore(searchWidget, firstChild);
+                } else {
+                    originalContainer.appendChild(searchWidget);
+                }
+            }
+            
+            if (originalContainer && archivesWidget.parentNode !== originalContainer) {
+                const searchWidgetInSidebar = originalContainer.querySelector('.search-widget');
+                if (searchWidgetInSidebar) {
+                    searchWidgetInSidebar.insertAdjacentElement('afterend', archivesWidget);
+                } else {
+                    const firstChild = originalContainer.firstChild;
+                    if (firstChild) {
+                        originalContainer.insertBefore(archivesWidget, firstChild);
+                    } else {
+                        originalContainer.appendChild(archivesWidget);
+                    }
+                }
+            }
+            
+            // Remettre le widget archives visible sur desktop
+            if (archivesWidget) {
+                archivesWidget.style.display = '';
+            }
+            
+            // Supprimer les conteneurs mobile
+            const mobileSearchContainer = document.getElementById('mobile-search-container');
+            const mobileArchivesContainer = document.getElementById('mobile-archives-container');
+            if (mobileSearchContainer) mobileSearchContainer.remove();
+            if (mobileArchivesContainer) mobileArchivesContainer.remove();
+        }
+    }
+    
+    // Exécuter au chargement
+    moveWidgetsOnMobile();
+    
+    // Exécuter lors du redimensionnement
+    window.addEventListener('resize', moveWidgetsOnMobile);
+});
+</script>
+
 </body><!-- End of .page_wrapper -->
 </html>
 
