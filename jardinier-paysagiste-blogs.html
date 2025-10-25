@@ -998,6 +998,8 @@
                 async function fetchDataPaginationInfinite() {
                   let totalPages;
                   
+                  console.log('fetchDataPaginationInfinite appelée - currentSelectedCategory:', currentSelectedCategory);
+                  
                   // Vérifier le tri actuel
                   const currentSelection = document.getElementById('current-selection');
                   const currentSort = currentSelection ? currentSelection.getAttribute('data-sort') : 'created_at';
@@ -1014,6 +1016,7 @@
 
                     // Si une catégorie est sélectionnée, filtrer
                     if (currentSelectedCategory) {
+                      console.log('Pagination audio - Catégorie sélectionnée:', currentSelectedCategory);
                       countQuery = countQuery.eq('categorie', currentSelectedCategory);
                     }
 
@@ -1037,10 +1040,12 @@
 
                     // Si une catégorie est sélectionnée, filtrer
                     if (currentSelectedCategory) {
+                      console.log('Pagination normale - Catégorie sélectionnée:', currentSelectedCategory);
                       countQuery = countQuery.eq('categorie', currentSelectedCategory);
                     }
 
                     const {count, error: countError} = await countQuery;
+                    console.log('Nombre total d\'articles trouvés:', count);
 
                     if (countError) {
                       console.error("Erreur lors du comptage:", countError);
@@ -1048,6 +1053,7 @@
                     }
 
                     totalPages = Math.ceil(count / globalPageSizeInfinite);
+                    console.log('Nombre total de pages calculé:', totalPages, '(articles:', count, ', par page:', globalPageSizeInfinite, ')');
                   }
                   
                   // Générer les boutons de pagination
