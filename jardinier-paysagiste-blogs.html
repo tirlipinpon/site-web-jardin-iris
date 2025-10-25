@@ -67,17 +67,6 @@
   </script>
   <script> window.chtlConfig = { chatbotId: "6424574229" } </script>
   <script async data-id="6424574229" id="chatling-embed-script" src="https://chatling.ai/js/embed.js"></script>
-<!-- Hotjar Tracking Code for https://www.jardin-iris.be -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:6435492,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
 
 </head>
 
@@ -297,8 +286,8 @@
       const sidebarPageContainer = document.getElementById('sidebar-page-container');
       const infiniteNewsContainer = document.getElementById('infinite-news-container');
       
-      // Afficher uniquement la vue grille au chargement
-      setCookieGridViewButton('view', 'grid', 30);
+      // Vue grille par défaut (plus de choix de vue)
+      
       globalCurrentCategorie = "";
       proxy.value = "tous";
       
@@ -507,173 +496,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
           <div class="blog-sidebar default-sidebar ml_20">
 
-            <div class="search-widget sidebar-widget p_relative d_block mb_50 pt_30 pr_40 pb_40 pl_40 b_radius_5">
-              <div class="search-inner">
-                <form id="search-form" class="default-form">
-                  <div class="form-group p_relative mr-0">
-                    <input type="search" id="search-field" name="search-field" minlength="3" placeholder="Recherche par mots clefs" required="">
-                    <div id="dropdownContainer" class="dropdown" style="position: relative;">
-                      <div id="dropdownResults" class="dropdown-content" style="position: absolute; background-color: white; border: 1px solid #ccc; display: none; width: 100%; overflow-y: auto; z-index: 1;"></div>
-                    </div>
-                    <button id="loadMoreButton" style="display: none;">Charger plus de résultats</button>
-
-                  </div>
-                </form>
-              </div>
-            </div>
             <script>
-              let currentPage = 0;
-              const pageSize = 10;
-              let currentQuery = '';
-              let newHrefFolder  = 'jardinier-paysagiste-belgique-blog';
-
-              async function searchArticlesDropDown(query, page = 0) {
-                const { data, error } = await supabaseClient
-                  .from('post')
-                  .select('id, titre')
-                  .or(`titre.ilike.%${query}%, article.ilike.%${query}%`)
-                  .range(page * pageSize, (page + 1) * pageSize - 1);
-
-                if (error) {
-                  console.error("Erreur lors de la recherche :", error.message);
-                  return [];
-                }
-
-                return data;
-              }
-
-              let debounceTimeout;
-              function debounceDropDown(func, delay) {
-                return (...args) => {
-                  clearTimeout(debounceTimeout);
-                  debounceTimeout = setTimeout(() => func(...args), delay);
-                };
-              }
-
-              document.getElementById('search-field').addEventListener(
-                'input',
-                debounceDropDown(async (event) => {
-                  currentQuery = event.target.value.trim();
-                  currentPage = 0;
-
-                  if (currentQuery === '') {
-                    document.getElementById('dropdownResults').style.display = 'none';
-                    return;
-                  }
-
-                  const results = await searchArticlesDropDown(currentQuery, currentPage);
-                  displayDropdownResults(results, true);
-                }, 300)
-              );
-
-              function displayDropdownResults(results, clear = false) {
-                const dropdownResults = document.getElementById('dropdownResults');
-
-                if (clear) dropdownResults.innerHTML = '';
-
-                if (results.length === 0 && currentPage === 0) {
-                  dropdownResults.innerHTML = '<div>Aucun résultat trouvé</div>';
-                  dropdownResults.style.display = 'block';
-                  return;
-                }
-
-                results.forEach(article => {
-                  const articleElement = document.createElement('div');
-                  articleElement.innerHTML = `<a href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}">${article.titre}</a>`;
-                  articleElement.onclick = () => {
-                    document.getElementById('search-field').value = article.title;
-                    dropdownResults.style.display = 'none'; // Cache le dropdown après sélection
-                  };
-                  dropdownResults.appendChild(articleElement);
-                });
-
-                // Affiche le dropdown uniquement si des résultats sont trouvés
-                dropdownResults.style.display = results.length > 0 ? 'block' : 'none';
-              }
-
-              // Gérer le clic en dehors du dropdown pour le fermer
-              document.addEventListener('click', (event) => {
-                const searchField = document.getElementById('search-field');
-                const dropdownResults = document.getElementById('dropdownResults');
-                if (!searchField.contains(event.target) && !dropdownResults.contains(event.target)) {
-                  dropdownResults.style.display = 'none';
-                }
-              });
-
-              document.getElementById('loadMoreButton').addEventListener('click', async () => {
-                currentPage += 1;
-                const results = await searchArticlesDropDown(currentQuery, currentPage);
-                displayDropdownResults(results, false);
-              });
-
-              document.getElementById('search-field').addEventListener('input', debounce(async function (event) {
-                const searchTerm = event.target.value.trim();
-
-                // Vérifie que le champ de recherche a au moins 3 lettres
-                if (searchTerm.length === 0) {
-                  globalPageSize = 3
-                  fetchData(1);
-                  fetchDataPagination()
-                  return;
-                } else if(searchTerm.length !== 0 && searchTerm.length < 4) {
-                  return;
-                }
-
-                try {
-                  // Appel de la fonction searchArticles avec le terme de recherche
-                  const articles = await searchArticles(searchTerm);
-
-                  // Sélectionne l'élément pour afficher les résultats
-                  const resultsContainer = document.getElementById('search-field');
-                  resultsContainer.innerHTML = ''; // Vide les résultats précédents
-
-                  // Vérifie si des articles ont été trouvés
-                  if (articles.length === 0) {
-                    resultsContainer.innerHTML = '<p>Aucun résultat trouvé.</p>';
-                    $("#containerBlogs").empty();
-                    $("#containerPagination").empty();
-                    return;
-                  } else {
-                    // Affiche les résultats de la recherche
-                    $("#containerBlogs").empty();
-                    $("#containerPagination").empty();
-                    globalPageSize = articles.length
-                    fetchData(1, articles);
-
-                  }
-                } catch (error) {
-                  console.error('Erreur lors de la recherche:', error);
-                  alert('Une erreur est survenue lors de la recherche.');
-                }
-              }, 1000)); // 300 millisecondes de délai pour le debounce
-
-              function debounce(func, delay) {
-                let timer;
-                return function (...args) {
-                  clearTimeout(timer);
-                  timer = setTimeout(() => func.apply(this, args), delay);
-                };
-              }
-
-              async function searchArticles(term) {
-                // Effectue une requête pour obtenir seulement les ID des posts
-                const {data, error} = await supabaseClient
-                  .from('post')
-                  .select('id') // Sélectionne uniquement les IDs
-                  .neq('deleted', true)  // Exclut les entrées où deleted = true
-                  .neq('valid', false)
-                  .textSearch('article', term, {
-                    config: 'french', // Utilise la configuration linguistique pour le français
-                    type: 'plain'     // Utilise plainto_tsquery pour une recherche simple
-                  });
-
-                if (error) {
-                  console.error('Erreur lors de la recherche:', error);
-                  return [];
-                }
-                return data.map(post => post.id); // Retourne seulement les IDs
-              }
-
               function getOldHrefAndSetNewHref(newHref, id) {
                 if (newHref && newHref!=='NULL' && newHref.length > 10) {
                   return 'jardinier-paysagiste-belgique-blog/'+newHref+'.html';
@@ -681,8 +504,8 @@
                   return 'blog-detail.html?post='+id;
                 }
               }
-
             </script>
+
 
             <div class="category-widget sidebar-widget p_relative d_block pt_30 pr_40 pb_12 pl_40 b_radius_5 mb_50">
               <div class="widget-title p_relative d_block">
@@ -1222,6 +1045,11 @@
                   };
                 }
 
+                // Fonction pour normaliser les caractères spéciaux (enlever les accents)
+                function normalizeText(text) {
+                    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                }
+
                 // Fonction pour récupérer les titres et le contenu limité à 300 mots
                 async function fetchMatchingTitles(query) {
                   const { data, error } = await supabaseClient
@@ -1234,10 +1062,12 @@
                   }
 
                   const matchingTitles = new Map();
-                  const queryWords = query.toLowerCase().split(/\s+/);
+                  const normalizedQuery = normalizeText(query.toLowerCase());
+                  const queryWords = normalizedQuery.split(/\s+/);
 
                   data.forEach(article => {
-                    const titleWords = article.titre.toLowerCase().split(/\s+/);
+                    const normalizedTitle = normalizeText(article.titre.toLowerCase());
+                    const titleWords = normalizedTitle.split(/\s+/);
                     let matchIndex = 0;
 
                     for (let i = 0; i < titleWords.length; i++) {
@@ -1274,7 +1104,9 @@
                     const item = document.createElement('div');
                     item.classList.add('autocomplete-item-infinite');
 
-                    const regex = new RegExp(`(${query})`, 'i');
+                    // Normaliser la requête pour le highlighting
+                    const normalizedQuery = normalizeText(query);
+                    const regex = new RegExp(`(${normalizedQuery})`, 'i');
                     const highlightedText = displayTitle.replace(regex, `<strong>$1</strong>`);
 
                     const link = document.createElement('a');

@@ -2142,6 +2142,11 @@
 
             let debounceTimeoutInfinite;
 
+            // Fonction pour normaliser les caractères spéciaux (enlever les accents)
+            function normalizeText(text) {
+                return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            }
+
             // Fonction pour extraire les titres et le contenu limité à 300 mots
             async function fetchMatchingTitles(queryInfinite) {
               console.log("Recherche de titres pour la requête :", queryInfinite);
@@ -2155,8 +2160,11 @@
               }
 
               const titlesMapInfinite = new Map();
+              const normalizedQuery = normalizeText(queryInfinite.toLowerCase());
+              
               data.forEach(article => {
-                if (article.titre.toLowerCase().includes(queryInfinite.toLowerCase())) {
+                const normalizedTitle = normalizeText(article.titre.toLowerCase());
+                if (normalizedTitle.includes(normalizedQuery)) {
                   const contentPreview = article.article.split(' ').slice(0, 300).join(' ');
                   titlesMapInfinite.set(article.titre, {id: article.id, contentPreview, new_href: article.new_href});
                 }
@@ -2200,7 +2208,9 @@
                 const itemInfinite = document.createElement('div');
                 itemInfinite.classList.add('autocomplete-item-infinite');
 
-                const regexInfinite = new RegExp(`(${queryInfinite})`, 'gi');
+                // Normaliser la requête pour le highlighting
+                const normalizedQuery = normalizeText(queryInfinite);
+                const regexInfinite = new RegExp(`(${normalizedQuery})`, 'gi');
                 const highlightedTitleInfinite = title.replace(regexInfinite, `<strong>$1</strong>`);
 
                 const linkInfinite = document.createElement('a');
