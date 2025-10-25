@@ -44,13 +44,16 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="assets/css/responsive.css" rel="stylesheet">
+  <link href="assets/css/blogs-custom.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
   <!--  supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- Cookies handler -->
+  <script src="assets/js/cookies-handler.js"></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-741K1XCCSV">
@@ -62,108 +65,6 @@
 
     gtag('config', 'G-741K1XCCSV');
   </script>
-  <style>
-    .grid-view,
-    .list-view {
-      transition: background-color 0.3s, color 0.3s;
-      cursor: pointer;
-      font-size: 28px;
-      padding: 10px;
-      margin: 20px 0 20px 15px;
-    }
-
-    .grid-view:hover,
-    .list-view:hover {
-      background-color: #ddd; /* Couleur de fond au survol */
-      color: #312f2f; /* Couleur du texte au survol */
-    }
-
-    .grid-view.active,
-    .list-view.active {
-      background-color: rgba(47, 121, 85, 0.9); /* Couleur de fond pour le bouton sélectionné */
-      color: #fff; /* Couleur du texte pour le bouton sélectionné */
-    }
-  /*  autocomplete infinite */
-    .autocomplete-container-infinite {
-      position: relative;
-      width: 100%;
-    }
-
-    /* Style pour que le dropdown occupe toute la hauteur de la page */
-    .autocomplete-dropdown-infinite {
-      position: absolute;
-      top: 100%; /* Position en-dessous de l'input */
-      left: 0;
-      right: 0;
-      max-height: calc(100vh - 50px); /* Ajuste la hauteur pour qu'il occupe presque tout l'écran */
-      overflow-y: auto; /* Permet un défilement si le contenu dépasse la hauteur de l'écran */
-      z-index: 1000;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    /* Style pour les éléments individuels dans le dropdown */
-    .autocomplete-item-infinite {
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    /* Mise en forme sur le survol */
-    .autocomplete-item-infinite:hover {
-      background-color: #f0f0f0;
-    }
-
-  /*  drop down search-field */
-    .dropdown-content div {
-      padding: 8px 16px;
-      cursor: pointer;
-    }
-
-    .dropdown-content div:hover {
-      background-color: #f1f1f1;
-    }
-
-  /* phylactere search field infinite  */
-    /* Style pour le phylactère */
-    .phylactere {
-      position: absolute;
-      max-width: 600px;
-      width: 600px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      line-height: 1; /* Supprime les espaces entre les lignes */
-      white-space: normal;
-      word-wrap: break-word;
-      z-index: 1000;
-      display: none;
-    }
-
-    .phylactere::after {
-      content: "";
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent transparent #333 transparent;
-    }
-
-
-      .resizeHeight {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border: 3px solid grey;
-        padding: 1px;
-      }
-
-  </style>
   <script> window.chtlConfig = { chatbotId: "6424574229" } </script>
   <script async data-id="6424574229" id="chatling-embed-script" src="https://chatling.ai/js/embed.js"></script>
 <!-- Hotjar Tracking Code for https://www.jardin-iris.be -->
@@ -375,20 +276,7 @@
   <!-- End Page Title -->
 
 
-  <!-- design-select-container -->
-  <section id="design-select-container" class="sidebar-page-container p_relative blog-classic">
-    <div class="auto-container">
-      <div class="row clearfix">
-        <div class="btn-box float_left p_relative clearfix">
-          <button id="listViewButton" class="list-view p_relative d_iblock fs_20 b_radius_5 centred active"><i
-            class="icon-27"></i></button>
-          <button id="gridViewButton" class="grid-view p_relative d_iblock fs_20 b_radius_5 mr_2 centred"><i
-            class="icon-26"></i></button>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--  cookie handler -->
+  <!--  view handler -->
   <script>
     function dateHelperFormat(dateNotFormated) {
       // La date au format ISO
@@ -403,189 +291,30 @@
       var formattedDate = day + "-" + month + "-" + year;
       return formattedDate;
     }
-    // Fonction pour obtenir les cookies sous forme d'objet
-    function getCookies() {
-      const cookies = {};
-      document.cookie.split(';').forEach(cookie => {
-        const [name, value] = cookie.split('=');
-        cookies[name.trim()] = value ? decodeURIComponent(value.trim()) : '';
-      });
-      console.log('Contenu de cookies:', cookies); // Affiche le contenu de la constante cookies
-      return cookies;
-    }
-
-    // Fonction pour enregistrer des cookies
-    function setCookie(name, value, days) {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
-    }
-
-    // Fonction pour ajouter ou retirer un ID de la liste dans le cookie
-    function toggleIdInCookie(id) {
-      const cookies = getCookies();
-      let ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
-
-      if (ids.includes(id)) {
-        // Retirer l'ID du cookie
-        ids = ids.filter(item => item !== id);
-        setCookie('clicked_ids', JSON.stringify(ids), 7);
-        console.log(`cookie desactive = ` + id + ' A la liste = ' + JSON.stringify(ids));
-        return false; // Indique que l'élément a été désactivé
-      } else {
-        // Ajouter l'ID au cookie
-        ids.push(id);
-        setCookie('clicked_ids', JSON.stringify(ids), 7);
-        console.log(`cookie Ajouter l'ID au cookie = ` + id + ' A la liste = ' + JSON.stringify(ids));
-        return true; // Indique que l'élément a été activé
-      }
-    }
-
-    // Fonction pour marquer ou démarrer les éléments en fonction des cookies
-    function markItems() {
-      const cookies = getCookies();
-      const ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
-      ids.forEach(id => {
-        const item = document.getElementById(id);
-        if (item) {
-          item.querySelector('i').classList.add('heart-active');
-          console.log(`cookie markItems= ` + id);
-        }
-      });
-    }
-
-    // Gestion des clics sur les éléments avec la classe 'track-click'
-    // Marquer les éléments au chargement de la page
-    // Objet pour stocker les références des gestionnaires d'événements
-    const eventListenersMap = new Map();
-
-    // Fonction pour ajouter des gestionnaires d'événements
-    function markItemsClickToggle() {
-      document.querySelectorAll('li.track-click').forEach(li => {
-        // Définir une fonction de gestion d'événement pour le 'click'
-        const clickHandler = () => {
-          const id = li.id;
-          const isActive = toggleIdInCookie(id);
-          const icon = li.querySelector('i');
-          if (isActive) {
-            icon.classList.add('heart-active');
-            icon.classList.add('heart-clicked');
-            console.log(`click cookie toggle active 1`);
-            // Retirer la classe 'heart-clicked' après l'animation
-            setTimeout(() => {
-              icon.classList.remove('heart-clicked');
-            }, 300); // Correspond à la durée de l'animation
-          } else {
-            icon.classList.remove('heart-active');
-            console.log(`click cookie toggle active 2`);
-          }
-          updateFavorisCountListView();
-          updateListWithFavorisGridView()
-          console.log(`ID ${id} ${isActive ? 'ajouté' : 'retiré'} du cookie.`);
-        };
-        // Ajouter l'événement 'click' à l'élément 'li'
-        li.addEventListener('click', clickHandler);
-        // Stocker la référence du gestionnaire d'événement pour cet élément 'li'
-        eventListenersMap.set(li, clickHandler);
-      });
-      console.log('Contenu de eventListenersMap après l\'ajout:', Array.from(eventListenersMap.entries())); // Affiche le contenu de la map
-    }
-
-    // Fonction pour supprimer tous les gestionnaires d'événements des éléments 'li.track-click'
-    function removeAllClickListeners() {
-      eventListenersMap.forEach((clickHandler, li) => {
-        if (clickHandler) {
-          li.removeEventListener('click', clickHandler); // Supprimer le gestionnaire d'événement
-          eventListenersMap.delete(li); // Supprimer la référence de la Map
-        }
-      });
-      console.log('Delete Contenu de eventListenersMap:', Array.from(eventListenersMap.entries())); // Affiche le contenu de la map
-    }
-
-
-    function cookieMarkItemAndClickToggle() {
-      setTimeout(() => {
-        removeAllClickListeners();
-        markItemsClickToggle()
-        markItems();
-      }, 1500); // Correspond à la durée de l'animation
-
-    }
-  </script>
-  <!--  view handler -->
-  <script>
-    // Fonction pour créer un cookie
-    function setCookieGridViewButton(name, value, days) {
-      let date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      let expires = "expires=" + date.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires + ";path=/";
-    }
-
-    // Fonction pour obtenir un cookie
-    function getCookieGridViewButton(name) {
-      let cookieArr = document.cookie.split(";");
-      for (let i = 0; i < cookieArr.length; i++) {
-        let cookiePair = cookieArr[i].split("=");
-        if (name == cookiePair[0].trim()) {
-          return decodeURIComponent(cookiePair[1]);
-        }
-      }
-      return null;
-    }
-
-    // Fonction pour supprimer un cookie
-    function deleteCookieGridViewButton(name) {
-      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    }
 
     document.addEventListener('DOMContentLoaded', function () {
-      // Sélection des éléments
-      const gridViewButton = document.getElementById('gridViewButton');
-      const listViewButton = document.getElementById('listViewButton');
+      // Configuration initiale
       const sidebarPageContainer = document.getElementById('sidebar-page-container');
       const infiniteNewsContainer = document.getElementById('infinite-news-container');
-      // Ajout des gestionnaires d'événements
-      listViewButton.addEventListener('click', function () {
-        deleteCookieGridViewButton('view');  // Supprime le cookie
-        fetchDataPagination();
-        fetchData(1);
-        // Affichage de la section de la vue liste
-        sidebarPageContainer.style.display = 'block';
-        infiniteNewsContainer.style.display = 'none';
-        // Mettre à jour les classes actives pour le style
-        listViewButton.classList.add('active');
-        gridViewButton.classList.remove('active');
-        const resultsContainer = document.getElementById('search-field-infinite');
-        resultsContainer.innerHTML = ''; // Vide les résultats précédents
-      });
-      // Ajout des gestionnaires d'événements
-      gridViewButton.addEventListener('click', function () {
-        setCookieGridViewButton('view', 'grid', 30);  // Stocke le cookie pendant 7 jours
-        globalCurrentCategorie = "";
-        proxy.value = "tous"
-        // Affichage de la section de la vue grille
-        sidebarPageContainer.style.display = 'none';
-        infiniteNewsContainer.style.display = 'block';
-        // Mettre à jour les classes actives pour le style
-        gridViewButton.classList.add('active');
-        listViewButton.classList.remove('active');
-        updateListWithFavorisGridView()
-        fetchDataInfinite('created_at');
-        document.querySelector('.nice-select .option[data-value="created_at"]').click();
-      });
-      // Vérifie l'état du cookie lors du chargement de la page
-      let view = getCookieGridViewButton('view');
-      if (view === 'grid') {
-        gridViewButton.click();  // Simule un clic sur le bouton "Vue Grille" après avoir défini l'écouteur d'événement
-      } else {
-        listViewButton.click();      }
+      
+      // Afficher uniquement la vue grille au chargement
+      setCookieGridViewButton('view', 'grid', 30);
+      globalCurrentCategorie = "";
+      proxy.value = "tous";
+      
+      // Affichage de la section de la vue grille
+      if (sidebarPageContainer) sidebarPageContainer.style.display = 'none';
+      if (infiniteNewsContainer) infiniteNewsContainer.style.display = 'block';
+      
+      // Initialiser les favoris
+      if (typeof updateListWithFavorisGridView === 'function') {
+        updateListWithFavorisGridView();
+      }
     });
   </script>
-  <!-- design-select-container -->
 
-  <!-- sidebar-page-container -->
-  <section id="sidebar-page-container" class="sidebar-page-container p_relative blog-classic pb_150">
+  <!-- sidebar-page-container - Désactivé, on utilise uniquement la vue grille -->
+  <section id="sidebar-page-container" class="sidebar-page-container p_relative blog-classic pb_150" style="display: none;">
     <div class="auto-container">
       <div class="row clearfix">
         <div class="col-lg-8 col-md-12 col-sm-12 content-side">
@@ -622,7 +351,6 @@
                 });
               }
 
-              let globalPostIdsSearch = 0;
               const SUPABASE_URL = 'https://zmgfaiprgbawcernymqa.supabase.co';
               const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2ZhaXByZ2Jhd2Nlcm55bXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ2NTc0MjEsImV4cCI6MjA0MDIzMzQyMX0.sBq7sR7JhRZCg36xvt13yt_f398oWbHUfdUwa9yoox0';
               const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -698,7 +426,6 @@
                   <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a  href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
                   <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:#d2f5dc;padding:0 0 0 10px;">
                    <li id="myListItem${cpt}" class="p_relative d_iblock float_left fs_15 mr_25"><a  href=" #" onclick="return false;" class="fw_medium hov_color" style="text-transform: capitalize;">${dataJson[dataJsonKey].categorie}</a></li>
-                   <li class="p_relative d_iblock float_left fs_15 mr_25">${Math.floor(Math.random() * (Math.floor(6) - Math.ceil(2)) + Math.ceil(2))} min. de lecture</li>
                    <li class="p_relative d_iblock float_left fs_15 mr_25">${dataJson[dataJsonKey].visite} vues</li>
                    <li class="p_relative d_iblock float_left fs_15 mr_25">${commentText}</li>
                    <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].id}"><i class="far fa-heart"></i></li>
@@ -1101,8 +828,12 @@
 
 
   <!-- infinite-news-container  -->
-  <section id="infinite-news-container" class="news-section p_relative blog-grid pb_150" style="display: none;">
+  <section id="infinite-news-container" class="news-section p_relative blog-grid pb_150" style="display: block;">
     <div class="auto-container">
+      <!-- Catégories -->
+      <div id="category-buttons-container" class="category-buttons-container p_relative d_block mb_30 clearfix">
+        <!-- Les boutons seront ajoutés dynamiquement ici -->
+      </div>
       <div class="item-shorting p_relative d_block mb_50 clearfix">
         <div class="right-column pull-right clearfix">
           <div class="short-box clearfix">
@@ -1110,20 +841,102 @@
             <div class="select-box float_left mr_30">
 
               <div class="nice-select wide open" tabindex="0">
-                <span id="current-selection" class="current">Date (le plus récent)</span>
+                <span id="current-selection" class="current" data-sort="created_at">Date (le plus récent)</span>
                 <ul id="dropdown-list" class="list">
                   <li data-value="created_at" class="option selected focus">Date (le plus récent)</li>
                   <li data-value="visite" class="option">Vues (le plus populaire)</li>
                   <li data-value="comment_count" class="option">Commentaires</li>
-                  <li data-value="categorie" class="option has-submenu">Catégorie
-                    <!-- Sous-menu généré dynamiquement -->
-                    <ul id="category-submenu" class="submenu"></ul>
-                  </li>
+                  <li data-value="audio" class="option">Avec audio</li>
                 </ul>
               </div>
 
 
               <script>
+                // Cache global pour les catégories
+                let cachedCategories = null;
+                let currentSelectedCategory = null; // Catégorie actuellement sélectionnée
+                let globalCurrentPageInfinite = 1; // Numéro de la page actuelle pour la vue infinite
+                let globalPageSizeInfinite = 12; // Nombre d'éléments par page pour la vue infinite
+
+                // Fonction pour créer les boutons de catégories
+                function createCategoryButtons(categories, categoryCounts) {
+                  const container = document.getElementById('category-buttons-container');
+                  container.innerHTML = ''; // Nettoyer le conteneur
+
+                  // Calculer le total d'articles
+                  const totalCount = Object.values(categoryCounts).reduce((sum, count) => sum + count, 0);
+
+                  // Créer le bouton "Tous"
+                  const allButton = document.createElement('button');
+                  allButton.classList.add('category-btn', 'active');
+                  const allText = document.createTextNode('Tous ');
+                  allButton.appendChild(allText);
+                  const allBadge = document.createElement('span');
+                  allBadge.classList.add('category-badge');
+                  allBadge.textContent = totalCount;
+                  allButton.appendChild(allBadge);
+                  allButton.addEventListener('click', function() {
+                    // Retirer l'état actif de tous les boutons
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    // Activer le bouton "Tous"
+                    this.classList.add('active');
+                    currentSelectedCategory = null;
+                    globalCurrentPageInfinite = 1; // Reset à la page 1
+                    
+                    // Réinitialiser le tri à "Date (le plus récent)" lors du clic sur "Tous"
+                    const currentSelection = document.getElementById('current-selection');
+                    const options = document.querySelectorAll('.nice-select .option');
+                    
+                    // Trouver et activer l'option "Date (le plus récent)"
+                    options.forEach(opt => {
+                      if (opt.getAttribute('data-value') === 'created_at') {
+                        currentSelection.textContent = opt.textContent;
+                        updateSelectionClasses(opt, options);
+                      }
+                    });
+                    
+                    // Recharger toutes les données avec le tri par date
+                    fetchDataInfinite('created_at');
+                  });
+                  container.appendChild(allButton);
+
+                  // Créer les boutons pour chaque catégorie
+                  categories.forEach(category => {
+                    const btn = document.createElement('button');
+                    btn.classList.add('category-btn');
+                    const btnText = document.createTextNode(category + ' ');
+                    btn.appendChild(btnText);
+                    const badge = document.createElement('span');
+                    badge.classList.add('category-badge');
+                    badge.textContent = categoryCounts[category] || 0;
+                    btn.appendChild(badge);
+                    btn.addEventListener('click', function() {
+                      // Retirer l'état actif de tous les boutons
+                      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                      // Activer le bouton cliqué
+                      this.classList.add('active');
+                      currentSelectedCategory = category;
+                      globalCurrentPageInfinite = 1; // Reset à la page 1
+                      
+                      // Réinitialiser le tri à "Date (le plus récent)" lors du changement de catégorie
+                      const currentSelection = document.getElementById('current-selection');
+                      const options = document.querySelectorAll('.nice-select .option');
+                      
+                      // Trouver et activer l'option "Date (le plus récent)"
+                      options.forEach(opt => {
+                        if (opt.getAttribute('data-value') === 'created_at') {
+                          currentSelection.textContent = opt.textContent;
+                          updateSelectionClasses(opt, options);
+                        }
+                      });
+                      
+                      // Appliquer le filtre de catégorie avec le tri par date
+                      fetchDataInfinite('created_at', []);
+                    });
+                    container.appendChild(btn);
+                  });
+                }
+
                 async function loadCategories() {
                   try {
                     const { data, error } = await supabaseClient
@@ -1134,43 +947,44 @@
 
                     if (error) throw error;
 
-                    // Utiliser un Set pour obtenir les catégories uniques
+                    // Utiliser un Set pour obtenir les catégories uniques et les mettre en cache
                     const uniqueCategories = [...new Set(data.map(item => item.categorie))];
+                    cachedCategories = uniqueCategories;
 
-                    const submenu = document.getElementById('category-submenu');
-                    submenu.innerHTML = ''; // Nettoyer le sous-menu avant ajout
-
-                    uniqueCategories.forEach(category => {
-                      const li = document.createElement('li');
-                      li.classList.add('option', 'sub-option');
-                      li.setAttribute('data-value', category);
-                      li.textContent = category;
-                      submenu.appendChild(li);
-
-                      // Écouteur pour chaque sous-catégorie
-                      li.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        document.getElementById('current-selection').textContent = `Catégorie - ${category}`;
-                        fetchDataInfinite(category, []);
-                        updateSelectionClasses(this, submenu.querySelectorAll('.sub-option'));
-                      });
+                    // Compter les articles par catégorie
+                    const categoryCounts = {};
+                    data.forEach(item => {
+                      categoryCounts[item.categorie] = (categoryCounts[item.categorie] || 0) + 1;
                     });
+
+                    // Créer les boutons de catégories avec les compteurs
+                    createCategoryButtons(uniqueCategories, categoryCounts);
                   } catch (error) {
                     console.error('Erreur lors du chargement des catégories :', error);
                   }
                 }
 
                 function selectMenuInfinite() {
-                  const options = document.querySelectorAll('.nice-select .option:not(.sub-option)');
+                  const options = document.querySelectorAll('.nice-select .option');
                   const currentSelection = document.getElementById('current-selection');
 
                   options.forEach(function (option) {
                     option.addEventListener('click', function () {
-                      if (!this.classList.contains('has-submenu')) {
-                        currentSelection.textContent = this.textContent;
+                      currentSelection.textContent = this.textContent;
+                      currentSelection.setAttribute('data-sort', this.getAttribute('data-value'));
+                      globalCurrentPageInfinite = 1; // Reset à la page 1 lors d'un changement de tri
+                      
+                      // Si une catégorie est sélectionnée, appliquer le tri sur cette catégorie
+                      if (currentSelectedCategory) {
+                        // Appliquer le tri mais avec filtre de catégorie
+                        const sortValue = this.getAttribute('data-value');
+                        fetchDataInfinite(sortValue, []);
+                      } else {
+                        // Aucune catégorie sélectionnée, appliquer le tri normal
                         fetchDataInfinite(this.getAttribute('data-value'));
-                        updateSelectionClasses(this, options);
                       }
+                      
+                      updateSelectionClasses(this, options);
                     });
                   });
                 }
@@ -1180,28 +994,119 @@
                   selectedOption.classList.add('selected', 'focus');
                 }
 
-                loadCategories();
-                selectMenuInfinite();
+                // Fonction pour générer la pagination
+                async function fetchDataPaginationInfinite() {
+                  let totalPages;
+                  
+                  // Vérifier le tri actuel
+                  const currentSelection = document.getElementById('current-selection');
+                  const currentSort = currentSelection ? currentSelection.getAttribute('data-sort') : 'created_at';
+                  
+                  if (currentSort === 'audio') {
+                    // Pour le tri par audio, compter les articles avec audio
+                    let countQuery = supabaseClient
+                      .from('post')
+                      .select('id, audio')
+                      .neq('deleted', true)
+                      .neq('valid', false)
+                      .not('audio', 'is', null)
+                      .neq('audio', '');
 
-                function handleSelection(value) {
-                  // Vérifier si la valeur correspond à une catégorie dynamique
-                  const categories = ['created_at', 'visite', 'comment_count']; // Liste des options non-catégories
-                  if (categories.includes(value)) {
-                    // Gérer les options standards (tri par date, vues, commentaires)
-                    fetchDataInfinite(value);
+                    // Si une catégorie est sélectionnée, filtrer
+                    if (currentSelectedCategory) {
+                      countQuery = countQuery.eq('categorie', currentSelectedCategory);
+                    }
+
+                    const {data: postsWithAudio, error: audioError} = await countQuery;
+                    
+                    if (audioError) {
+                      console.error("Erreur lors du comptage des articles avec audio:", audioError);
+                      return;
+                    }
+                    
+                    // Filtrer côté client pour s'assurer que l'audio n'est pas vide
+                    const validAudioPosts = postsWithAudio.filter(post => post.audio && post.audio.trim() !== '');
+                    totalPages = Math.ceil(validAudioPosts.length / globalPageSizeInfinite);
                   } else {
-                    // Gérer les catégories dynamiques
-                    fetchDataInfinite(value, []); // Filtre par catégorie avec le nom dynamique
+                    // Pour les autres tris, utiliser le comptage normal
+                    let countQuery = supabaseClient
+                      .from('post')
+                      .select('id', {count: 'exact'})
+                      .neq('deleted', true)
+                      .neq('valid', false);
+
+                    // Si une catégorie est sélectionnée, filtrer
+                    if (currentSelectedCategory) {
+                      countQuery = countQuery.eq('categorie', currentSelectedCategory);
+                    }
+
+                    const {count, error: countError} = await countQuery;
+
+                    if (countError) {
+                      console.error("Erreur lors du comptage:", countError);
+                      return;
+                    }
+
+                    totalPages = Math.ceil(count / globalPageSizeInfinite);
                   }
+                  
+                  // Générer les boutons de pagination
+                  $("#containerPaginationInfinite").empty();
+                  
+                  if (totalPages <= 1) {
+                    return; // Pas besoin de pagination s'il n'y a qu'une page
+                  }
+
+                  // Bouton Précédent
+                  const prevLi = document.createElement('li');
+                  prevLi.innerHTML = `<a href="#" onclick="return false;" class="pagination-prev ${globalCurrentPageInfinite === 1 ? 'disabled' : ''}"><i class="fas fa-angle-left"></i></a>`;
+                  if (globalCurrentPageInfinite > 1) {
+                    prevLi.querySelector('a').addEventListener('click', () => {
+                      globalCurrentPageInfinite--;
+                      const currentSelection = document.getElementById('current-selection');
+                      const sortValue = currentSelection ? (currentSelection.getAttribute('data-sort') || 'created_at') : 'created_at';
+                      fetchDataInfinite(sortValue);
+                      $("html, body").animate({scrollTop: 0}, "slow");
+                    });
+                  }
+                  document.getElementById("containerPaginationInfinite").appendChild(prevLi);
+
+                  // Boutons numérotés
+                  for (let i = 1; i <= totalPages; i++) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="#" onclick="return false;" class="click-pagination-infinite-${i} ${i === globalCurrentPageInfinite ? 'current' : ''}">${i}</a>`;
+                    li.querySelector('a').addEventListener('click', () => {
+                      globalCurrentPageInfinite = i;
+                      const currentSelection = document.getElementById('current-selection');
+                      const sortValue = currentSelection ? (currentSelection.getAttribute('data-sort') || 'created_at') : 'created_at';
+                      fetchDataInfinite(sortValue);
+                      $("html, body").animate({scrollTop: 0}, "slow");
+                    });
+                    document.getElementById("containerPaginationInfinite").appendChild(li);
+                  }
+
+                  // Bouton Suivant
+                  const nextLi = document.createElement('li');
+                  nextLi.innerHTML = `<a href="#" onclick="return false;" class="pagination-next ${globalCurrentPageInfinite === totalPages ? 'disabled' : ''}"><i class="fas fa-angle-right"></i></a>`;
+                  if (globalCurrentPageInfinite < totalPages) {
+                    nextLi.querySelector('a').addEventListener('click', () => {
+                      globalCurrentPageInfinite++;
+                      const currentSelection = document.getElementById('current-selection');
+                      const sortValue = currentSelection ? (currentSelection.getAttribute('data-sort') || 'created_at') : 'created_at';
+                      fetchDataInfinite(sortValue);
+                      $("html, body").animate({scrollTop: 0}, "slow");
+                    });
+                  }
+                  document.getElementById("containerPaginationInfinite").appendChild(nextLi);
                 }
 
-                function updateSelectionClasses(selectedOption, optionList) {
-                  optionList.forEach(function (opt) {
-                    opt.classList.remove('selected', 'focus');
-                  });
-                  selectedOption.classList.add('selected', 'focus');
-                }
-
+                // Charger les catégories et initialiser les données
+                loadCategories().then(() => {
+                  // Attendre que le cache soit rempli avant de charger les données
+                  if (typeof fetchDataInfinite === 'function') {
+                    fetchDataInfinite('created_at');
+                  }
+                });
                 selectMenuInfinite();
               </script>
 
@@ -1250,6 +1155,11 @@
                     // Attache un événement de clic en passant un paramètre
                     favoriteLi.addEventListener('click', function () {
                       handleFavorisClick(favoris); // Remplacez par le paramètre souhaité
+                      // Mettre à jour le texte du bouton principal
+                      const currentSelection = document.getElementById('current-selection');
+                      if (currentSelection) {
+                        currentSelection.textContent = `Favoris ( ${favoris.length} )`;
+                      }
                       console.log('! je met dans la liste le choix favoris')
                     });
                   } else if (favoris.length === 0 && favoriteLi) {
@@ -1258,10 +1168,16 @@
                     ulElement.removeChild(favoriteLi);
                     document.querySelector('.nice-select .option[data-value="created_at"]').click();
                     console.log('! j enléve de la liste le choix favoris')
-                  } else {
+                  } else if (favoris.length > 0 && favoriteLi) {
+                    // Mettre à jour le compteur dans le dropdown
                     const spanCount = document.getElementById('favorite-count');
                     if (spanCount) {
-                      spanCount.textContent = `(${favoris.length})`;
+                      spanCount.textContent = `( ${favoris.length} )`;
+                    }
+                    // Mettre à jour le texte du bouton principal si "favoris" est sélectionné
+                    const currentSelection = document.getElementById('current-selection');
+                    if (currentSelection && currentSelection.textContent.includes('Favoris')) {
+                      currentSelection.textContent = `Favoris ( ${favoris.length} )`;
                     }
                     console.log('! il se passe un truc pour la liste avec le favoris')
                   }
@@ -1291,9 +1207,6 @@
               </form>
               <script>
                 let debounceTimeoutInfinite;
-                const phylactere = document.createElement('div');
-                phylactere.classList.add('phylactere');
-                document.body.appendChild(phylactere);
 
                 // Fonction de debounce pour limiter les requêtes
                 function debounce(func, delay) {
@@ -1359,7 +1272,7 @@
                     const highlightedText = displayTitle.replace(regex, `<strong>$1</strong>`);
 
                     const link = document.createElement('a');
-                    link.href = `${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, id)}`;
+                    link.href = `${getOldHrefAndSetNewHref(new_href, id)}`;
                     link.style.textDecoration = 'none';
                     link.style.color = 'inherit';
                     link.style.display = 'block';
@@ -1367,24 +1280,6 @@
                     link.innerHTML = highlightedText;
 
                     item.appendChild(link);
-
-                    // Gestion de l'affichage du phylactère avec aperçu du contenu
-                    item.addEventListener('mouseover', (e) => {
-                      phylactere.innerText = stripHTML(contentPreview); // Utilisation de stripHTML pour enlever les balises
-                      phylactere.style.display = 'block';
-                      phylactere.style.left = `${e.pageX + 10}px`;
-                      phylactere.style.top = `${e.pageY + 10}px`;
-                    });
-
-                    item.addEventListener('mousemove', (e) => {
-                      phylactere.style.left = `${e.pageX + 10}px`;
-                      phylactere.style.top = `${e.pageY + 10}px`;
-                    });
-
-                    item.addEventListener('mouseout', () => {
-                      phylactere.style.display = 'none';
-                    });
-
                     dropdown.appendChild(item);
                   });
 
@@ -1415,13 +1310,6 @@
                   }
                 });
 
-                // Fonction pour enlever les balises HTML
-                function stripHTML(html) {
-                  const tempDiv = document.createElement("div");
-                  tempDiv.innerHTML = html;
-                  return tempDiv.textContent || tempDiv.innerText || "";
-                }
-
               </script>
             </div>
 
@@ -1445,25 +1333,37 @@
               .neq('deleted', true)  // Exclut les entrées où deleted = true
               .neq('valid', false);  // Exclut les entrées où valid = false
 
-            // Vérifier si selectionTri est une catégorie ou un critère de tri
-            const { data: categoriesData, error: categoriesError } = await supabaseClient
-              .from('post')
-              .select('categorie')
-              .neq('deleted', true)
-              .neq('valid', false);
+            // Utiliser le cache des catégories au lieu de faire une requête à chaque fois
+            let categories;
+            if (cachedCategories) {
+              categories = cachedCategories;
+            } else {
+              // Si le cache n'existe pas encore, faire la requête
+              const { data: categoriesData, error: categoriesError } = await supabaseClient
+                .from('post')
+                .select('categorie')
+                .neq('deleted', true)
+                .neq('valid', false);
 
-            if (categoriesError) {
-              console.error('Erreur lors de la récupération des catégories :', categoriesError);
-              return [];
+              if (categoriesError) {
+                console.error('Erreur lors de la récupération des catégories :', categoriesError);
+                return [];
+              }
+
+              // Extraire les catégories uniques et les mettre en cache
+              categories = [...new Set(categoriesData.map(item => item.categorie))];
+              cachedCategories = categories;
             }
 
-            // Extraire les catégories uniques
-            const categories = [...new Set(categoriesData.map(item => item.categorie))];
-
-            // Si selectionTri est une catégorie dynamique, on filtre par cette catégorie
-            if (categories.includes(selectionTri)) {
+            // Si une catégorie est sélectionnée, filtrer par cette catégorie
+            if (currentSelectedCategory) {
+              baseQuery = baseQuery.eq('categorie', currentSelectedCategory);
+            }
+            
+            // Si selectionTri est une catégorie dynamique (et aucune catégorie n'est déjà sélectionnée), on filtre par cette catégorie
+            if (!currentSelectedCategory && categories.includes(selectionTri)) {
               baseQuery = baseQuery.eq('categorie', selectionTri);
-            } else if (selectionTri !== 'comment_count' && selectionTri !== 'favoris') {
+            } else if (selectionTri !== 'comment_count' && selectionTri !== 'favoris' && selectionTri !== 'audio' && !categories.includes(selectionTri)) {
               // Si ce n'est pas une catégorie, on l'utilise comme critère de tri
               baseQuery = baseQuery.order(selectionTri, { ascending: false });
             }
@@ -1478,6 +1378,13 @@
               baseQuery = baseQuery.in('id', ids);
             } else if (ids.length > 0) {
               baseQuery = baseQuery.in('id', ids);
+            }
+
+            // Ajouter la pagination seulement si ce n'est pas un tri par audio
+            if (selectionTri !== 'audio') {
+              const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
+              const end = globalCurrentPageInfinite * globalPageSizeInfinite - 1;
+              baseQuery = baseQuery.range(start, end);
             }
 
             try {
@@ -1516,8 +1423,38 @@
                   const countB = b.comment_count || 0; // S'assurer que 'comment_count' est un nombre
                   return countB - countA; // Tri décroissant par 'comment_count'
                 });
+              } else if (selectionTri === 'audio') {
+                // Filtrer les articles qui ont un audio
+                const postsWithAudio = postsWithCommentCount.filter(post => post.audio && post.audio.trim() !== '');
+                
+                // Appliquer la pagination côté client pour les articles avec audio
+                const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
+                const end = start + globalPageSizeInfinite;
+                const paginatedPostsWithAudio = postsWithAudio.slice(start, end);
+                
+                postsWithCommentCount.length = 0; // Vider le tableau
+                postsWithCommentCount.push(...paginatedPostsWithAudio); // Ajouter seulement les articles avec audio paginés
               }
               $("#containerBlogsInfinite").empty();
+              
+              // Afficher un message si aucun résultat et que c'est une catégorie avec favoris
+              if (postsWithCommentCount.length === 0 && currentSelectedCategory && selectionTri === 'favoris') {
+                const emptyDiv = document.createElement("div");
+                emptyDiv.className = "col-12 empty-favorites-message";
+                emptyDiv.innerHTML = '<div class="empty-message-container" style="text-align: center; padding: 60px 20px; background-color: #f8f9fa; border-radius: 10px; margin: 40px 0;"><i class="far fa-heart" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: #666; margin-bottom: 15px;">Aucun favori dans cette catégorie</h3><p style="color: #999; font-size: 16px;">Cliquez sur "Tous" pour afficher tous vos articles favoris.</p></div>';
+                document.getElementById("containerBlogsInfinite").appendChild(emptyDiv);
+                return;
+              }
+              
+              // Afficher un message si aucun article avec audio
+              if (postsWithCommentCount.length === 0 && selectionTri === 'audio') {
+                const emptyDiv = document.createElement("div");
+                emptyDiv.className = "col-12 empty-audio-message";
+                emptyDiv.innerHTML = '<div class="empty-message-container" style="text-align: center; padding: 60px 20px; background-color: #f8f9fa; border-radius: 10px; margin: 40px 0;"><i class="far fa-podcast" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: #666; margin-bottom: 15px;">Aucun article avec audio</h3><p style="color: #999; font-size: 16px;">Aucun article ne contient de fichier audio pour le moment.</p></div>';
+                document.getElementById("containerBlogsInfinite").appendChild(emptyDiv);
+                return;
+              }
+              
               // Mettre à jour le conteneur avec les données triées
               dataJsonInfinite = postsWithCommentCount;
               // Afficher les données
@@ -1538,9 +1475,8 @@
                   '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a  href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
                   '                <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:#9cd59e;padding:0 0 0 10px;">\n' +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25"><a  href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="fw_medium hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a></li>\n' +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + Math.floor(Math.random() * (Math.floor(8) - Math.ceil(2)) + Math.ceil(3)) + ' min. </li>\n' +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</li>\n' +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + commentText + '</li>\n' +
+                  (commentText ? '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + commentText + '</li>\n' : '') +
                   '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].id + '"><i class="far fa-heart"></i></li>\n' +
                   (dataJsonInfinite[dataJsonKeyInfinite].video ?
                     '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></li>\n'
@@ -1556,21 +1492,20 @@
               }
               cookieMarkItemAndClickToggle();
 
+              // Mettre à jour la pagination après le chargement des données
+              await fetchDataPaginationInfinite();
+
             } catch (error) {
               console.error('Erreur lors du fetch:', error);
             }
           }
         </script>
       </div>
-      <!--      <div class="pagination-wrapper centred">-->
-      <!--        <ul class="pagination clearfix">-->
-      <!--          <li><a  href=" blog-2.html"><i class="fas fa-angle-left"></i></a></li>-->
-      <!--          <li><a  href=" blog-2.html" class="current">1</a></li>-->
-      <!--          <li><a  href=" blog-2.html">2</a></li>-->
-      <!--          <li><a  href=" blog-2.html">3</a></li>-->
-      <!--          <li><a  href=" blog-2.html"><i class="fas fa-angle-right"></i></a></li>-->
-      <!--        </ul>-->
-      <!--      </div>-->
+      <div class="pagination-wrapper centred">
+        <ul id="containerPaginationInfinite" class="pagination clearfix">
+          <!-- Pagination sera générée dynamiquement ici -->
+        </ul>
+      </div>
     </div>
   </section>
   <!-- infinite-news-container  -->
@@ -1674,7 +1609,6 @@
 
 
 <!-- jequery plugins -->
-<script src="assets/js/jquery.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/owl.js"></script>

@@ -1,0 +1,208 @@
+/* Styles pour les boutons de vue */
+.grid-view {
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+  font-size: 28px;
+  padding: 10px;
+  margin: 20px 0 20px 15px;
+}
+
+.grid-view:hover {
+  background-color: #ddd; /* Couleur de fond au survol */
+  color: #312f2f; /* Couleur du texte au survol */
+}
+
+.grid-view.active {
+  background-color: rgba(47, 121, 85, 0.9); /* Couleur de fond pour le bouton sélectionné */
+  color: #fff; /* Couleur du texte pour le bouton sélectionné */
+}
+
+/* Autocomplete infinite */
+.autocomplete-container-infinite {
+  position: relative;
+  width: 100%;
+}
+
+/* Style pour que le dropdown occupe toute la hauteur de la page */
+.autocomplete-dropdown-infinite {
+  position: absolute;
+  top: 100%; /* Position en-dessous de l'input */
+  left: 0;
+  right: 0;
+  max-height: 400px; /* Hauteur maximale raisonnable pour le dropdown */
+  overflow-y: auto; /* Permet un défilement si le contenu dépasse la hauteur de l'écran */
+  z-index: 9999; /* Augmenté pour être au-dessus des autres éléments */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Style pour les éléments individuels dans le dropdown */
+.autocomplete-item-infinite {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Mise en forme sur le survol */
+.autocomplete-item-infinite:hover {
+  background-color: #f0f0f0;
+}
+
+/* Drop down search-field */
+.dropdown-content div {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+.resizeHeight {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border: 3px solid grey;
+  padding: 1px;
+}
+
+/* Catégories boutons */
+.category-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-btn {
+  padding: 8px 20px;
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.category-btn:hover {
+  background-color: rgba(47, 121, 85, 0.1);
+  border-color: rgba(47, 121, 85, 0.5);
+  color: rgba(47, 121, 85, 1);
+}
+
+.category-btn.active {
+  background-color: rgba(47, 121, 85, 0.9);
+  border-color: rgba(47, 121, 85, 0.9);
+  color: #fff;
+}
+
+/* Badge avec nombre d'articles */
+.category-badge {
+  display: inline-block;
+  background-color: rgba(47, 121, 85, 0.1);
+  color: rgba(47, 121, 85, 1);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 5px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.category-btn.active .category-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Favoris heart-active */
+.heart-active {
+  color: green; /* Couleur verte pour les éléments marqués */
+  font-weight: 700;
+}
+
+/* Animation du clic sur le cœur */
+.heart-clicked {
+  animation: heartGrow 0.3s ease-in-out;
+}
+
+@keyframes heartGrow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Styles pour maintenir les éléments post-info sur une seule ligne */
+.post-info {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 10px !important;
+  margin-bottom: 15px !important;
+  background-color: #9cd59e !important;
+  border-radius: 4px;
+  width: 100% !important;
+  min-height: 40px !important;
+}
+
+.post-info li {
+  flex: 0 1 auto !important;
+  float: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 0 !important;
+  padding: 0 8px !important;
+  white-space: nowrap !important;
+  min-width: 0 !important;
+  text-align: center !important;
+}
+
+.post-info li:first-child {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.post-info li:last-child {
+  justify-content: flex-end !important;
+  text-align: right !important;
+  margin-right: 0 !important;
+}
+
+/* Séparateurs visuels entre les éléments */
+.post-info li:not(:last-child)::after {
+  content: "|";
+  color: rgba(0, 0, 0, 0.3);
+  margin-left: 8px;
+  font-weight: 300;
+}
+
+/* Responsive pour les petits écrans */
+@media (max-width: 768px) {
+  .post-info {
+    padding: 6px 8px !important;
+    min-height: 35px !important;
+  }
+  
+  .post-info li {
+    padding: 0 4px !important;
+    font-size: 12px !important;
+  }
+  
+  .post-info li:not(:last-child)::after {
+    margin-left: 4px;
+  }
+}
