@@ -205,4 +205,11 @@
   .post-info li:not(:last-child)::after {
     margin-left: 4px;
   }
+  
+  /* Masquer les badges sur mobile */
+  .category-badge,
+  .category-btn .category-badge,
+  .category-btn.active .category-badge {
+    display: none !important;
+  }
 }

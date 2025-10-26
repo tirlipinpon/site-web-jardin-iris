@@ -46,6 +46,17 @@
   <link href="assets/css/responsive.css" rel="stylesheet">
   <link href="assets/css/blogs-custom.css" rel="stylesheet">
 
+  <!-- CSS pour masquer les badges sur mobile -->
+  <style>
+    @media (max-width: 768px) {
+      .category-badge,
+      .category-btn .category-badge,
+      .category-btn.active .category-badge {
+        display: none !important;
+      }
+    }
+  </style>
+
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
@@ -681,8 +692,14 @@
                 let globalCurrentPageInfinite = 1; // Numéro de la page actuelle pour la vue infinite
                 let globalPageSizeInfinite = 12; // Nombre d'éléments par page pour la vue infinite
 
+                // Variables pour stocker les données des catégories
+                let cachedCategoryCounts = null;
+
                 // Fonction pour créer les boutons de catégories
                 function createCategoryButtons(categories, categoryCounts) {
+                  // Stocker les données pour le redimensionnement
+                  cachedCategories = categories;
+                  cachedCategoryCounts = categoryCounts;
                   const container = document.getElementById('category-buttons-container');
                   container.innerHTML = ''; // Nettoyer le conteneur
 
@@ -694,10 +711,13 @@
                   allButton.classList.add('category-btn', 'active');
                   const allText = document.createTextNode('Tous ');
                   allButton.appendChild(allText);
-                  const allBadge = document.createElement('span');
-                  allBadge.classList.add('category-badge');
-                  allBadge.textContent = totalCount;
-                  allButton.appendChild(allBadge);
+                  // Ne créer le badge que sur desktop
+                  if (window.innerWidth > 768) {
+                    const allBadge = document.createElement('span');
+                    allBadge.classList.add('category-badge');
+                    allBadge.textContent = totalCount;
+                    allButton.appendChild(allBadge);
+                  }
                   allButton.addEventListener('click', function() {
                     // Retirer l'état actif de tous les boutons
                     document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
@@ -729,10 +749,13 @@
                     btn.classList.add('category-btn');
                     const btnText = document.createTextNode(category + ' ');
                     btn.appendChild(btnText);
-                    const badge = document.createElement('span');
-                    badge.classList.add('category-badge');
-                    badge.textContent = categoryCounts[category] || 0;
-                    btn.appendChild(badge);
+                    // Ne créer le badge que sur desktop
+                    if (window.innerWidth > 768) {
+                      const badge = document.createElement('span');
+                      badge.classList.add('category-badge');
+                      badge.textContent = categoryCounts[category] || 0;
+                      btn.appendChild(badge);
+                    }
                     btn.addEventListener('click', function() {
                       // Retirer l'état actif de tous les boutons
                       document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -1337,6 +1360,13 @@
               console.error('Erreur lors du fetch:', error);
             }
           }
+
+          // Listener pour le redimensionnement de la fenêtre
+          window.addEventListener('resize', function() {
+            if (cachedCategories && cachedCategoryCounts) {
+              createCategoryButtons(cachedCategories, cachedCategoryCounts);
+            }
+          });
         </script>
       </div>
       <div class="pagination-wrapper centred">
