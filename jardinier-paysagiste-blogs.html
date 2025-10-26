@@ -419,19 +419,19 @@
                     var ldiv = document.createElement("div");
                     ldiv.innerHTML = `<div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
               <div class="inner-box p_relative d_block b_radius_5 bg_white mb_70">
-                <figure class="image-box p_relative d_block theme_bg"><a  href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}">
-                 <img class="resizeHeight" loading="lazy" src="${dataJson[dataJsonKey].image_url}" alt="${dataJson[dataJsonKey].titre}${dataJson[dataJsonKey].id}"></a></figure>
+                <figure class="image-box p_relative d_block theme_bg">
+                  <a href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}">
+                    <img class="resizeHeight" loading="lazy" src="${dataJson[dataJsonKey].image_url}" alt="${dataJson[dataJsonKey].titre}${dataJson[dataJsonKey].id}">
+                  </a>
+                  <a href="#" onclick="return false;" id="myListItem${cpt}" class="badge badge-top-left">${dataJson[dataJsonKey].categorie}</a>
+                  <span class="badge badge-top-right">${dataJson[dataJsonKey].visite} vues</span>
+                  ${commentText ? `<span class="badge badge-bottom-left">${commentText}</span>` : ''}
+                                     ${dataJson[dataJsonKey].video ? `<span class="badge badge-youtube track-click" id="${dataJson[dataJsonKey].video}"><i class="fab fa-youtube-square"></i></span>` : ''}
+                   ${dataJson[dataJsonKey].audio ? `<span class="badge badge-podcast track-click" id="${dataJson[dataJsonKey].audio}"><i class="far fa-podcast"></i></span>` : ''}
+                </figure>
                 <div class="lower-content p_relative d_block pt_35">
-                  <span class="post-date p_relative d_block fs_15 mb_2">${dateHelperFormat(dataJson[dataJsonKey].created_at)}</span>
-                  <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a  href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
-                  <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:#d2f5dc;padding:0 0 0 10px;">
-                   <li id="myListItem${cpt}" class="p_relative d_iblock float_left fs_15 mr_25"><a  href=" #" onclick="return false;" class="fw_medium hov_color" style="text-transform: capitalize;">${dataJson[dataJsonKey].categorie}</a></li>
-                   <li class="p_relative d_iblock float_left fs_15 mr_25">${dataJson[dataJsonKey].visite} vues</li>
-                   <li class="p_relative d_iblock float_left fs_15 mr_25">${commentText}</li>
-                   <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].id}"><i class="far fa-heart"></i></li>
-                   ${dataJson[dataJsonKey].video ? `<li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].video}"><i class="fab fa-youtube-square"></i></li>` : ''}
-                   ${dataJson[dataJsonKey].audio ? `<li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="${dataJson[dataJsonKey].audio}"><i class="far fa-podcast"></i></li>` : ''}
-                  </ul>
+                  <span class="post-date p_relative d_block fs_15 mb_2"><span class="track-click" id="${dataJson[dataJsonKey].id}" style="cursor: pointer; margin-left: 10px;"><i class="far fa-heart"></i></span> ${dateHelperFormat(dataJson[dataJsonKey].created_at)}</span>
+                  <h2 class="p_relative d_block fs_30 lh_40 mb_2 fw_medium"><a href="${getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id)}" class="d_iblock hov_color">${dataJson[dataJsonKey].titre}</a></h2>
                 </div>
               </div>
             </div>`;
@@ -443,6 +443,35 @@
                       }, 100);
                     }
                     document.getElementById("containerBlogs").appendChild(ldiv);
+                    
+                    // Force le positionnement des badges avec des styles inline
+                    const imageBox = ldiv.querySelector('.image-box');
+                    if (imageBox) {
+                      const badges = imageBox.querySelectorAll('.badge');
+                      const hasVideo = Array.from(badges).some(b => b.classList.contains('badge-youtube'));
+                      const hasAudio = Array.from(badges).some(b => b.classList.contains('badge-podcast'));
+                      
+                      badges.forEach(badge => {
+                        if (badge.classList.contains('badge-top-left')) {
+                          badge.style.cssText = 'position: absolute !important; top: 10px !important; left: 10px !important; z-index: 10;';
+                        } else if (badge.classList.contains('badge-top-right')) {
+                          badge.style.cssText = 'position: absolute !important; top: 10px !important; right: 10px !important; z-index: 10;';
+                        } else if (badge.classList.contains('badge-bottom-left')) {
+                          badge.style.cssText = 'position: absolute !important; bottom: 10px !important; left: 10px !important; z-index: 10;';
+                        } else if (badge.classList.contains('badge-youtube')) {
+                          // YouTube toujours en bas à droite
+                          badge.style.cssText = 'position: absolute !important; bottom: 10px !important; right: 10px !important; z-index: 10;';
+                        } else if (badge.classList.contains('badge-podcast')) {
+                          // Podcast au-dessus de YouTube s'il existe, sinon en bas à droite
+                          if (hasVideo) {
+                            badge.style.cssText = 'position: absolute !important; bottom: 50px !important; right: 10px !important; z-index: 10;';
+                          } else {
+                            badge.style.cssText = 'position: absolute !important; bottom: 10px !important; right: 10px !important; z-index: 10;';
+                          }
+                        }
+                      });
+                    }
+                    
                     // Ajoutez un événement 'click' à cet élément
                     var listItem = document.getElementById('myListItem' + cpt);
                     listItem.addEventListener('click', function () {
@@ -1329,27 +1358,55 @@
                 ldiv.className = "col-lg-4 col-md-6 col-sm-12 news-block";
                 ldiv.innerHTML = ('<div class="news-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">\n' +
                   '            <div class="inner-box p_relative d_block b_radius_5 b_shadow_7 bg_white mb_30">\n' +
-                  '              <figure class="image-box p_relative d_block theme_bg"><a  href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '">' +
-                  '               <img class="resizeHeight" loading="lazy" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '"></a></figure>\n' +
-                  '              <div class="lower-content p_relative d_block pl_40 pt_35 pr_30 pb_40">\n' +
-                  '                <span class="post-date p_relative d_block fs_15 mb_5">' + dateHelperFormat(dataJsonInfinite[dataJsonKeyInfinite].created_at) + '</span>\n' +
-                  '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a  href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
-                  '                <ul class="post-info p_relative d_block mb_15 clearfix" style="background-color:#9cd59e;padding:0 0 0 10px;">\n' +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25"><a  href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="fw_medium hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a></li>\n' +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</li>\n' +
-                  (commentText ? '                  <li class="p_relative d_iblock float_left fs_15 mr_25">' + commentText + '</li>\n' : '') +
-                  '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].id + '"><i class="far fa-heart"></i></li>\n' +
+                  '              <figure class="image-box p_relative d_block theme_bg">\n' +
+                  '                <a href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '">' +
+                  '                  <img class="resizeHeight" loading="lazy" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '">\n' +
+                  '                </a>\n' +
+                  '                <a href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="badge badge-top-left">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a>\n' +
+                  '                <span class="badge badge-top-right">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</span>\n' +
+                  (commentText ? '                <span class="badge badge-bottom-left">' + commentText + '</span>\n' : '') +
                   (dataJsonInfinite[dataJsonKeyInfinite].video ?
-                    '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></li>\n'
+                    '                <span class="badge badge-youtube track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></span>\n'
                     : '') +
                   (dataJsonInfinite[dataJsonKeyInfinite].audio ?
-                    '                  <li class="p_relative d_iblock float_left fs_15 mr_25 track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].audio + '"><i class="far fa-podcast"></i></li>\n'
+                    '                <span class="badge badge-podcast track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].audio + '"><i class="far fa-podcast"></i></span>\n'
                     : '') +
-                  '                </ul>\n' +
+                  '              </figure>\n' +
+                  '              <div class="lower-content p_relative d_block pl_40 pt_35 pr_30 pb_40">\n' +
+                  '                <span class="post-date p_relative d_block fs_15 mb_5"><span class="track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].id + '" style="cursor: pointer; margin-left: 10px;"><i class="far fa-heart"></i></span> ' + dateHelperFormat(dataJsonInfinite[dataJsonKeyInfinite].created_at) + '</span>\n' +
+                  '                <h3 class="p_relative d_block fs_22 lh_28 mb_5 fw_medium"><a href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="d_iblock hov_color">' + dataJsonInfinite[dataJsonKeyInfinite].titre + '</a></h3>\n' +
                   '              </div>\n' +
                   '            </div>\n' +
                   '          </div>');
                 document.getElementById("containerBlogsInfinite").appendChild(ldiv);
+                
+                // Force le positionnement des badges avec des styles inline
+                const imageBox = ldiv.querySelector('.image-box');
+                if (imageBox) {
+                  const badges = imageBox.querySelectorAll('.badge');
+                  const hasVideo = Array.from(badges).some(b => b.classList.contains('badge-youtube'));
+                  const hasAudio = Array.from(badges).some(b => b.classList.contains('badge-podcast'));
+                  
+                  badges.forEach(badge => {
+                    if (badge.classList.contains('badge-top-left')) {
+                      badge.style.cssText = 'position: absolute !important; top: 10px !important; left: 10px !important; z-index: 10;';
+                    } else if (badge.classList.contains('badge-top-right')) {
+                      badge.style.cssText = 'position: absolute !important; top: 10px !important; right: 10px !important; z-index: 10;';
+                    } else if (badge.classList.contains('badge-bottom-left')) {
+                      badge.style.cssText = 'position: absolute !important; bottom: 10px !important; left: 10px !important; z-index: 10;';
+                    } else if (badge.classList.contains('badge-youtube')) {
+                      // YouTube toujours en bas à droite
+                      badge.style.cssText = 'position: absolute !important; bottom: 10px !important; right: 10px !important; z-index: 10;';
+                    } else if (badge.classList.contains('badge-podcast')) {
+                      // Podcast au-dessus de YouTube s'il existe, sinon en bas à droite
+                      if (hasVideo) {
+                        badge.style.cssText = 'position: absolute !important; bottom: 50px !important; right: 10px !important; z-index: 10;';
+                      } else {
+                        badge.style.cssText = 'position: absolute !important; bottom: 10px !important; right: 10px !important; z-index: 10;';
+                      }
+                    }
+                  });
+                }
               }
               cookieMarkItemAndClickToggle();
 

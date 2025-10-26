@@ -57,32 +57,41 @@ const eventListenersMap = new Map();
 
 // Fonction pour ajouter des gestionnaires d'événements
 function markItemsClickToggle() {
-  document.querySelectorAll('li.track-click').forEach(li => {
+  // Écouter à la fois les li.track-click et span.badge.track-click, a.badge.track-click
+  document.querySelectorAll('li.track-click, span.track-click, a.track-click').forEach(element => {
     // Définir une fonction de gestion d'événement pour le 'click'
     const clickHandler = () => {
-      const id = li.id;
+      const id = element.id;
       const isActive = toggleIdInCookie(id);
-      const icon = li.querySelector('i');
-      if (isActive) {
-        icon.classList.add('heart-active');
-        icon.classList.add('heart-clicked');
-        console.log(`click cookie toggle active 1`);
-        // Retirer la classe 'heart-clicked' après l'animation
-        setTimeout(() => {
-          icon.classList.remove('heart-clicked');
-        }, 300); // Correspond à la durée de l'animation
-      } else {
-        icon.classList.remove('heart-active');
-        console.log(`click cookie toggle active 2`);
+      const icon = element.querySelector('i');
+      if (icon) {
+        if (isActive) {
+          icon.classList.add('heart-active');
+          icon.classList.add('heart-clicked');
+          console.log(`click cookie toggle active 1`);
+          // Retirer la classe 'heart-clicked' après l'animation
+          setTimeout(() => {
+            icon.classList.remove('heart-clicked');
+          }, 300); // Correspond à la durée de l'animation
+        } else {
+          icon.classList.remove('heart-active');
+          console.log(`click cookie toggle active 2`);
+        }
       }
-      updateFavorisCountListView();
-      updateListWithFavorisGridView()
+      
+      // Appeler ces fonctions si elles existent
+      if (typeof updateFavorisCountListView === 'function') {
+        updateFavorisCountListView();
+      }
+      if (typeof updateListWithFavorisGridView === 'function') {
+        updateListWithFavorisGridView();
+      }
       console.log(`ID ${id} ${isActive ? 'ajouté' : 'retiré'} du cookie.`);
     };
-    // Ajouter l'événement 'click' à l'élément 'li'
-    li.addEventListener('click', clickHandler);
-    // Stocker la référence du gestionnaire d'événement pour cet élément 'li'
-    eventListenersMap.set(li, clickHandler);
+    // Ajouter l'événement 'click' à l'élément
+    element.addEventListener('click', clickHandler);
+    // Stocker la référence du gestionnaire d'événement pour cet élément
+    eventListenersMap.set(element, clickHandler);
   });
   console.log('Contenu de eventListenersMap après l\'ajout:', Array.from(eventListenersMap.entries())); // Affiche le contenu de la map
 }

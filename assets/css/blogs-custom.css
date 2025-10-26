@@ -213,3 +213,223 @@
     display: none !important;
   }
 }
+
+/* Styles pour afficher badges aux 4 coins de l'image */
+.image-box {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Réinitialiser les styles sur l'image elle-même */
+.image-box img {
+  display: block;
+  width: 100%;
+}
+
+/* Style simple pour tous les badges sur les images - Avec spécificité pour surcharger Bootstrap */
+.image-box .badge,
+figure.image-box .badge,
+span.badge,
+a.badge {
+  color: white !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  position: absolute !important;
+}
+
+.image-box .badge:hover,
+figure.image-box .badge:hover,
+span.badge:hover,
+a.badge:hover {
+  background-color: #218838 !important;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.image-box .badge i,
+figure.image-box .badge i,
+span.badge i,
+a.badge i {
+  color: white !important;
+  font-size: 14px !important;
+  margin-right: 4px !important;
+  display: inline-block !important;
+}
+
+/* Forcer l'affichage des icônes Font Awesome */
+.badge .far {
+  display: inline-block !important;
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 400 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Spécifique pour l'icône podcast - Forcer l'utilisation de Solid */
+.badge .fa-podcast,
+.badge i.fa-podcast,
+.badge i.far.fa-podcast {
+  display: inline-block !important;
+  font-family: "Font Awesome 5 Pro" !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  text-rendering: auto !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.badge .fa-podcast::before,
+.badge i.fa-podcast::before,
+.badge i.far.fa-podcast::before {
+  content: "\f2ce" !important;
+  display: inline-block !important;
+  font-family: "Font Awesome 5 Pro" !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+}
+
+.badge .fab {
+  display: inline-block !important;
+  font-family: "Font Awesome 5 Brands" !important;
+  font-weight: 400 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.image-box .badge-top-left {
+  top: 10px !important;
+  left: 10px !important;
+  bottom: auto !important;
+  right: auto !important;
+}
+
+.image-box .badge-top-right {
+  top: 10px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+}
+
+.image-box .badge-bottom-left {
+  bottom: 10px !important;
+  left: 10px !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+.image-box .badge-bottom-right {
+  bottom: 10px !important;
+  right: 10px !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+/* Règles plus spécifiques pour la structure news-block */
+.news-block-one .inner-box .image-box .badge-top-left {
+  top: 10px !important;
+  left: 10px !important;
+  bottom: auto !important;
+  right: auto !important;
+}
+
+.news-block-one .inner-box .image-box .badge-top-right {
+  top: 10px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+}
+
+.news-block-one .inner-box .image-box .badge-bottom-left {
+  bottom: 10px !important;
+  left: 10px !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+.news-block-one .inner-box .image-box .badge-bottom-right {
+  bottom: 10px !important;
+  right: 10px !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+/* Pour les badges supplémentaires en bas à droite (vidéo/audio) */
+.image-box .badge-bottom-right-extra {
+  bottom: 50px !important;
+}
+
+/* Badge YouTube à droite */
+.image-box .badge-bottom-right-extra[id*="youtube"],
+.image-box .badge-bottom-right-extra .fa-youtube-square,
+.image-box .badge-bottom-right-extra .fab {
+  right: 10px !important;
+  left: auto !important;
+}
+
+/* Badge Podcast à gauche du badge YouTube */
+.image-box .badge-bottom-right-extra .fa-podcast {
+  right: 70px !important;
+  left: auto !important;
+}
+
+/* Si c'est un badge avec podcast et pas YouTube, on le met à droite */
+.image-box .badge-bottom-right-extra:not(:has(.fa-youtube-square)) .fa-podcast {
+  right: 10px !important;
+}
+
+/* S'assurer que TOUS les badges sont bien positionnés */
+.news-block-one .inner-box .image-box a.badge,
+.news-block-one .inner-box .image-box span.badge,
+.image-box a.badge,
+.image-box span.badge {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Styles pour afficher le cœur à droite de la date */
+.post-date {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.post-date .track-click {
+  order: 2 !important;
+}
+
+/* Responsive pour les badges sur image */
+@media (max-width: 768px) {
+  .image-box .badge {
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+  }
+  
+  .image-box .badge-top-left,
+  .image-box .badge-top-right {
+    top: 5px !important;
+  }
+  
+  .image-box .badge-top-left,
+  .image-box .badge-bottom-left {
+    left: 5px !important;
+  }
+  
+  .image-box .badge-top-right,
+  .image-box .badge-bottom-right {
+    right: 5px !important;
+  }
+  
+  .image-box .badge-bottom-left,
+  .image-box .badge-bottom-right {
+    bottom: 5px !important;
+  }
+}
