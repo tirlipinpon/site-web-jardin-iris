@@ -440,6 +440,5 @@
 @media (max-width: 767px) {
   .text-column {
     display: flex !important;
-    flex-direction: column;
   }
 }
