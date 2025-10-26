@@ -278,6 +278,33 @@
 
   <!--  view handler -->
   <script>
+    // Fonctions de cache globales pour toutes les optimisations
+    function getCachedData(key, defaultData, maxAge = 3600000) { // 1 heure par défaut
+      try {
+        const cached = localStorage.getItem(key);
+        if (!cached) return null;
+        const {data, timestamp} = JSON.parse(cached);
+        if (Date.now() - timestamp > maxAge) {
+          localStorage.removeItem(key);
+          return null;
+        }
+        return data;
+      } catch (e) {
+        return null;
+      }
+    }
+    
+    function setCachedData(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
+      } catch (e) {
+        console.error('Erreur lors de la mise en cache:', e);
+      }
+    }
+
     function dateHelperFormat(dateNotFormated) {
       // La date au format ISO
       var isoDate = dateNotFormated;
@@ -651,11 +678,30 @@
               </div>
               <script>
                 async function fetchDataPostMini() {
+                  // Optimisation 10: Cache pour les favoris
+                  const cachedPosts = getCachedData('blog_recent_posts', null, 1800000); // 30 min
+                  if (cachedPosts) {
+                    dataJson = cachedPosts;
+                    for (const dataJsonKey in dataJson) {
+                      var ldiv = document.createElement("div");
+                      ldiv.innerHTML = ('<div class="post p_relative d_block pl_100 pb_20 mb_15" style="border-bottom: 1px solid lightgray">\n' +
+                        '                  <figure class="post-thumb p_absolute b_radius_5">' +
+                        '<a  href="' + getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id) + '">' +
+                        '<img loading="lazy" src="' + dataJson[dataJsonKey].image_url + '" alt="' + dataJson[dataJsonKey].titre + '"></a></figure>\n' +
+                        '                  <h5 class="fs_18 lh_26 fw_medium mb_6">' +
+                        '<a  href="' + getOldHrefAndSetNewHref(dataJson[dataJsonKey].new_href, dataJson[dataJsonKey].id) + '" class="d_iblock">' + dataJson[dataJsonKey].titre + '</a></h5>\n' +
+                        '                  <span class="post-date p_relative d_block fs_16 lh_28">' + dateHelperFormat(dataJson[dataJsonKey].created_at) + '</span>\n' +
+                        '                </div>');
+                      document.getElementById("containerPostRecent").appendChild(ldiv);
+                    }
+                    return;
+                  }
+                  
                   const {data, error} = await supabaseClient
                     .from('post')
                     .select('id, created_at, titre, image_url, new_href')
                     .order('created_at', {ascending: false})
-                    .limit(10)
+                    .limit(5)  // Optimisation 7: Réduire de 10 à 5
                     .neq('deleted', true)  // Exclut les entrées où deleted = true
                     .neq('valid', false);
 
@@ -663,6 +709,9 @@
                     console.error('Erreur lors du fetch:', error);
                   } else {
                     dataJson = data;
+                    // Optimisation 10: Mettre en cache
+                    setCachedData('blog_recent_posts', data);
+                    
                     for (const dataJsonKey in dataJson) {
                       var ldiv = document.createElement("div");
                       ldiv.innerHTML = ('<div class="post p_relative d_block pl_100 pb_20 mb_15" style="border-bottom: 1px solid lightgray">\n' +
@@ -723,6 +772,9 @@
 
                 // Variables pour stocker les données des catégories
                 let cachedCategoryCounts = null;
+                
+                // Cache pour les commentaires (10) - optimisé
+                let commentCountCache = {};
 
                 // Fonction pour créer les boutons de catégories
                 function createCategoryButtons(categories, categoryCounts) {
@@ -814,6 +866,15 @@
 
                 async function loadCategories() {
                   try {
+                    // Optimisation 2: Vérifier le cache des catégories
+                    const cached = getCachedData('blog_categories', null, 7200000); // 2 heures
+                    if (cached) {
+                      cachedCategories = cached.uniqueCategories;
+                      cachedCategoryCounts = cached.categoryCounts;
+                      createCategoryButtons(cachedCategories, cachedCategoryCounts);
+                      return Promise.resolve(); // Retourner une Promise résolue pour que le .then() fonctionne
+                    }
+
                     const { data, error } = await supabaseClient
                       .from('post')
                       .select('categorie')
@@ -830,6 +891,12 @@
                     const categoryCounts = {};
                     data.forEach(item => {
                       categoryCounts[item.categorie] = (categoryCounts[item.categorie] || 0) + 1;
+                    });
+
+                    // Mettre en cache (optimisation 2)
+                    setCachedData('blog_categories', {
+                      uniqueCategories,
+                      categoryCounts
                     });
 
                     // Créer les boutons de catégories avec les compteurs
@@ -981,14 +1048,8 @@
                   document.getElementById("containerPaginationInfinite").appendChild(nextLi);
                 }
 
-                // Charger les catégories et initialiser les données
-                loadCategories().then(() => {
-                  // Attendre que le cache soit rempli avant de charger les données
-                  if (typeof fetchDataInfinite === 'function') {
-                    fetchDataInfinite('created_at');
-                  }
-                });
-                selectMenuInfinite();
+                // Charger les catégories et initialiser les données - Appel déplacé après la définition de fetchDataInfinite
+                // (Appel fait plus bas dans le code pour s'assurer que fetchDataInfinite existe)
               </script>
 
 
@@ -1217,9 +1278,10 @@
         <script>
           async function fetchDataInfinite(selectionTri, ids = []) {
             // Création de la requête de base pour obtenir les posts
+            // Optimisation 1: Sélectionner uniquement les champs nécessaires au lieu de '*'
             let baseQuery = supabaseClient
               .from('post')
-              .select('*')
+              .select('id, titre, created_at, image_url, new_href, visite, categorie, video, audio')
               .neq('deleted', true)  // Exclut les entrées où deleted = true
               .neq('valid', false);  // Exclut les entrées où valid = false
 
@@ -1270,6 +1332,12 @@
               baseQuery = baseQuery.in('id', ids);
             }
 
+            // Pour le tri par audio, on doit récupérer tous les articles car le filtrage est fait côté client
+            // Mais on doit quand même les trier par date
+            if (selectionTri === 'audio') {
+              baseQuery = baseQuery.order('created_at', { ascending: false });
+            }
+
             // Ajouter la pagination seulement si ce n'est pas un tri par audio
             if (selectionTri !== 'audio') {
               const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
@@ -1286,19 +1354,36 @@
               // Obtenir les IDs des posts récupérés
               const postIds = posts.map(post => post.id);
 
-              // Étape 2 : Obtenir le nombre de commentaires pour chaque post
-              const {data: commentsCount, error: commentsError} = await supabaseClient
-                .rpc('count_comments', {post_ids: postIds});
-
-              if (commentsError) {
-                throw commentsError;
-              }
-
-              // Créer un dictionnaire pour les comptages de commentaires
+              // Optimisation 3: Vérifier le cache pour les commentaires
               const commentCountMap = {};
-              commentsCount.forEach(({post_id, comment_count}) => {
-                commentCountMap[post_id] = comment_count;
+              const postsToFetch = [];
+              
+              postIds.forEach(postId => {
+                if (commentCountCache[postId] && Date.now() - commentCountCache[postId].timestamp < 3600000) { // Cache 1 heure
+                  commentCountMap[postId] = commentCountCache[postId].count;
+                } else {
+                  postsToFetch.push(postId);
+                }
               });
+
+              // Optimisation 5: Ne récupérer que les commentaires non en cache
+              if (postsToFetch.length > 0) {
+                const {data: commentsCount, error: commentsError} = await supabaseClient
+                  .rpc('count_comments', {post_ids: postsToFetch});
+
+                if (commentsError) {
+                  throw commentsError;
+                }
+
+                // Mettre en cache les nouveaux résultats
+                commentsCount.forEach(({post_id, comment_count}) => {
+                  commentCountMap[post_id] = comment_count;
+                  commentCountCache[post_id] = {
+                    count: comment_count,
+                    timestamp: Date.now()
+                  };
+                });
+              }
 
               // Ajouter le nombre de commentaires aux posts
               const postsWithCommentCount = posts.map(post => ({
@@ -1314,8 +1399,13 @@
                   return countB - countA; // Tri décroissant par 'comment_count'
                 });
               } else if (selectionTri === 'audio') {
-                // Filtrer les articles qui ont un audio
-                const postsWithAudio = postsWithCommentCount.filter(post => post.audio && post.audio.trim() !== '');
+                // Filtrer les articles qui ont un audio et trier par date (déjà trié dans la requête, mais s'assurer)
+                let postsWithAudio = postsWithCommentCount.filter(post => post.audio && post.audio.trim() !== '');
+                
+                // S'assurer que c'est trié par date décroissante (les plus récents d'abord)
+                postsWithAudio.sort((a, b) => {
+                  return new Date(b.created_at) - new Date(a.created_at);
+                });
                 
                 // Appliquer la pagination côté client pour les articles avec audio
                 const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
@@ -1360,7 +1450,7 @@
                   '            <div class="inner-box p_relative d_block b_radius_5 b_shadow_7 bg_white mb_30">\n' +
                   '              <figure class="image-box p_relative d_block theme_bg">\n' +
                   '                <a href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '">' +
-                  '                  <img class="resizeHeight" loading="lazy" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '">\n' +
+                  '                  <img class="resizeHeight" loading="lazy" decoding="async" fetchpriority="' + (dataJsonKeyInfinite < 3 ? 'high' : 'low') + '" src="' + dataJsonInfinite[dataJsonKeyInfinite].image_url + '" alt="' + dataJsonInfinite[dataJsonKeyInfinite].titre + '">\n' +
                   '                </a>\n' +
                   '                <a href="' + getOldHrefAndSetNewHref(dataJsonInfinite[dataJsonKeyInfinite].new_href, dataJsonInfinite[dataJsonKeyInfinite].id) + '" class="badge badge-top-left">' + dataJsonInfinite[dataJsonKeyInfinite].categorie + '</a>\n' +
                   '                <span class="badge badge-top-right">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</span>\n' +
@@ -1423,6 +1513,13 @@
             if (cachedCategories && cachedCategoryCounts) {
               createCategoryButtons(cachedCategories, cachedCategoryCounts);
             }
+          });
+
+          // Charger les catégories et initialiser les données (après que fetchDataInfinite soit définie)
+          selectMenuInfinite();
+          loadCategories().then(() => {
+            // Attendre que le cache soit rempli avant de charger les données
+            fetchDataInfinite('created_at');
           });
         </script>
       </div>
