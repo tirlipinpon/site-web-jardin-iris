@@ -770,17 +770,21 @@
                 let globalCurrentPageInfinite = 1; // Numéro de la page actuelle pour la vue infinite
                 let globalPageSizeInfinite = 12; // Nombre d'éléments par page pour la vue infinite
 
-                // Variables pour stocker les données des catégories
+                // Variables pour stocker les données des catégories (globales pour être accessibles depuis cookies-handler.js)
                 let cachedCategoryCounts = null;
+                window.cachedCategories = cachedCategories;
+                window.cachedCategoryCounts = cachedCategoryCounts;
                 
                 // Cache pour les commentaires (10) - optimisé
                 let commentCountCache = {};
 
                 // Fonction pour créer les boutons de catégories
-                function createCategoryButtons(categories, categoryCounts) {
+                window.createCategoryButtons = function(categories, categoryCounts) {
                   // Stocker les données pour le redimensionnement
                   cachedCategories = categories;
+                  window.cachedCategories = categories;
                   cachedCategoryCounts = categoryCounts;
+                  window.cachedCategoryCounts = categoryCounts;
                   const container = document.getElementById('category-buttons-container');
                   container.innerHTML = ''; // Nettoyer le conteneur
 
@@ -824,6 +828,58 @@
                   });
                   container.appendChild(allButton);
 
+                  // Ajouter le bouton "Mes Favoris" si des favoris existent
+                  const cookies = getCookies();
+                  const favorisIds = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+                  
+                  // Filtrer les IDs valides (nombres seulement) - EN PREMIER pour le comptage correct
+                  const validFavorisIds = favorisIds.filter(id => {
+                    const num = parseInt(id);
+                    return !isNaN(num) && num > 0 && id.indexOf('http') === -1;
+                  });
+                  
+                  if (validFavorisIds.length > 0) {
+                    const favoritesButton = document.createElement('button');
+                    favoritesButton.classList.add('category-btn');
+                    const favoritesIcon = document.createElement('i');
+                    favoritesIcon.className = 'far fa-heart heart-active';
+                    favoritesButton.appendChild(favoritesIcon);
+                    const favoritesText = document.createTextNode(' Mes Favoris ');
+                    favoritesButton.appendChild(favoritesText);
+                    
+                    // Ne créer le badge que sur desktop
+                    if (window.innerWidth > 768) {
+                      const favoritesBadge = document.createElement('span');
+                      favoritesBadge.classList.add('category-badge');
+                      favoritesBadge.textContent = validFavorisIds.length; // Utiliser le nombre filtré
+                      favoritesButton.appendChild(favoritesBadge);
+                    }
+                    
+                    favoritesButton.addEventListener('click', function() {
+                      // Retirer l'état actif de tous les boutons
+                      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                      // Activer le bouton favoris
+                      this.classList.add('active');
+                      currentSelectedCategory = 'MES_FAVORIS'; // Catégorie spéciale
+                      globalCurrentPageInfinite = 1; // Reset à la page 1
+                      
+                      // Réinitialiser le tri à "Date (le plus récent)" lors du changement de catégorie
+                      const currentSelection = document.getElementById('current-selection');
+                      const options = document.querySelectorAll('.nice-select .option');
+                      
+                      options.forEach(opt => {
+                        if (opt.getAttribute('data-value') === 'created_at') {
+                          currentSelection.textContent = opt.textContent;
+                          updateSelectionClasses(opt, options);
+                        }
+                      });
+                    
+                    // Afficher les favoris
+                    fetchDataInfinite('created_at', validFavorisIds);
+                    });
+                    container.appendChild(favoritesButton);
+                  }
+
                   // Créer les boutons pour chaque catégorie
                   categories.forEach(category => {
                     const btn = document.createElement('button');
@@ -859,10 +915,10 @@
                       
                       // Appliquer le filtre de catégorie avec le tri par date
                       fetchDataInfinite('created_at', []);
-                    });
-                    container.appendChild(btn);
                   });
-                }
+                  container.appendChild(btn);
+                  });
+                };
 
                 async function loadCategories() {
                   try {
@@ -886,12 +942,15 @@
                     // Utiliser un Set pour obtenir les catégories uniques et les mettre en cache
                     const uniqueCategories = [...new Set(data.map(item => item.categorie))];
                     cachedCategories = uniqueCategories;
+                    window.cachedCategories = uniqueCategories;
 
                     // Compter les articles par catégorie
                     const categoryCounts = {};
                     data.forEach(item => {
                       categoryCounts[item.categorie] = (categoryCounts[item.categorie] || 0) + 1;
                     });
+                    cachedCategoryCounts = categoryCounts;
+                    window.cachedCategoryCounts = categoryCounts;
 
                     // Mettre en cache (optimisation 2)
                     setCachedData('blog_categories', {
@@ -940,7 +999,7 @@
                 async function fetchDataPaginationInfinite() {
                   let totalPages;
                   
-                  console.log('fetchDataPaginationInfinite appelée - currentSelectedCategory:', currentSelectedCategory);
+                  // Pagination appelée
                   
                   // Vérifier le tri actuel
                   const currentSelection = document.getElementById('current-selection');
@@ -958,7 +1017,7 @@
 
                     // Si une catégorie est sélectionnée, filtrer
                     if (currentSelectedCategory) {
-                      console.log('Pagination audio - Catégorie sélectionnée:', currentSelectedCategory);
+                        // Pagination audio
                       countQuery = countQuery.eq('categorie', currentSelectedCategory);
                     }
 
@@ -973,29 +1032,37 @@
                     const validAudioPosts = postsWithAudio.filter(post => post.audio && post.audio.trim() !== '');
                     totalPages = Math.ceil(validAudioPosts.length / globalPageSizeInfinite);
                   } else {
-                    // Pour les autres tris, utiliser le comptage normal
-                    let countQuery = supabaseClient
-                      .from('post')
-                      .select('id', {count: 'exact'})
-                      .neq('deleted', true)
-                      .neq('valid', false);
+                    // Vérifier si on est sur "Mes Favoris"
+                    if (currentSelectedCategory === 'MES_FAVORIS') {
+                      // Compter les favoris
+                      const cookies = getCookies();
+                      const favorisIds = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+                      totalPages = Math.ceil(favorisIds.length / globalPageSizeInfinite);
+                    } else {
+                      // Pour les autres tris, utiliser le comptage normal
+                      let countQuery = supabaseClient
+                        .from('post')
+                        .select('id', {count: 'exact'})
+                        .neq('deleted', true)
+                        .neq('valid', false);
 
-                    // Si une catégorie est sélectionnée, filtrer
-                    if (currentSelectedCategory) {
-                      console.log('Pagination normale - Catégorie sélectionnée:', currentSelectedCategory);
-                      countQuery = countQuery.eq('categorie', currentSelectedCategory);
+                      // Si une catégorie est sélectionnée, filtrer
+                      if (currentSelectedCategory && currentSelectedCategory !== 'MES_FAVORIS') {
+                          // Pagination normale
+                        countQuery = countQuery.eq('categorie', currentSelectedCategory);
+                      }
+
+                      const {count, error: countError} = await countQuery;
+                        // Calcul du nombre d'articles et pages
+
+                      if (countError) {
+                        console.error("Erreur lors du comptage:", countError);
+                        return;
+                      }
+
+                      totalPages = Math.ceil(count / globalPageSizeInfinite);
+                        console.log(`[Pagination] ${count} articles, ${totalPages} pages`);
                     }
-
-                    const {count, error: countError} = await countQuery;
-                    console.log('Nombre total d\'articles trouvés:', count);
-
-                    if (countError) {
-                      console.error("Erreur lors du comptage:", countError);
-                      return;
-                    }
-
-                    totalPages = Math.ceil(count / globalPageSizeInfinite);
-                    console.log('Nombre total de pages calculé:', totalPages, '(articles:', count, ', par page:', globalPageSizeInfinite, ')');
                   }
                   
                   // Générer les boutons de pagination
@@ -1054,78 +1121,15 @@
 
 
               <script>
-                // Fonction pour gérer le clic sur l'option "favoris"
-                function handleFavorisClick() {
-                  const cookies = getCookies(); // Récupère les cookies
-                  const ids = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : []
-                  fetchDataInfinite('favoris', ids)
-                }
-
-                // Fonction pour mettre à jour la liste
+                // Fonction désactivée car "Mes Favoris" est maintenant une catégorie, pas un tri
+                // Les favoris sont gérés par le bouton "Mes Favoris" dans les catégories
+                
+                // Fonction pour mettre à jour la liste (maintenant vide car les favoris sont dans les catégories)
                 function updateListWithFavorisGridView() {
-                  const cookies = getCookies(); // Récupère les cookies
-                  const favoris = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : []
-
-                  // Sélectionne la liste dans le DOM
-                  const ulElement = document.querySelector('.nice-select .list');
-
-                  // Cherche l'élément <li> "favoris" existant
-                  let favoriteLi = ulElement.querySelector('li[data-value="favoris"]');
-
-                  if (Array.isArray(favoris) && favoris.length > 0 && !favoriteLi) {
-                    // Si le cookie "favoris" existe et l'élément <li> n'est pas présent, on l'ajoute
-                    favoriteLi = document.createElement('li');
-                    favoriteLi.setAttribute('data-value', 'favoris');
-                    favoriteLi.className = 'option';
-
-                    // Créer l'icône Font Awesome
-                    const icon = document.createElement('i');
-                    icon.className = 'far fa-heart heart-active';
-                    favoriteLi.appendChild(icon); // Ajouter l'icône à l'élément <li>
-
-                    // Ajouter le texte après l'icône
-                    favoriteLi.appendChild(document.createTextNode(' Favoris '));
-
-                    // Créer le <span> pour afficher la longueur des favoris
-                    const spanCount = document.createElement('span');
-                    spanCount.textContent = `( ${favoris.length} )`;
-                    spanCount.id = 'favorite-count'; // Ajoute un id pour faciliter la mise à jour
-                    favoriteLi.appendChild(spanCount);
-
-                    ulElement.insertBefore(favoriteLi, ulElement.firstChild);
-
-                    // Attache un événement de clic en passant un paramètre
-                    favoriteLi.addEventListener('click', function () {
-                      handleFavorisClick(favoris); // Remplacez par le paramètre souhaité
-                      // Mettre à jour le texte du bouton principal
-                      const currentSelection = document.getElementById('current-selection');
-                      if (currentSelection) {
-                        currentSelection.textContent = `Favoris ( ${favoris.length} )`;
-                      }
-                      console.log('! je met dans la liste le choix favoris')
-                    });
-                  } else if (favoris.length === 0 && favoriteLi) {
-                    // Si le cookie "favoris" n'existe pas mais l'élément <li> est présent, on le retire
-                    favoriteLi.removeEventListener('click', handleFavorisClick); // Supprime l'événement de clic
-                    ulElement.removeChild(favoriteLi);
-                    document.querySelector('.nice-select .option[data-value="created_at"]').click();
-                    console.log('! j enléve de la liste le choix favoris')
-                  } else if (favoris.length > 0 && favoriteLi) {
-                    // Mettre à jour le compteur dans le dropdown
-                    const spanCount = document.getElementById('favorite-count');
-                    if (spanCount) {
-                      spanCount.textContent = `( ${favoris.length} )`;
-                    }
-                    // Mettre à jour le texte du bouton principal si "favoris" est sélectionné
-                    const currentSelection = document.getElementById('current-selection');
-                    if (currentSelection && currentSelection.textContent.includes('Favoris')) {
-                      currentSelection.textContent = `Favoris ( ${favoris.length} )`;
-                    }
-                    console.log('! il se passe un truc pour la liste avec le favoris')
-                  }
+                  // Ne rien faire - les favoris sont gérés par le bouton de catégorie
                 }
 
-                // Appel de la fonction pour initialiser la liste avec l'état des cookies
+                // Appel de la fonction pour initialiser la liste
                 updateListWithFavorisGridView();
 
               </script>
@@ -1285,61 +1289,79 @@
               .neq('deleted', true)  // Exclut les entrées où deleted = true
               .neq('valid', false);  // Exclut les entrées où valid = false
 
-            // Utiliser le cache des catégories au lieu de faire une requête à chaque fois
-            let categories;
-            if (cachedCategories) {
-              categories = cachedCategories;
-            } else {
-              // Si le cache n'existe pas encore, faire la requête
-              const { data: categoriesData, error: categoriesError } = await supabaseClient
-                .from('post')
-                .select('categorie')
-                .neq('deleted', true)
-                .neq('valid', false);
+            // Si on est sur "Mes Favoris", récupérer les IDs automatiquement
+            if (currentSelectedCategory === 'MES_FAVORIS' && ids.length === 0) {
+              const cookies = getCookies();
+              const favorisIds = cookies['clicked_ids'] ? JSON.parse(cookies['clicked_ids']) : [];
+              if (favorisIds.length > 0) {
+                // Filtrer pour ne garder que les IDs valides (nombres)
+                ids = favorisIds.filter(id => {
+                  const num = parseInt(id);
+                  return !isNaN(num) && num > 0;
+                });
+              }
+            }
 
-              if (categoriesError) {
-                console.error('Erreur lors de la récupération des catégories :', categoriesError);
-                return [];
+            // Vérifier si on est en mode favoris
+            const isFavorisMode = currentSelectedCategory === 'MES_FAVORIS' || ids.length > 0;
+
+            // Si on a des IDs (favoris), filtrer immédiatement
+            if (ids.length > 0) {
+              const numericIds = ids.map(id => parseInt(id)).filter(id => !isNaN(id) && id > 0);
+              if (numericIds.length > 0) {
+                baseQuery = baseQuery.in('id', numericIds);
+              } else {
+                // Aucun ID valide
+                const emptyDiv = document.createElement("div");
+                emptyDiv.className = "col-12 empty-message";
+                emptyDiv.innerHTML = '<div class="empty-message-container" style="text-align: center; padding: 60px 20px; background-color: #f8f9fa; border-radius: 10px; margin: 40px 0;"><i class="far fa-heart" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: #666; margin-bottom: 15px;">Aucun article favori valide</h3><p style="color: #999; font-size: 16px;">Vos favoris ne contiennent pas d\'articles valides.</p></div>';
+                document.getElementById("containerBlogsInfinite").empty();
+                document.getElementById("containerBlogsInfinite").appendChild(emptyDiv);
+                return;
+              }
+            }
+
+            // Utiliser le cache des catégories au lieu de faire une requête à chaque fois (sauf pour les favoris)
+            let categories;
+            if (!isFavorisMode) {
+              if (cachedCategories) {
+                categories = cachedCategories;
+              } else {
+                const { data: categoriesData, error: categoriesError } = await supabaseClient
+                  .from('post')
+                  .select('categorie')
+                  .neq('deleted', true)
+                  .neq('valid', false);
+
+                if (categoriesError) {
+                  console.error('Erreur lors de la récupération des catégories :', categoriesError);
+                  return [];
+                }
+
+                categories = [...new Set(categoriesData.map(item => item.categorie))];
+                cachedCategories = categories;
               }
 
-              // Extraire les catégories uniques et les mettre en cache
-              categories = [...new Set(categoriesData.map(item => item.categorie))];
-              cachedCategories = categories;
+              // Filtrer par catégorie si nécessaire
+              if (currentSelectedCategory && currentSelectedCategory !== 'MES_FAVORIS') {
+                baseQuery = baseQuery.eq('categorie', currentSelectedCategory);
+              }
+              
+              // Si selectionTri est une catégorie dynamique
+              if (!currentSelectedCategory && categories.includes(selectionTri)) {
+                baseQuery = baseQuery.eq('categorie', selectionTri);
+              } else if (selectionTri !== 'comment_count' && selectionTri !== 'favoris' && selectionTri !== 'audio' && !categories.includes(selectionTri)) {
+                baseQuery = baseQuery.order(selectionTri, { ascending: false });
+              }
             }
 
-            // Si une catégorie est sélectionnée, filtrer par cette catégorie
-            if (currentSelectedCategory) {
-              baseQuery = baseQuery.eq('categorie', currentSelectedCategory);
-            }
-            
-            // Si selectionTri est une catégorie dynamique (et aucune catégorie n'est déjà sélectionnée), on filtre par cette catégorie
-            if (!currentSelectedCategory && categories.includes(selectionTri)) {
-              baseQuery = baseQuery.eq('categorie', selectionTri);
-            } else if (selectionTri !== 'comment_count' && selectionTri !== 'favoris' && selectionTri !== 'audio' && !categories.includes(selectionTri)) {
-              // Si ce n'est pas une catégorie, on l'utilise comme critère de tri
-              baseQuery = baseQuery.order(selectionTri, { ascending: false });
-            }
-
-            // Filtrer par liste d'IDs si fournie (ex: favoris)
-            if (ids.length > 0) {
-              baseQuery = baseQuery.in('id', ids);
-            }
-
-            // Gestion des favoris ou des IDs spécifiques (cas où des posts spécifiques sont demandés)
-            if (selectionTri === 'favoris' && ids.length > 0) {
-              baseQuery = baseQuery.in('id', ids);
-            } else if (ids.length > 0) {
-              baseQuery = baseQuery.in('id', ids);
-            }
-
-            // Pour le tri par audio, on doit récupérer tous les articles car le filtrage est fait côté client
-            // Mais on doit quand même les trier par date
-            if (selectionTri === 'audio') {
+            // Pour les favoris et audio, trier par date
+            if (selectionTri === 'audio' || isFavorisMode) {
               baseQuery = baseQuery.order('created_at', { ascending: false });
             }
 
-            // Ajouter la pagination seulement si ce n'est pas un tri par audio
-            if (selectionTri !== 'audio') {
+            // Ajouter la pagination SQL seulement si ce n'est pas un tri par audio et pas les favoris
+            if (selectionTri !== 'audio' && !isFavorisMode) {
               const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
               const end = globalCurrentPageInfinite * globalPageSizeInfinite - 1;
               baseQuery = baseQuery.range(start, end);
@@ -1349,6 +1371,11 @@
               const {data: posts, error: postsError} = await baseQuery;
               if (postsError) {
                 throw postsError;
+              }
+              
+              // Debug pour les favoris
+              if (isFavorisMode) {
+                console.log(`[Favoris] ${posts.length} posts récupérés`);
               }
 
               // Obtenir les IDs des posts récupérés
@@ -1414,14 +1441,24 @@
                 
                 postsWithCommentCount.length = 0; // Vider le tableau
                 postsWithCommentCount.push(...paginatedPostsWithAudio); // Ajouter seulement les articles avec audio paginés
+              } else if (isFavorisMode) {
+                // Pour les favoris, appliquer la pagination côté client
+                // Les favoris sont déjà triés par date dans la requête
+                const start = (globalCurrentPageInfinite - 1) * globalPageSizeInfinite;
+                const end = start + globalPageSizeInfinite;
+                const paginatedPostsWithFavoris = postsWithCommentCount.slice(start, end);
+                console.log(`[Favoris] ${postsWithCommentCount.length} → ${paginatedPostsWithFavoris.length} (page ${globalCurrentPageInfinite})`);
+                
+                postsWithCommentCount.length = 0; // Vider le tableau
+                postsWithCommentCount.push(...paginatedPostsWithFavoris); // Ajouter seulement les favoris paginés
               }
               $("#containerBlogsInfinite").empty();
               
               // Afficher un message si aucun résultat et que c'est une catégorie avec favoris
-              if (postsWithCommentCount.length === 0 && currentSelectedCategory && selectionTri === 'favoris') {
+              if (postsWithCommentCount.length === 0 && isFavorisMode) {
                 const emptyDiv = document.createElement("div");
                 emptyDiv.className = "col-12 empty-favorites-message";
-                emptyDiv.innerHTML = '<div class="empty-message-container" style="text-align: center; padding: 60px 20px; background-color: #f8f9fa; border-radius: 10px; margin: 40px 0;"><i class="far fa-heart" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: #666; margin-bottom: 15px;">Aucun favori dans cette catégorie</h3><p style="color: #999; font-size: 16px;">Cliquez sur "Tous" pour afficher tous vos articles favoris.</p></div>';
+                emptyDiv.innerHTML = '<div class="empty-message-container" style="text-align: center; padding: 60px 20px; background-color: #f8f9fa; border-radius: 10px; margin: 40px 0;"><i class="far fa-heart" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: #666; margin-bottom: 15px;">Aucun article favori</h3><p style="color: #999; font-size: 16px;">Vous n\'avez pas encore d\'article favori.</p></div>';
                 document.getElementById("containerBlogsInfinite").appendChild(emptyDiv);
                 return;
               }
@@ -1456,10 +1493,10 @@
                   '                <span class="badge badge-top-right">' + dataJsonInfinite[dataJsonKeyInfinite].visite + ' vues</span>\n' +
                   (commentText ? '                <span class="badge badge-bottom-left">' + commentText + '</span>\n' : '') +
                   (dataJsonInfinite[dataJsonKeyInfinite].video ?
-                    '                <span class="badge badge-youtube track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></span>\n'
+                    '                <span class="badge badge-youtube" id="' + dataJsonInfinite[dataJsonKeyInfinite].video + '"><i class="fab fa-youtube-square"></i></span>\n'
                     : '') +
                   (dataJsonInfinite[dataJsonKeyInfinite].audio ?
-                    '                <span class="badge badge-podcast track-click" id="' + dataJsonInfinite[dataJsonKeyInfinite].audio + '"><i class="far fa-podcast"></i></span>\n'
+                    '                <span class="badge badge-podcast" id="' + dataJsonInfinite[dataJsonKeyInfinite].audio + '"><i class="far fa-podcast"></i></span>\n'
                     : '') +
                   '              </figure>\n' +
                   '              <div class="lower-content p_relative d_block pl_40 pt_35 pr_30 pb_40">\n' +
@@ -1498,8 +1535,20 @@
                   });
                 }
               }
-              cookieMarkItemAndClickToggle();
-
+              
+              // FORCER l'appel de la fonction de debug pour marquer les favoris
+              setTimeout(() => {
+                // Appeler la fonction de debug
+                if (typeof debugMarkFavorites === 'function') {
+                  debugMarkFavorites();
+                }
+                
+                // Appeler aussi les anciennes fonctions
+                if (typeof markItemsImmediate === 'function') {
+                  markItemsImmediate();
+                }
+              }, 300);
+              
               // Mettre à jour la pagination après le chargement des données
               await fetchDataPaginationInfinite();
 
